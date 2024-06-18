@@ -1,0 +1,458 @@
+[
+    {
+        "sent_id": 37,
+        "text": "This operation would only consolidate the terrorist acts in the world and would not bring peace to the region , \" the message claimed .",
+        "target_lemma": "to",
+        "target_id": 17,
+        "target_slice": [
+            96,
+            98
+        ],
+        "lexical_lemma": "bring",
+        "lexical_id": 15
+    },
+    {
+        "sent_id": 58,
+        "text": "\" They can freely write anything they like about our prophet , but if one raises doubts about the Holocaust he is either fined or sent to prison , \" he added .",
+        "target_lemma": "to",
+        "target_id": 27,
+        "target_slice": [
+            135,
+            137
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 26
+    },
+    {
+        "sent_id": 121,
+        "text": "Chahine said her immediate family spent about $ 20,000 to return to Detroit via Syria and Jordan .",
+        "target_lemma": "to",
+        "target_id": 12,
+        "target_slice": [
+            65,
+            67
+        ],
+        "lexical_lemma": "return",
+        "lexical_id": 11
+    },
+    {
+        "sent_id": 175,
+        "text": "I just want to extend a big \" Welcome ! \" to Darin Darin Fisher who joined me at Google this week .",
+        "target_lemma": "to",
+        "target_id": 12,
+        "target_slice": [
+            42,
+            44
+        ],
+        "lexical_lemma": "extend",
+        "lexical_id": 5
+    },
+    {
+        "sent_id": 315,
+        "text": "Please send it directly to kent.shoemaker@ae.ge.com , copy to me .",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 2
+    },
+    {
+        "sent_id": 315,
+        "text": "Please send it directly to kent.shoemaker@ae.ge.com , copy to me .",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 2
+    },
+    {
+        "sent_id": 377,
+        "text": "These agreements were forwarded to the counterparty , CCNG , Inc. .",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            32,
+            34
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 380,
+        "text": "She was instructed to destroy the agreement and another would be forwarded to her with the necessary corrections and re-wording of Section 7 .",
+        "target_lemma": "to",
+        "target_id": 13,
+        "target_slice": [
+            75,
+            77
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 412,
+        "text": "Go ahead and forward to Brant if you are ready .",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            21,
+            23
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 437,
+        "text": "Either option should take you directly to Enron 's United Way 2000 Campaign site .",
+        "target_lemma": "to",
+        "target_id": 7,
+        "target_slice": [
+            39,
+            41
+        ],
+        "lexical_lemma": "take",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 514,
+        "text": "You wear your heart on your sleeve ... and since you are an emotional person you are apt to give your all ... heart and soul ... to all those that show you a little affection ... but take care ... it would appear that you have been extremely hurt in the past ... and you keep leaving yourself wide open for punishment ..",
+        "target_lemma": "to",
+        "target_id": 28,
+        "target_slice": [
+            129,
+            131
+        ],
+        "lexical_lemma": "give",
+        "lexical_id": 20
+    },
+    {
+        "sent_id": 524,
+        "text": "sorry for not sending it to you earlier ( totally forgot to open my outlook ) .",
+        "target_lemma": "to",
+        "target_id": 6,
+        "target_slice": [
+            25,
+            27
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 560,
+        "text": "I have sent your question re on line trading to that area .",
+        "target_lemma": "to",
+        "target_id": 10,
+        "target_slice": [
+            45,
+            47
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 595,
+        "text": "Go ahead and forward to Brant if you are ready .",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            21,
+            23
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 620,
+        "text": "Please complete agreement and forward to counterparty .",
+        "target_lemma": "to",
+        "target_id": 6,
+        "target_slice": [
+            38,
+            40
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 5
+    },
+    {
+        "sent_id": 624,
+        "text": "Please forward a copy of the J.M. Huber Corporation Guaranty to my attention .",
+        "target_lemma": "to",
+        "target_id": 11,
+        "target_slice": [
+            61,
+            63
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 2
+    },
+    {
+        "sent_id": 707,
+        "text": "As you know , we are in the process of transferring recordkeeping services from NTRC to Hewitt .",
+        "target_lemma": "to",
+        "target_id": 16,
+        "target_slice": [
+            85,
+            87
+        ],
+        "lexical_lemma": "transfer",
+        "lexical_id": 11
+    },
+    {
+        "sent_id": 842,
+        "text": "He did n't take a dislike to the kids for \" no \" reason !",
+        "target_lemma": "to",
+        "target_id": 7,
+        "target_slice": [
+            26,
+            28
+        ],
+        "lexical_lemma": "take",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 856,
+        "text": "You have received this BBC Breaking News Alert because you subscribed to it or , someone forwarded it to you .",
+        "target_lemma": "to",
+        "target_id": 19,
+        "target_slice": [
+            102,
+            104
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 17
+    },
+    {
+        "sent_id": 856,
+        "text": "You have received this BBC Breaking News Alert because you subscribed to it or , someone forwarded it to you .",
+        "target_lemma": "to",
+        "target_id": 19,
+        "target_slice": [
+            102,
+            104
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 17
+    },
+    {
+        "sent_id": 857,
+        "text": "To unsubscribe ( or subscribe if this message was forwarded to you ) go to : http://www.bbc.co.uk/email",
+        "target_lemma": "to",
+        "target_id": 11,
+        "target_slice": [
+            60,
+            62
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 857,
+        "text": "To unsubscribe ( or subscribe if this message was forwarded to you ) go to : http://www.bbc.co.uk/email",
+        "target_lemma": "to",
+        "target_id": 11,
+        "target_slice": [
+            60,
+            62
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 864,
+        "text": "Posted by Hidden Nook to Hidden Nook at 3/9/2005 11:16:00 PM",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            22,
+            24
+        ],
+        "lexical_lemma": "post",
+        "lexical_id": 1
+    },
+    {
+        "sent_id": 957,
+        "text": "Upon return to New Orleans after the Hurricane Katrina evacuation , former residents have been informed that there are no available public housing units at River Garden because those units have been reserved for HANO employees .",
+        "target_lemma": "to",
+        "target_id": 3,
+        "target_slice": [
+            12,
+            14
+        ],
+        "lexical_lemma": "return",
+        "lexical_id": 2
+    },
+    {
+        "sent_id": 963,
+        "text": "In London , the price of Brent North Sea crude for November delivery advanced 53 cents to 64.73 dollars .",
+        "target_lemma": "to",
+        "target_id": 17,
+        "target_slice": [
+            87,
+            89
+        ],
+        "lexical_lemma": "advance",
+        "lexical_id": 14
+    },
+    {
+        "sent_id": 971,
+        "text": "Last month , Katrina devastated refineries in Louisiana and Mississippi and sent prices to a record high of 70.85 dollars a barrel .",
+        "target_lemma": "to",
+        "target_id": 14,
+        "target_slice": [
+            88,
+            90
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 986,
+        "text": "But seeing how the private sector has been able to successfully transport civilians to the ISS ( at about a fifth of the cost ) , it would come to no surprise if corporate America was able to out perform their bureaucratic friends in government .",
+        "target_lemma": "to",
+        "target_id": 14,
+        "target_slice": [
+            84,
+            86
+        ],
+        "lexical_lemma": "transport",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 986,
+        "text": "But seeing how the private sector has been able to successfully transport civilians to the ISS ( at about a fifth of the cost ) , it would come to no surprise if corporate America was able to out perform their bureaucratic friends in government .",
+        "target_lemma": "to",
+        "target_id": 14,
+        "target_slice": [
+            84,
+            86
+        ],
+        "lexical_lemma": "transport",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 988,
+        "text": "Posted by Hidden Nook to Hidden Nook at 11/16/2005 08:36:00 AM",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            22,
+            24
+        ],
+        "lexical_lemma": "post",
+        "lexical_id": 1
+    },
+    {
+        "sent_id": 1005,
+        "text": "Posted by Hidden Nook to Hidden Nook at 12/26/2004 10:46:08 PM",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            22,
+            24
+        ],
+        "lexical_lemma": "post",
+        "lexical_id": 1
+    },
+    {
+        "sent_id": 1027,
+        "text": "Posted by Hidden Nook to Hidden Nook at 9/26/2005 08:14:00 PM",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            22,
+            24
+        ],
+        "lexical_lemma": "post",
+        "lexical_id": 1
+    },
+    {
+        "sent_id": 1095,
+        "text": "I gave mine to a rest home for senior citizens and an old soldiers ' home .",
+        "target_lemma": "to",
+        "target_id": 4,
+        "target_slice": [
+            12,
+            14
+        ],
+        "lexical_lemma": "give",
+        "lexical_id": 2
+    },
+    {
+        "sent_id": 1097,
+        "text": "give them to a library or burn them .",
+        "target_lemma": "to",
+        "target_id": 3,
+        "target_slice": [
+            10,
+            12
+        ],
+        "lexical_lemma": "give",
+        "lexical_id": 1
+    },
+    {
+        "sent_id": 1137,
+        "text": "Out of the 650 k est stolen works of art by the Nazis ... 70 k still remain missing .. and there are thousands in musems that have n't been returned to their right full owners and heirs ..",
+        "target_lemma": "to",
+        "target_id": 32,
+        "target_slice": [
+            149,
+            151
+        ],
+        "lexical_lemma": "return",
+        "lexical_id": 31
+    },
+    {
+        "sent_id": 1160,
+        "text": "I sent a phone to Mobile Phone Exchange and it failed a test due to lost or stolen what should I do ?",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            15,
+            17
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 2
+    },
+    {
+        "sent_id": 1160,
+        "text": "I sent a phone to Mobile Phone Exchange and it failed a test due to lost or stolen what should I do ?",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            15,
+            17
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 2
+    },
+    {
+        "sent_id": 1397,
+        "text": "It 'll take you to all the major sites ( GG Bridge , Haight , Chinatown , etc ) and you can get off anyplace you want to spend more time at .",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            16,
+            18
+        ],
+        "lexical_lemma": "take",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 1605,
+        "text": "Calls are now forwarded to Malcolm Smith Motorsports down the road .",
+        "target_lemma": "to",
+        "target_id": 5,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "forward",
+        "lexical_id": 4
+    }
+]

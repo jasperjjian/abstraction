@@ -1,0 +1,2282 @@
+[
+    {
+        "sent_id": 164,
+        "text": "The problem with this argument is that Bush lacked the experience necessary to be president when he ran in 2000 , so this sort of cheap shot just hoists him by his own petard .",
+        "target_lemma": "by",
+        "target_id": 31,
+        "target_slice": [
+            157,
+            159
+        ],
+        "lexical_lemma": "hoist",
+        "lexical_id": 29
+    },
+    {
+        "sent_id": 222,
+        "text": "By the late 1990s , Iraq had no nuclear or biological weapons program , and had destroyed its chemical weapons stockpiles .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 359,
+        "text": "By the time it was over , Bush had served nearly two years .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "serve",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 387,
+        "text": "By that time , however , he had accumulated enough points in each year to cover six years of service .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "accumulate",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 423,
+        "text": "Hazim Al - Sha'lan , by the way , is the son of the late Sheikh of Al - Khaza'il in Diwaniya and has the potential to replace former information minister , M.S. Al - Sahaf , in his nonsensical media statements , which can be passed as jokes .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            21,
+            23
+        ],
+        "lexical_lemma": "son",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 617,
+        "text": "A pattern of arrests and seizures indicate that arms are brought by the LTTE from Laos , Cambodia and Thailand into Chittagong , from where they are transported northward by land to Bhutan .",
+        "target_lemma": "by",
+        "target_id": 30,
+        "target_slice": [
+            171,
+            173
+        ],
+        "lexical_lemma": "transport",
+        "lexical_id": 28
+    },
+    {
+        "sent_id": 617,
+        "text": "A pattern of arrests and seizures indicate that arms are brought by the LTTE from Laos , Cambodia and Thailand into Chittagong , from where they are transported northward by land to Bhutan .",
+        "target_lemma": "by",
+        "target_id": 30,
+        "target_slice": [
+            171,
+            173
+        ],
+        "lexical_lemma": "transport",
+        "lexical_id": 28
+    },
+    {
+        "sent_id": 734,
+        "text": "We all know by now that Bush did not even do his full service with the Texas Air National Guard , absenting himself to work on the Alabama senate campaign of Winton \" Red \" Blount .",
+        "target_lemma": "by",
+        "target_id": 4,
+        "target_slice": [
+            12,
+            14
+        ],
+        "lexical_lemma": "know",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 790,
+        "text": "Archibald , a middle - class Alabama boy -- who , by the way , is now a registered Democrat -- did n't like that story .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            50,
+            52
+        ],
+        "lexical_lemma": "Democrat",
+        "lexical_id": 20
+    },
+    {
+        "sent_id": 1090,
+        "text": "I seem to remember something about ' by their works shall ye know them . \"",
+        "target_lemma": "by",
+        "target_id": 8,
+        "target_slice": [
+            37,
+            39
+        ],
+        "lexical_lemma": "know",
+        "lexical_id": 13
+    },
+    {
+        "sent_id": 1125,
+        "text": "The root of the trouble is that this entire Moslem region is totally dysfunctional , by any standard of the word , and would have been so even if Israel had joined the Arab league and an independent Palestine had existed for 100 years .",
+        "target_lemma": "by",
+        "target_id": 16,
+        "target_slice": [
+            85,
+            87
+        ],
+        "lexical_lemma": "dysfunctional",
+        "lexical_id": 14
+    },
+    {
+        "sent_id": 1165,
+        "text": "But if you want to murder by suicide , you do not have to board a plane in order to explode yourself and kill many people .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            26,
+            28
+        ],
+        "lexical_lemma": "murder",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1171,
+        "text": "You can somewhat reduce your vulnerability by preventive and defensive measures and by strict border controls but not eliminate it and definitely not win the war in a defensive way .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            43,
+            45
+        ],
+        "lexical_lemma": "reduce",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 1171,
+        "text": "You can somewhat reduce your vulnerability by preventive and defensive measures and by strict border controls but not eliminate it and definitely not win the war in a defensive way .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            43,
+            45
+        ],
+        "lexical_lemma": "reduce",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 1184,
+        "text": "The poorest region in the world , by far , is Africa .",
+        "target_lemma": "by",
+        "target_id": 8,
+        "target_slice": [
+            34,
+            36
+        ],
+        "lexical_lemma": "Africa",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 1194,
+        "text": "If part of the public supports it , others tolerate it , many are afraid of it and some try to explain it away by poverty or by a miserable childhood , organized crime will thrive and so will terrorism .",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            111,
+            113
+        ],
+        "lexical_lemma": "explain",
+        "lexical_id": 22
+    },
+    {
+        "sent_id": 1194,
+        "text": "If part of the public supports it , others tolerate it , many are afraid of it and some try to explain it away by poverty or by a miserable childhood , organized crime will thrive and so will terrorism .",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            111,
+            113
+        ],
+        "lexical_lemma": "explain",
+        "lexical_id": 22
+    },
+    {
+        "sent_id": 1287,
+        "text": "It is trying to play ice hockey by sending a ballerina ice - skater into the ring or to knock out a heavyweight boxer by a chess player .",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            118,
+            120
+        ],
+        "lexical_lemma": "knock",
+        "lexical_id": 20
+    },
+    {
+        "sent_id": 1300,
+        "text": "The inner circles can and must be destroyed by force .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            44,
+            46
+        ],
+        "lexical_lemma": "destroy",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 1301,
+        "text": "The outer circle can not be eliminated by force .",
+        "target_lemma": "by",
+        "target_id": 8,
+        "target_slice": [
+            39,
+            41
+        ],
+        "lexical_lemma": "eliminate",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 1308,
+        "text": "But before you fight and win , by force or otherwise , you have to realize that you are in a war , and this may take Europe a few more years .",
+        "target_lemma": "by",
+        "target_id": 8,
+        "target_slice": [
+            31,
+            33
+        ],
+        "lexical_lemma": "win",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1341,
+        "text": "If by democracy we mean free elections but also free press , free speech , a functioning judicial system , civil liberties , equality to women , free international travel , exposure to international media and ideas , laws against racial incitement and against defamation , and avoidance of lawless behavior regarding hospitals , places of worship and children , then yes , democracy is the solution .",
+        "target_lemma": "by",
+        "target_id": 2,
+        "target_slice": [
+            3,
+            5
+        ],
+        "lexical_lemma": "mean",
+        "lexical_id": 5
+    },
+    {
+        "sent_id": 1352,
+        "text": "By 1998 , Zawahiri had determined that the Egyptian Islamic Jihad should focus on its struggle against the United States and hold off on further attacks against the Egyptian regime .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "determine",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1399,
+        "text": "By 1998 , Zawahiri had determined that the Egyptian Islamic Jihad should focus on its struggle against the United States and hold off on further attacks against the Egyptian regime .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "determine",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1555,
+        "text": "By Greendale School , the anthrax perp was being cute , just as Yazid Sufaat was being cute in naming his lab Green Laboratory Medicine .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "cute",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 1652,
+        "text": "Martin 's box is working wonderfully - I 'll have everything transferred to it and give him the keys by Friday .",
+        "target_lemma": "by",
+        "target_id": 20,
+        "target_slice": [
+            101,
+            103
+        ],
+        "lexical_lemma": "give",
+        "lexical_id": 16
+    },
+    {
+        "sent_id": 1687,
+        "text": "Notice Regarding Entry of Orders and Instructions : Please do not transmit orders and / or instructions regarding your PaineWebber account ( s ) by e-mail .",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            145,
+            147
+        ],
+        "lexical_lemma": "transmit",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 1688,
+        "text": "Orders and / or instructions transmitted by e-mail will not be accepted by PaineWebber and PaineWebber will not be responsible for carrying out such orders and / or instructions .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            41,
+            43
+        ],
+        "lexical_lemma": "transmit",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1688,
+        "text": "Orders and / or instructions transmitted by e-mail will not be accepted by PaineWebber and PaineWebber will not be responsible for carrying out such orders and / or instructions .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            41,
+            43
+        ],
+        "lexical_lemma": "transmit",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1690,
+        "text": "Notice Regarding Entry of Orders and Instructions : Please do not transmit orders and / or instructions regarding your PaineWebber account ( s ) by e-mail .",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            145,
+            147
+        ],
+        "lexical_lemma": "transmit",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 1691,
+        "text": "Orders and / or instructions transmitted by e-mail will not be accepted by PaineWebber and PaineWebber will not be responsible for carrying out such orders and / or instructions .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            41,
+            43
+        ],
+        "lexical_lemma": "transmit",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1691,
+        "text": "Orders and / or instructions transmitted by e-mail will not be accepted by PaineWebber and PaineWebber will not be responsible for carrying out such orders and / or instructions .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            41,
+            43
+        ],
+        "lexical_lemma": "transmit",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1693,
+        "text": "Notice Regarding Entry of Orders and Instructions : Please do not transmit orders and / or instructions regarding your PaineWebber account ( s ) by e-mail .",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            145,
+            147
+        ],
+        "lexical_lemma": "transmit",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 1694,
+        "text": "Orders and / or instructions transmitted by e-mail will not be accepted by PaineWebber and PaineWebber will not be responsible for carrying out such orders and / or instructions .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            41,
+            43
+        ],
+        "lexical_lemma": "transmit",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1694,
+        "text": "Orders and / or instructions transmitted by e-mail will not be accepted by PaineWebber and PaineWebber will not be responsible for carrying out such orders and / or instructions .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            41,
+            43
+        ],
+        "lexical_lemma": "transmit",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1734,
+        "text": "If you would , please review the entire list and let me know if you are in agreement with the presentation by tomorrow evening , if possible .",
+        "target_lemma": "by",
+        "target_id": 22,
+        "target_slice": [
+            107,
+            109
+        ],
+        "lexical_lemma": "agreement",
+        "lexical_id": 18
+    },
+    {
+        "sent_id": 1765,
+        "text": "Let me know your thoughts .... then I will run it by Oxley .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            50,
+            52
+        ],
+        "lexical_lemma": "run",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 1866,
+        "text": "By the way the Lichtenstein is up and hanging in our formal living room and it is magnificent .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "be",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 1892,
+        "text": "By the way , I am interested in re-looking at a Picasso ( although we have 2 ) that your gallery had a couple of years ago .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "interested",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 1914,
+        "text": "I am out all weekend and we have to have the final comments on the Analyst Presentation in by sunday night so I may be working over lunch .",
+        "target_lemma": "by",
+        "target_id": 19,
+        "target_slice": [
+            91,
+            93
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 1929,
+        "text": "I am out all weekend and we have to have the final comments on the Analyst Presentation in by sunday night so I may be working over lunch .",
+        "target_lemma": "by",
+        "target_id": 19,
+        "target_slice": [
+            91,
+            93
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 1943,
+        "text": "Most Fridays I 'm going to TRY to pick Michael up since I 'm away so much , which means leaving by 445 or so .",
+        "target_lemma": "by",
+        "target_id": 22,
+        "target_slice": [
+            96,
+            98
+        ],
+        "lexical_lemma": "leave",
+        "lexical_id": 21
+    },
+    {
+        "sent_id": 2099,
+        "text": "Saturday probably works better for me , just so that I am back in Houston and doing laundry by Sunday afternoon !!",
+        "target_lemma": "by",
+        "target_id": 19,
+        "target_slice": [
+            92,
+            94
+        ],
+        "lexical_lemma": "do",
+        "lexical_id": 17
+    },
+    {
+        "sent_id": 2120,
+        "text": "My commitment to Rick Causey is that I will have that global report in production by the end of the year .",
+        "target_lemma": "by",
+        "target_id": 16,
+        "target_slice": [
+            82,
+            84
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 2132,
+        "text": "Steve , I noticed that our allocation from 2000 to 2001 is going up by 21 % year on year ( ie ) $ 13.9 M from $ 11.5 M .",
+        "target_lemma": "by",
+        "target_id": 15,
+        "target_slice": [
+            68,
+            70
+        ],
+        "lexical_lemma": "go",
+        "lexical_id": 13
+    },
+    {
+        "sent_id": 2174,
+        "text": "This means that I could be away from the office for several days and miss a message entirely , because it would have expired and disappeared by the time I returned .",
+        "target_lemma": "by",
+        "target_id": 27,
+        "target_slice": [
+            141,
+            143
+        ],
+        "lexical_lemma": "expire",
+        "lexical_id": 24
+    },
+    {
+        "sent_id": 2290,
+        "text": "cool by me !",
+        "target_lemma": "by",
+        "target_id": 2,
+        "target_slice": [
+            5,
+            7
+        ],
+        "lexical_lemma": "cool",
+        "lexical_id": 1
+    },
+    {
+        "sent_id": 2318,
+        "text": "By the way , Cullen and Dykman is sending copies of what we are doing to Melanie Gray .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 2468,
+        "text": "P.S. By the way , did you have a chance to take a look at the EOL ?",
+        "target_lemma": "by",
+        "target_id": 2,
+        "target_slice": [
+            5,
+            7
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 2518,
+        "text": "\" Calculation of Floating Amount : The Floating Amount payable by [ ENA ] on a Payment Date will be calculated for that Payment Date as follows :",
+        "target_lemma": "by",
+        "target_id": 11,
+        "target_slice": [
+            63,
+            65
+        ],
+        "lexical_lemma": "payable",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 2525,
+        "text": "\" Calculation of Floating Amount : The Floating Amount payable by [ ENA ] on a Payment Date will be calculated for that Payment Date as follows :",
+        "target_lemma": "by",
+        "target_id": 11,
+        "target_slice": [
+            63,
+            65
+        ],
+        "lexical_lemma": "payable",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 2546,
+        "text": "The Foreign Currency Amount shall equal the Base Currency Amount , multiplied by the daily London Metal Exchange ( LME ) fixing rate as published by Reuters on page MTLE on the date of the transaction , modified by the price submitted by the Counterparty via the Website .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            78,
+            80
+        ],
+        "lexical_lemma": "multiply",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 2546,
+        "text": "The Foreign Currency Amount shall equal the Base Currency Amount , multiplied by the daily London Metal Exchange ( LME ) fixing rate as published by Reuters on page MTLE on the date of the transaction , modified by the price submitted by the Counterparty via the Website .",
+        "target_lemma": "by",
+        "target_id": 39,
+        "target_slice": [
+            212,
+            214
+        ],
+        "lexical_lemma": "modify",
+        "lexical_id": 38
+    },
+    {
+        "sent_id": 2546,
+        "text": "The Foreign Currency Amount shall equal the Base Currency Amount , multiplied by the daily London Metal Exchange ( LME ) fixing rate as published by Reuters on page MTLE on the date of the transaction , modified by the price submitted by the Counterparty via the Website .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            78,
+            80
+        ],
+        "lexical_lemma": "multiply",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 2546,
+        "text": "The Foreign Currency Amount shall equal the Base Currency Amount , multiplied by the daily London Metal Exchange ( LME ) fixing rate as published by Reuters on page MTLE on the date of the transaction , modified by the price submitted by the Counterparty via the Website .",
+        "target_lemma": "by",
+        "target_id": 39,
+        "target_slice": [
+            212,
+            214
+        ],
+        "lexical_lemma": "modify",
+        "lexical_id": 38
+    },
+    {
+        "sent_id": 2546,
+        "text": "The Foreign Currency Amount shall equal the Base Currency Amount , multiplied by the daily London Metal Exchange ( LME ) fixing rate as published by Reuters on page MTLE on the date of the transaction , modified by the price submitted by the Counterparty via the Website .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            78,
+            80
+        ],
+        "lexical_lemma": "multiply",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 2546,
+        "text": "The Foreign Currency Amount shall equal the Base Currency Amount , multiplied by the daily London Metal Exchange ( LME ) fixing rate as published by Reuters on page MTLE on the date of the transaction , modified by the price submitted by the Counterparty via the Website .",
+        "target_lemma": "by",
+        "target_id": 39,
+        "target_slice": [
+            212,
+            214
+        ],
+        "lexical_lemma": "modify",
+        "lexical_id": 38
+    },
+    {
+        "sent_id": 2546,
+        "text": "The Foreign Currency Amount shall equal the Base Currency Amount , multiplied by the daily London Metal Exchange ( LME ) fixing rate as published by Reuters on page MTLE on the date of the transaction , modified by the price submitted by the Counterparty via the Website .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            78,
+            80
+        ],
+        "lexical_lemma": "multiply",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 2546,
+        "text": "The Foreign Currency Amount shall equal the Base Currency Amount , multiplied by the daily London Metal Exchange ( LME ) fixing rate as published by Reuters on page MTLE on the date of the transaction , modified by the price submitted by the Counterparty via the Website .",
+        "target_lemma": "by",
+        "target_id": 39,
+        "target_slice": [
+            212,
+            214
+        ],
+        "lexical_lemma": "modify",
+        "lexical_id": 38
+    },
+    {
+        "sent_id": 2560,
+        "text": "They will be there by noon on the 20th , and the surgery will last 1.5 hours and then they 'll watch him for 2 more hours before they put him into ICU .",
+        "target_lemma": "by",
+        "target_id": 5,
+        "target_slice": [
+            19,
+            21
+        ],
+        "lexical_lemma": "be",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 2576,
+        "text": "If you have received this email in error , please immediately notify the sender by return email and delete this email from your system .",
+        "target_lemma": "by",
+        "target_id": 15,
+        "target_slice": [
+            80,
+            82
+        ],
+        "lexical_lemma": "notify",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 2626,
+        "text": "Please review the attached org chart for March and submit any changes by noon tomorrow .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            70,
+            72
+        ],
+        "lexical_lemma": "submit",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 2735,
+        "text": "By return email , please verify that you received this message and let us know if there is another email address that you prefer us to use .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "verify",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 2773,
+        "text": "I am doing dirt work and hope to plant ST Augustine Grass by Friday before rain .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            58,
+            60
+        ],
+        "lexical_lemma": "plant",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 2901,
+        "text": "My goal , however optimistic , is to execute the risk policy by the end of today .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            61,
+            63
+        ],
+        "lexical_lemma": "execute",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 2904,
+        "text": "Otherwise , I will be sending it to Peoples as our final revision by mid morning .",
+        "target_lemma": "by",
+        "target_id": 14,
+        "target_slice": [
+            66,
+            68
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 2958,
+        "text": "My goal , however optimistic , is to execute the risk policy by the end of today .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            61,
+            63
+        ],
+        "lexical_lemma": "execute",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 2961,
+        "text": "Otherwise , I will be sending it to Peoples as our final revision by mid morning .",
+        "target_lemma": "by",
+        "target_id": 14,
+        "target_slice": [
+            66,
+            68
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 3005,
+        "text": "As far as the call with Uncle Ben goes , if he was thrilled to hear from me I could n't tell by his voice .",
+        "target_lemma": "by",
+        "target_id": 23,
+        "target_slice": [
+            93,
+            95
+        ],
+        "lexical_lemma": "tell",
+        "lexical_id": 22
+    },
+    {
+        "sent_id": 3420,
+        "text": "We 'll hook you guys in by videoconference .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "hook",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 3461,
+        "text": "We need responses or direction by no later than COB on Monday , October 30 , 2000 .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            31,
+            33
+        ],
+        "lexical_lemma": "need",
+        "lexical_id": 2
+    },
+    {
+        "sent_id": 3519,
+        "text": "While we should be proud of our accomplishment , we now must turn to the task of getting our testimony ready by May 5 deadline .?",
+        "target_lemma": "by",
+        "target_id": 22,
+        "target_slice": [
+            109,
+            111
+        ],
+        "lexical_lemma": "ready",
+        "lexical_id": 21
+    },
+    {
+        "sent_id": 3588,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy the message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "receive",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 3588,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy the message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            54,
+            56
+        ],
+        "lexical_lemma": "let",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 3588,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy the message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "receive",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 3588,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy the message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            54,
+            56
+        ],
+        "lexical_lemma": "let",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 3805,
+        "text": "We had a pretty good idea when we signed the contract that ECS would not be able to complete that by the contract start date , so we negotiated a fall back plan under which ECS is obligated to \" assist [ Transwestern ] in developing a manual system to accomplish the same result and will hold harmless and keep [ Transwestern ] whole for all cost and expenses \" associated with the manual system .",
+        "target_lemma": "by",
+        "target_id": 21,
+        "target_slice": [
+            98,
+            100
+        ],
+        "lexical_lemma": "complete",
+        "lexical_id": 19
+    },
+    {
+        "sent_id": 3967,
+        "text": "Thane is in Austin on Friday , but is available by phone .",
+        "target_lemma": "by",
+        "target_id": 11,
+        "target_slice": [
+            48,
+            50
+        ],
+        "lexical_lemma": "available",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 4010,
+        "text": "Also , please let me know , by email , the names and contact information of other managers within Enron who might benefit from having someone with my qualifications in their group .",
+        "target_lemma": "by",
+        "target_id": 8,
+        "target_slice": [
+            28,
+            30
+        ],
+        "lexical_lemma": "know",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 4027,
+        "text": "Thought since I will be in Houston , stop by your office for few minutes .",
+        "target_lemma": "by",
+        "target_id": 10,
+        "target_slice": [
+            42,
+            44
+        ],
+        "lexical_lemma": "stop",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 4058,
+        "text": "This is ok by me .",
+        "target_lemma": "by",
+        "target_id": 4,
+        "target_slice": [
+            11,
+            13
+        ],
+        "lexical_lemma": "ok",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 4122,
+        "text": "Please return this e-mail to me with your response by 12:00 p.m. , Friday , May 4th",
+        "target_lemma": "by",
+        "target_id": 10,
+        "target_slice": [
+            51,
+            53
+        ],
+        "lexical_lemma": "return",
+        "lexical_id": 2
+    },
+    {
+        "sent_id": 4167,
+        "text": "Enron will guarantee delivery by the 20th of each scheduled Dispatch Period and accept supply to the 15th of each scheduled Dispatch Period .",
+        "target_lemma": "by",
+        "target_id": 5,
+        "target_slice": [
+            30,
+            32
+        ],
+        "lexical_lemma": "guarantee",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 4168,
+        "text": "Payment shall be made , against the receipt of the required documents outlined in the General Terms and Conditions , in the Contractual Currency by telegraphic transfer no later than 30 calendar days after the date on which the Commodity is released to Buyer .",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            145,
+            147
+        ],
+        "lexical_lemma": "make",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 4438,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy this message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "receive",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 4438,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy this message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            54,
+            56
+        ],
+        "lexical_lemma": "let",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 4438,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy this message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "receive",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 4438,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy this message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            54,
+            56
+        ],
+        "lexical_lemma": "let",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 4655,
+        "text": "In the medium case , investigations find that Enron ( like others ) \" played by the rules , \" but the rules stunk , and Enron profited at the expense of California consumers .",
+        "target_lemma": "by",
+        "target_id": 16,
+        "target_slice": [
+            77,
+            79
+        ],
+        "lexical_lemma": "play",
+        "lexical_id": 15
+    },
+    {
+        "sent_id": 4848,
+        "text": "I am waiting on the confirms and will send them to you shortly by fax or e-mail .",
+        "target_lemma": "by",
+        "target_id": 14,
+        "target_slice": [
+            63,
+            65
+        ],
+        "lexical_lemma": "send",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 5109,
+        "text": "Davis spokesman Steve Maviglio said the governor felt \" betrayed \" by the actions of Winter .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            67,
+            69
+        ],
+        "lexical_lemma": "betray",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 5154,
+        "text": "\" Terry did this by himself , '' said Smutney - Jones , executive director of the Independent Energy Producers .",
+        "target_lemma": "by",
+        "target_id": 5,
+        "target_slice": [
+            17,
+            19
+        ],
+        "lexical_lemma": "do",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 5196,
+        "text": "By Friday December 1st , could you please tell me the percentages / amount of time you spent on East Coast Power during the months of October and November .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "tell",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 5242,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy the message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "receive",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 5242,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy the message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            54,
+            56
+        ],
+        "lexical_lemma": "let",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 5242,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy the message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            24,
+            26
+        ],
+        "lexical_lemma": "receive",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 5242,
+        "text": "If you have received it by mistake please let us know by reply and then delete it from your system ; you should not copy the message or disclose its contents to anyone .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            54,
+            56
+        ],
+        "lexical_lemma": "let",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 5307,
+        "text": "If you have received this communication in error , please immediately notify us by telephone ( 713-546-5000 ) , and destroy the original message .",
+        "target_lemma": "by",
+        "target_id": 14,
+        "target_slice": [
+            80,
+            82
+        ],
+        "lexical_lemma": "notify",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 5313,
+        "text": "While I left a you a phone message with some information about our project , I thought I could give you some additional details by e-mail as well ...",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            128,
+            130
+        ],
+        "lexical_lemma": "give",
+        "lexical_id": 20
+    },
+    {
+        "sent_id": 5557,
+        "text": "Dr. Fortier travelled another three kilometres by foot to seek help in the nearest settlement .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            47,
+            49
+        ],
+        "lexical_lemma": "travel",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 5568,
+        "text": "He was three months late in filing a name for the business , and he threatened to call his company Apple Computers if the other colleagues did n't suggest a better name by 5 O'clock .",
+        "target_lemma": "by",
+        "target_id": 33,
+        "target_slice": [
+            169,
+            171
+        ],
+        "lexical_lemma": "suggest",
+        "lexical_id": 29
+    },
+    {
+        "sent_id": 5688,
+        "text": "By the way , have you read the Declaration of Independence and US Constitution - or do you only know the first phrases ?",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "read",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 5826,
+        "text": "The bill reduces ISS operations by $ 120 million due to the continued reduced capability of the ISS for at least half of FY05 .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            32,
+            34
+        ],
+        "lexical_lemma": "reduce",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 5834,
+        "text": "\" The Senate Appropriations Committee used a somewhat controversial technique Tuesday to increase NASA 's fiscal year 2005 budget by $ 200 million over what President Bush requested .",
+        "target_lemma": "by",
+        "target_id": 20,
+        "target_slice": [
+            130,
+            132
+        ],
+        "lexical_lemma": "increase",
+        "lexical_id": 13
+    },
+    {
+        "sent_id": 5934,
+        "text": "But as its economy has expanded by an average of nine per cent per year for the last two decades , so has its demand for energy .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            32,
+            34
+        ],
+        "lexical_lemma": "expand",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 6006,
+        "text": "Think internally , intuitively , not by words , of the meaning , as you 're repeating it .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            37,
+            39
+        ],
+        "lexical_lemma": "think",
+        "lexical_id": 1
+    },
+    {
+        "sent_id": 6073,
+        "text": "Judge Samuel Alito is very highly qualified by all of the normal standards used to evaluate candidates for this position :",
+        "target_lemma": "by",
+        "target_id": 8,
+        "target_slice": [
+            44,
+            46
+        ],
+        "lexical_lemma": "qualified",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 6095,
+        "text": "But Samuel Alito believes in a little - known Constitutional theory - called the \" Unitary Executive Theory \" - which says that the President should have complete control over the Executive Branch , and that the Executive Branch should be in charge of almost everything that the Government actually does , including the functions of the Independent Agencies which were designed to be free of Presidential control , and the Military , which exists , which is regulated , and which is funded by specific authority given by the Constitution to Congress , not to the President .",
+        "target_lemma": "by",
+        "target_id": 85,
+        "target_slice": [
+            490,
+            492
+        ],
+        "lexical_lemma": "exist",
+        "lexical_id": 75
+    },
+    {
+        "sent_id": 6095,
+        "text": "But Samuel Alito believes in a little - known Constitutional theory - called the \" Unitary Executive Theory \" - which says that the President should have complete control over the Executive Branch , and that the Executive Branch should be in charge of almost everything that the Government actually does , including the functions of the Independent Agencies which were designed to be free of Presidential control , and the Military , which exists , which is regulated , and which is funded by specific authority given by the Constitution to Congress , not to the President .",
+        "target_lemma": "by",
+        "target_id": 85,
+        "target_slice": [
+            490,
+            492
+        ],
+        "lexical_lemma": "exist",
+        "lexical_id": 75
+    },
+    {
+        "sent_id": 6100,
+        "text": "And the President becomes a Dictator , unrestrained by anything in the Constitution , backed up by the Armed Forces , which would be entirely under his personal control .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            52,
+            54
+        ],
+        "lexical_lemma": "unrestrained",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 6100,
+        "text": "And the President becomes a Dictator , unrestrained by anything in the Constitution , backed up by the Armed Forces , which would be entirely under his personal control .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            52,
+            54
+        ],
+        "lexical_lemma": "unrestrained",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 6124,
+        "text": "The target for NASA & Company probably to get by 2018 all the ambitious space program countries shifting towards this model , through the propaganda of another moon mission ; deliberately failing this or trying hard for another moon landing hoax ; achieving the real aim of space unity between space programs of other countries .",
+        "target_lemma": "by",
+        "target_id": 10,
+        "target_slice": [
+            46,
+            48
+        ],
+        "lexical_lemma": "get",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 6137,
+        "text": "President Bush has directed NASA to return to the moon by 2018 with a new generation of human explorers .",
+        "target_lemma": "by",
+        "target_id": 11,
+        "target_slice": [
+            55,
+            57
+        ],
+        "lexical_lemma": "return",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 6138,
+        "text": "China 's \" is not a fly - by - night program , \" said Joan Johnson - Freese , an expert on national security who follows space developments in the Asian nation at the Naval War College in Newport , R.I .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            26,
+            28
+        ],
+        "lexical_lemma": "fly",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 6168,
+        "text": "Recently , I read an email that reported the horrific nightmare Civet Cats go through by sick losers who put them in sheds and heat the inside of the sheds up to 110 degrees with fires , so that they can periodically scrape the sweat off of their genitals and sell it to corrupt corporations who use it to prolong the scent of perfumes .",
+        "target_lemma": "by",
+        "target_id": 16,
+        "target_slice": [
+            86,
+            88
+        ],
+        "lexical_lemma": "go",
+        "lexical_id": 14
+    },
+    {
+        "sent_id": 6236,
+        "text": "By the end of the second week I had made a total of more than $ 1000.00 !!",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "make",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 6320,
+        "text": "In part because of that reputation , the gray wolf was nearly exterminated from the lower 48 states by the 1920s , except for a small remnant population on Isle Royale National Park in Michigan 's Lake Superior .",
+        "target_lemma": "by",
+        "target_id": 19,
+        "target_slice": [
+            100,
+            102
+        ],
+        "lexical_lemma": "exterminate",
+        "lexical_id": 13
+    },
+    {
+        "sent_id": 6422,
+        "text": "Arctic summer sea ice will decline by 50 percent by the end of the 21st century , the assessment found , with some models predicting complete disappearance of summer sea ice .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            35,
+            37
+        ],
+        "lexical_lemma": "decline",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 6422,
+        "text": "Arctic summer sea ice will decline by 50 percent by the end of the 21st century , the assessment found , with some models predicting complete disappearance of summer sea ice .",
+        "target_lemma": "by",
+        "target_id": 10,
+        "target_slice": [
+            49,
+            51
+        ],
+        "lexical_lemma": "decline",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 6422,
+        "text": "Arctic summer sea ice will decline by 50 percent by the end of the 21st century , the assessment found , with some models predicting complete disappearance of summer sea ice .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            35,
+            37
+        ],
+        "lexical_lemma": "decline",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 6422,
+        "text": "Arctic summer sea ice will decline by 50 percent by the end of the 21st century , the assessment found , with some models predicting complete disappearance of summer sea ice .",
+        "target_lemma": "by",
+        "target_id": 10,
+        "target_slice": [
+            49,
+            51
+        ],
+        "lexical_lemma": "decline",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 6556,
+        "text": "By the end of the year , you will have a whole new network of friends and group activity , stimulating new ideas and taking up your social life a notch or two .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 6563,
+        "text": "By the end of 2005 you 'll have a whole new start with regard to your career and your earning potential - and a possible new partnership to top it off !",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 6571,
+        "text": "By the end of 2005 , you 'll feel more confident , more determined , and far more capable of making the mountains come to you !",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "feel",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 6579,
+        "text": "Yet , this is no comparison to the advancements you 'll make overall , and by the end of 2005 , you 'll look back in sheer wonder and happiness .",
+        "target_lemma": "by",
+        "target_id": 16,
+        "target_slice": [
+            75,
+            77
+        ],
+        "lexical_lemma": "look",
+        "lexical_id": 24
+    },
+    {
+        "sent_id": 6587,
+        "text": "In spite of a lot of worry over your career , by the year 's end , you 'll see that 2005 has filled your life with prosperity and accomplishments .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            46,
+            48
+        ],
+        "lexical_lemma": "see",
+        "lexical_id": 20
+    },
+    {
+        "sent_id": 6592,
+        "text": "If you 're not presently married , and want to be , you just might wed by the end of the year .",
+        "target_lemma": "by",
+        "target_id": 17,
+        "target_slice": [
+            71,
+            73
+        ],
+        "lexical_lemma": "wed",
+        "lexical_id": 16
+    },
+    {
+        "sent_id": 6595,
+        "text": "By year 's end , you may find yourself seriously considering a major change - all for the best .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "find",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 6612,
+        "text": "By the second half of the year , you will finally feel welcome relief from the tight financial binds that have hindered you over the past two years .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "feel",
+        "lexical_id": 12
+    },
+    {
+        "sent_id": 6617,
+        "text": "The long awaited relief you 've needed in your love life is around the corner , and by the end of the year you will feel much clearer about your partnerships in general .",
+        "target_lemma": "by",
+        "target_id": 18,
+        "target_slice": [
+            84,
+            86
+        ],
+        "lexical_lemma": "feel",
+        "lexical_id": 26
+    },
+    {
+        "sent_id": 6626,
+        "text": "By year 's end , your creative decision - making will have carried you to whole new peaks - and a whole new view from above .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "carry",
+        "lexical_id": 13
+    },
+    {
+        "sent_id": 6778,
+        "text": "Antichrist John Lennon followed the Devil 's strategy writing lyrics such as \" God is a concept by which we measure our pain ... I do n't believe in Jesus , etc. , etc. , \" ( God ) and \" and no religions too ... \" ( Imagine ) .",
+        "target_lemma": "by",
+        "target_id": 18,
+        "target_slice": [
+            96,
+            98
+        ],
+        "lexical_lemma": "measure",
+        "lexical_id": 21
+    },
+    {
+        "sent_id": 6905,
+        "text": "This threat exists not merely on a military level , though China could force a confrontation in the Pacific by way of Taiwan .",
+        "target_lemma": "by",
+        "target_id": 20,
+        "target_slice": [
+            108,
+            110
+        ],
+        "lexical_lemma": "force",
+        "lexical_id": 14
+    },
+    {
+        "sent_id": 6919,
+        "text": "In short , China has the American economy by the throat .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            42,
+            44
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 5
+    },
+    {
+        "sent_id": 6931,
+        "text": "According to Linda Bilmes of Harvard and Nobel Laureate Joseph E. Stiglitz of Columbia University , the final cost of the Iraq occupation will run between $ 1 trillion and $ 2 trillion , surpassing by orders of magnitude the estimates put forth by the Bush administration .",
+        "target_lemma": "by",
+        "target_id": 36,
+        "target_slice": [
+            198,
+            200
+        ],
+        "lexical_lemma": "surpass",
+        "lexical_id": 35
+    },
+    {
+        "sent_id": 6931,
+        "text": "According to Linda Bilmes of Harvard and Nobel Laureate Joseph E. Stiglitz of Columbia University , the final cost of the Iraq occupation will run between $ 1 trillion and $ 2 trillion , surpassing by orders of magnitude the estimates put forth by the Bush administration .",
+        "target_lemma": "by",
+        "target_id": 36,
+        "target_slice": [
+            198,
+            200
+        ],
+        "lexical_lemma": "surpass",
+        "lexical_id": 35
+    },
+    {
+        "sent_id": 6963,
+        "text": "408 - Number of species that could be extinct by 2050 if the global - warming trend continues .",
+        "target_lemma": "by",
+        "target_id": 10,
+        "target_slice": [
+            46,
+            48
+        ],
+        "lexical_lemma": "extinct",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 6967,
+        "text": "68 - Number of days after taking office that Bush decided Not to ratify the Kyoto Protocol , the international treaty to reduce greenhouse gases by roughly 5.2 per cent below 1990 levels by 2012 .",
+        "target_lemma": "by",
+        "target_id": 26,
+        "target_slice": [
+            145,
+            147
+        ],
+        "lexical_lemma": "reduce",
+        "lexical_id": 23
+    },
+    {
+        "sent_id": 6967,
+        "text": "68 - Number of days after taking office that Bush decided Not to ratify the Kyoto Protocol , the international treaty to reduce greenhouse gases by roughly 5.2 per cent below 1990 levels by 2012 .",
+        "target_lemma": "by",
+        "target_id": 34,
+        "target_slice": [
+            187,
+            189
+        ],
+        "lexical_lemma": "reduce",
+        "lexical_id": 23
+    },
+    {
+        "sent_id": 6967,
+        "text": "68 - Number of days after taking office that Bush decided Not to ratify the Kyoto Protocol , the international treaty to reduce greenhouse gases by roughly 5.2 per cent below 1990 levels by 2012 .",
+        "target_lemma": "by",
+        "target_id": 26,
+        "target_slice": [
+            145,
+            147
+        ],
+        "lexical_lemma": "reduce",
+        "lexical_id": 23
+    },
+    {
+        "sent_id": 6967,
+        "text": "68 - Number of days after taking office that Bush decided Not to ratify the Kyoto Protocol , the international treaty to reduce greenhouse gases by roughly 5.2 per cent below 1990 levels by 2012 .",
+        "target_lemma": "by",
+        "target_id": 34,
+        "target_slice": [
+            187,
+            189
+        ],
+        "lexical_lemma": "reduce",
+        "lexical_id": 23
+    },
+    {
+        "sent_id": 6968,
+        "text": "The United States was to cut its level by 7 per cent .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            39,
+            41
+        ],
+        "lexical_lemma": "cut",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 7078,
+        "text": "95 - Percentage of foreign goods that arrive in the United States by sea .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            66,
+            68
+        ],
+        "lexical_lemma": "arrive",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 7088,
+        "text": "75 - Percentage of Americans unaffected by Bush 's sweeping 2003 cuts in capital gains and dividends taxes .",
+        "target_lemma": "by",
+        "target_id": 7,
+        "target_slice": [
+            40,
+            42
+        ],
+        "lexical_lemma": "unaffected",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 7101,
+        "text": "$ 5.6 t - Projected national surplus forecast by the end of the decade when Bush took office in 2001 .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            46,
+            48
+        ],
+        "lexical_lemma": "forecast",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 7168,
+        "text": "$ 200 m - Amount that the Bush - Cheney 2004 campaign expects to raise by November 2004 .",
+        "target_lemma": "by",
+        "target_id": 16,
+        "target_slice": [
+            71,
+            73
+        ],
+        "lexical_lemma": "raise",
+        "lexical_id": 15
+    },
+    {
+        "sent_id": 7279,
+        "text": "Take a photo of a very light plain subject close to the lens using long exposure and smallest aperture you have - over expose by a couple of stops",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            126,
+            128
+        ],
+        "lexical_lemma": "overexpose",
+        "lexical_id": 23
+    },
+    {
+        "sent_id": 7801,
+        "text": "Judging by Nook Tablet 's processor it 's supposed to be quite faster !",
+        "target_lemma": "by",
+        "target_id": 2,
+        "target_slice": [
+            8,
+            10
+        ],
+        "lexical_lemma": "judge",
+        "lexical_id": 1
+    },
+    {
+        "sent_id": 7927,
+        "text": "I think 2012 is going to be a great year for Fujairah as we have A LOT of projects to be done by 2012 .",
+        "target_lemma": "by",
+        "target_id": 23,
+        "target_slice": [
+            94,
+            96
+        ],
+        "lexical_lemma": "do",
+        "lexical_id": 22
+    },
+    {
+        "sent_id": 7966,
+        "text": "By comparison , outdoor cats have a life expectancy of 3 - 7 years depending on how many predators are in the local environment .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 7976,
+        "text": "Eating by his cage and keeping a \" sleep cage \" in your room is a good idea .",
+        "target_lemma": "by",
+        "target_id": 2,
+        "target_slice": [
+            7,
+            9
+        ],
+        "lexical_lemma": "eat",
+        "lexical_id": 1
+    },
+    {
+        "sent_id": 8123,
+        "text": "I 'm a 20 year old female travelling by myself so it could be anything .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            37,
+            39
+        ],
+        "lexical_lemma": "travel",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 8211,
+        "text": "The Iguazu Falls are easily accessible and , dependent on your time restrictions and budget , you can get to the area by either bus or plane .",
+        "target_lemma": "by",
+        "target_id": 23,
+        "target_slice": [
+            118,
+            120
+        ],
+        "lexical_lemma": "get",
+        "lexical_id": 19
+    },
+    {
+        "sent_id": 8236,
+        "text": "I used to live in London for 6 months and it 's by far one of my favorite places to be in the world ( I 've been to 45 countries in 5 years ) .",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            48,
+            50
+        ],
+        "lexical_lemma": "one",
+        "lexical_id": 15
+    },
+    {
+        "sent_id": 8386,
+        "text": "I honestly have no idea what to expect or prepare for and calling in to get professional advice from either of the embassies costs by the minute - which I really do n't have the money for .",
+        "target_lemma": "by",
+        "target_id": 25,
+        "target_slice": [
+            131,
+            133
+        ],
+        "lexical_lemma": "cost",
+        "lexical_id": 24
+    },
+    {
+        "sent_id": 8607,
+        "text": "When you go to another country , you live by their way of life and their laws , if you do n't like it , you know how to get back out the country ( but I guess our benefits system is too much to throw away , huh ) .",
+        "target_lemma": "by",
+        "target_id": 10,
+        "target_slice": [
+            42,
+            44
+        ],
+        "lexical_lemma": "live",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 8619,
+        "text": "I did all my research and am well prepared to keep one , I 'm 14 by the way",
+        "target_lemma": "by",
+        "target_id": 17,
+        "target_slice": [
+            65,
+            67
+        ],
+        "lexical_lemma": "14",
+        "lexical_id": 16
+    },
+    {
+        "sent_id": 8647,
+        "text": "If I threw him against a wall and still conscious he will run away , do I hang him by the tail so the blood can flush into his skull ?",
+        "target_lemma": "by",
+        "target_id": 20,
+        "target_slice": [
+            83,
+            85
+        ],
+        "lexical_lemma": "hang",
+        "lexical_id": 18
+    },
+    {
+        "sent_id": 8654,
+        "text": "If it wo n't take pre-killed and you usually feed live then you could hold the rat by the tail and whack it against a hard surface , like a refrigerator or wall .",
+        "target_lemma": "by",
+        "target_id": 18,
+        "target_slice": [
+            83,
+            85
+        ],
+        "lexical_lemma": "hold",
+        "lexical_id": 15
+    },
+    {
+        "sent_id": 9038,
+        "text": "It 's a little hard to get to by foot , they 're rebuilding the bridge , but you can get someone to moto - taxi you there for a dollar or less .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            30,
+            32
+        ],
+        "lexical_lemma": "get",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 9166,
+        "text": "Your answer does n't do anything but remind me that I 'm going to be $ 25,000 in debt by the time I 'm 22 .",
+        "target_lemma": "by",
+        "target_id": 20,
+        "target_slice": [
+            86,
+            88
+        ],
+        "lexical_lemma": "debt",
+        "lexical_id": 19
+    },
+    {
+        "sent_id": 9451,
+        "text": "4 ) If they are not going up by now you just got ta keep trying and keep trying .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            29,
+            31
+        ],
+        "lexical_lemma": "go",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 9489,
+        "text": "Crowds are at their thinnest , but many of the country \u2019s tourist attractions and services close down in October and do n\u2019t reopen until Easter , which paradoxically leaves visitors with a more convincing taste of how Ireland is experienced by most of the Irish : it \u2019s cold , grey and dark by 5 pm , but there \u2019s always a pub to escape into when the rain starts sheeting down .",
+        "target_lemma": "by",
+        "target_id": 55,
+        "target_slice": [
+            291,
+            293
+        ],
+        "lexical_lemma": "cold",
+        "lexical_id": 50
+    },
+    {
+        "sent_id": 9489,
+        "text": "Crowds are at their thinnest , but many of the country \u2019s tourist attractions and services close down in October and do n\u2019t reopen until Easter , which paradoxically leaves visitors with a more convincing taste of how Ireland is experienced by most of the Irish : it \u2019s cold , grey and dark by 5 pm , but there \u2019s always a pub to escape into when the rain starts sheeting down .",
+        "target_lemma": "by",
+        "target_id": 55,
+        "target_slice": [
+            291,
+            293
+        ],
+        "lexical_lemma": "cold",
+        "lexical_id": 50
+    },
+    {
+        "sent_id": 9502,
+        "text": "By definition most tourists will go to the best places so you might have to put up with a few tourists along the way .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "go",
+        "lexical_id": 6
+    },
+    {
+        "sent_id": 9664,
+        "text": "On the other hand though , if I 'm a client he should really of called back by now because you do n't leave a customer hanging .",
+        "target_lemma": "by",
+        "target_id": 18,
+        "target_slice": [
+            76,
+            78
+        ],
+        "lexical_lemma": "call",
+        "lexical_id": 16
+    },
+    {
+        "sent_id": 9695,
+        "text": "I would say if he does not call you back by friday call him again he could be playing hard to get ?",
+        "target_lemma": "by",
+        "target_id": 11,
+        "target_slice": [
+            41,
+            43
+        ],
+        "lexical_lemma": "call",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 9726,
+        "text": "He is now losing the cheek muscle on the left side of his face and seems to be dropping weight by the day .",
+        "target_lemma": "by",
+        "target_id": 21,
+        "target_slice": [
+            95,
+            97
+        ],
+        "lexical_lemma": "drop",
+        "lexical_id": 19
+    },
+    {
+        "sent_id": 9933,
+        "text": "This store is by far the worst Verizon store I 've been in .",
+        "target_lemma": "by",
+        "target_id": 4,
+        "target_slice": [
+            14,
+            16
+        ],
+        "lexical_lemma": "store",
+        "lexical_id": 9
+    },
+    {
+        "sent_id": 9949,
+        "text": "I 've been to quite a few tattoo shops around this area and Stainless Steel is by far the best .",
+        "target_lemma": "by",
+        "target_id": 17,
+        "target_slice": [
+            79,
+            81
+        ],
+        "lexical_lemma": "good",
+        "lexical_id": 20
+    },
+    {
+        "sent_id": 10076,
+        "text": "Before you buy ANYTHING in NY , make sure you stop by Jack -s first .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            51,
+            53
+        ],
+        "lexical_lemma": "stop",
+        "lexical_id": 11
+    },
+    {
+        "sent_id": 10314,
+        "text": "I went to get my nails filled Friday , by Monday 2 were broken .",
+        "target_lemma": "by",
+        "target_id": 10,
+        "target_slice": [
+            39,
+            41
+        ],
+        "lexical_lemma": "broken",
+        "lexical_id": 14
+    },
+    {
+        "sent_id": 10522,
+        "text": "He told us to stop by the salon and then he will tell us the price .",
+        "target_lemma": "by",
+        "target_id": 6,
+        "target_slice": [
+            19,
+            21
+        ],
+        "lexical_lemma": "stop",
+        "lexical_id": 5
+    },
+    {
+        "sent_id": 10563,
+        "text": "It 's located in the huge HONKA Log Homes building , by Walmart off of Evergreen Parkway .",
+        "target_lemma": "by",
+        "target_id": 12,
+        "target_slice": [
+            53,
+            55
+        ],
+        "lexical_lemma": "locate",
+        "lexical_id": 3
+    },
+    {
+        "sent_id": 11241,
+        "text": "I came in for alterations ( free , by the way ) and told her about a stain I had on my new leather purse .",
+        "target_lemma": "by",
+        "target_id": 9,
+        "target_slice": [
+            35,
+            37
+        ],
+        "lexical_lemma": "free",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 11260,
+        "text": "Half the tables and bar were empty by this point .",
+        "target_lemma": "by",
+        "target_id": 8,
+        "target_slice": [
+            35,
+            37
+        ],
+        "lexical_lemma": "empty",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 11468,
+        "text": "This is by far the BEST B&B that we have ever stayed at !",
+        "target_lemma": "by",
+        "target_id": 3,
+        "target_slice": [
+            8,
+            10
+        ],
+        "lexical_lemma": "b&b",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 11602,
+        "text": "By the age of 24 I stopped going to the dentist .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "stop",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 11617,
+        "text": "It took over 1.5 hours for our food to come out and by that time my 8 month old had it !",
+        "target_lemma": "by",
+        "target_id": 13,
+        "target_slice": [
+            52,
+            54
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 20
+    },
+    {
+        "sent_id": 11798,
+        "text": "By the way , Salmagundi ( the store name ) means something like smorgasbord ; potpourri ; motley ; variety ; mixed bag ; miscellaneous assortment ; mixture , a variety of many kinds of things .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "mean",
+        "lexical_id": 11
+    },
+    {
+        "sent_id": 11827,
+        "text": "Did n't hurt any that they knew my name by my second visit and greeted me warmly then and on my third visit .",
+        "target_lemma": "by",
+        "target_id": 10,
+        "target_slice": [
+            40,
+            42
+        ],
+        "lexical_lemma": "know",
+        "lexical_id": 7
+    },
+    {
+        "sent_id": 11912,
+        "text": "By the time we got to the budget i told him I could work with , there was basically no design .",
+        "target_lemma": "by",
+        "target_id": 1,
+        "target_slice": [
+            0,
+            2
+        ],
+        "lexical_lemma": "be",
+        "lexical_id": 18
+    },
+    {
+        "sent_id": 12042,
+        "text": "They were back quickly considering how far outside of Murfreesboro we were and had us on our way by 6:30 that evening .",
+        "target_lemma": "by",
+        "target_id": 19,
+        "target_slice": [
+            97,
+            99
+        ],
+        "lexical_lemma": "have",
+        "lexical_id": 14
+    },
+    {
+        "sent_id": 12175,
+        "text": "I think this place is probably really great especially judging by the reviews on here .",
+        "target_lemma": "by",
+        "target_id": 11,
+        "target_slice": [
+            63,
+            65
+        ],
+        "lexical_lemma": "judge",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 12186,
+        "text": "This is by far the worst chinese food I have ever had .",
+        "target_lemma": "by",
+        "target_id": 3,
+        "target_slice": [
+            8,
+            10
+        ],
+        "lexical_lemma": "food",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 12366,
+        "text": "He later said that by 2 months he \" meant at least two months \" .",
+        "target_lemma": "by",
+        "target_id": 5,
+        "target_slice": [
+            19,
+            21
+        ],
+        "lexical_lemma": "mean",
+        "lexical_id": 10
+    },
+    {
+        "sent_id": 12409,
+        "text": "17th , like over by 16th and 15th YES , I say , one mile west of you .",
+        "target_lemma": "by",
+        "target_id": 5,
+        "target_slice": [
+            17,
+            19
+        ],
+        "lexical_lemma": "over",
+        "lexical_id": 4
+    },
+    {
+        "sent_id": 12456,
+        "text": "( By whom , I do n't know .",
+        "target_lemma": "by",
+        "target_id": 2,
+        "target_slice": [
+            2,
+            4
+        ],
+        "lexical_lemma": "know",
+        "lexical_id": 8
+    },
+    {
+        "sent_id": 12485,
+        "text": "The warm chocolate cake was very tasty , but served at room temperature , not warm by any stretch of the imagination .",
+        "target_lemma": "by",
+        "target_id": 17,
+        "target_slice": [
+            83,
+            85
+        ],
+        "lexical_lemma": "warm",
+        "lexical_id": 16
+    },
+    {
+        "sent_id": 12501,
+        "text": "They either : a ) do n't want to give it to me because they do n't want me purchasing the dress elsewhere or b ) are recreating the dresses themselves ( ie STEALING other designers ' dress designs and \" filling the orders \" by their own seamstresses ) .",
+        "target_lemma": "by",
+        "target_id": 46,
+        "target_slice": [
+            224,
+            226
+        ],
+        "lexical_lemma": "fill",
+        "lexical_id": 42
+    }
+]

@@ -41,7 +41,7 @@ def save_embeddings_to_hdf5(directory, model_name, dataset, split, model_shortha
     hdf5_path = os.path.join(directory, f"{model_shorthand}_{split}_embeddings.hdf5")
     hdf5_file = h5py.File(hdf5_path, 'w')
     #model = cwe.CWE(model_name, device='cuda:0', token="AUTH_TOKEN", cache_dir="CACHE_DIR")
-    model = cwe.CWE(model_name, device='cuda:0', revision=checkpoint)
+    model = cwe.CWE(model_name, device='cuda:0', revision=checkpoint, cache_dir="/sailhome/jjian/.cache/huggingface/hub_1/")
     num_layers = get_num_layers(model_name)
     #print(f"Processing {len(dataset['sentence'])} sentences. This may take a while.")
 
@@ -98,9 +98,12 @@ def check_lexical_lemma(doc, instances, target_lemma='to', target_upos="ADP", le
                 if grandparent_lemma in lemmas:
                     sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_id' : lem_id, 'target_slice' : (start, end), 'lexical_lemma' : grandparent_lemma, 'lexical_id' : grandparent_id}
                     inclusion_list.append(sentence_d)
-                elif grandparent.upos == grandparent_upos:
+                elif parent_word.deprel == grandparent_upos:
                     sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_id' : lem_id, 'target_slice' : (start, end), 'lexical_lemma' : grandparent_lemma, 'lexical_id' : grandparent_id}
                     exclusion_list.append(sentence_d)
+                """elif grandparent.upos == grandparent_upos:
+                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_id' : lem_id, 'target_slice' : (start, end), 'lexical_lemma' : grandparent_lemma, 'lexical_id' : grandparent_id}
+                    exclusion_list.append(sentence_d)"""
             start = start + len(w.text) + 1
             end = end + 1
     if path_1 != None:
@@ -158,7 +161,7 @@ def get_from_checkpoint(model_name, split, instances=None, instances_path=None, 
         save_embeddings_to_hdf5(f'/nlp/scr/jjian/data/{split}/', model_name, instances, split, model_shorthand=f"{model_name_preprocessed}.{checkpoint}", checkpoint=checkpoint)
         if delete_from_cache:
             model_path = model_name.replace('/', '--')
-            shutil.rmtree(f"/sailhome/jjian/.cache/huggingface/hub/models--{model_path}")
+            shutil.rmtree(f"/sailhome/jjian/.cache/huggingface/hub_1/models--{model_path}")
     return
 
 if __name__ == "__main__":
@@ -177,8 +180,8 @@ if __name__ == "__main__":
     corpus_path = sys.argv[1]
     split = sys.argv[2]
     model_list = ["stanford-crfm/battlestar-gpt2-small-x49"]
-    #preloaded = get_lemmas("/nlp/scr/jjian/data/motion/checkpoints.txt")
-    #preloaded = [f'checkpoint-{checkpoint}' for checkpoint in preloaded]
+    preloaded = get_lemmas("/nlp/scr/jjian/data/inf/checkpoints.txt")
+    preloaded = [f'checkpoint-{checkpoint}' for checkpoint in preloaded]
     
     for model in model_list:
-        get_from_checkpoint(model, split, instances_path=corpus_path)
+        get_from_checkpoint(model, split, instances_path=corpus_path, predone=preloaded)
