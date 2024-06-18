@@ -14,7 +14,7 @@ import re
 def string_based_filtering(dataset, target, motion_regex, ditransitive_regex):
     motion_list = []
     ditransitive_list = []
-    for data in tqdm(dataset):
+    for data in tqdm(dataset, mininterval=5):
         if data != "":
             sentences = sent_tokenize(data["text"])
             for sentence in sentences:
