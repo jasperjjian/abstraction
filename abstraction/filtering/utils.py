@@ -1,4 +1,5 @@
 from lemminflect import getAllInflections, getAllInflectionsOOV
+from tqdm import tqdm
 
 def get_all_inflections(word_list : list[str]):
     inflections = set()
@@ -11,3 +12,31 @@ def get_all_inflections(word_list : list[str]):
     
     return inflections
     
+
+def stanza_parsing(sentences, pipeline):
+    parsed = []
+
+    for sentence in tqdm(sentences, mininterval=5):
+        doc = pipeline(sentence)
+        parsed += doc.sentences
+    
+    return parsed
+
+def stanza_parsing_batched(sentences, pipeline, batch_size):
+    parsed = []
+
+    # except the last batch
+    for i in tqdm(range(0, (len(sentences) // batch_size) * batch_size, batch_size), mininterval=5):
+        batch = sentences[i:i+batch_size]
+        batch_doc = "".join(batch)
+        docs = pipeline(batch_doc)
+        parsed += docs.sentences
+    
+    # last batch
+    if len(sentences) % batch_size != 0:
+        batch = sentences[(len(sentences) // batch_size) * batch_size:]
+        batch_doc = "".join(batch)
+        docs = pipeline(batch_doc)
+        parsed += docs.sentences
+    
+    return parsed
