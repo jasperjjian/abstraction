@@ -4,13 +4,9 @@ forward
 mail
 pass
 post
-return
 ship
 transfer
 transport
-bounce
-roll
-slide
 bring
 take
 feed
@@ -37,7 +33,6 @@ extend
 grant
 guarantee
 issue
-leave
 offer
 owe
 promise

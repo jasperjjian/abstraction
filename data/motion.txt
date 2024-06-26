@@ -1,7 +1,6 @@
 amble 
 backpack
 bolt
-bounce
 bound
 bowl
 canter
@@ -58,7 +57,6 @@ prowl
 race
 ramble
 roam
-roll
 romp
 rove
 run
@@ -81,7 +79,6 @@ skip
 skitter
 skulk
 sleepwalk
-slide
 slink
 slither
 slog
@@ -136,10 +133,8 @@ exit
 fall
 flee
 go
-leave
 plunge
 recede
-return
 rise
 tumble
 balloon

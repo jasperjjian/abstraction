@@ -35,6 +35,216 @@ def string_filtering_tokenized(dataset, target_verbs):
     
     return final
 
+def structure_filtering_ditransitives(doc, instances, target_lemma='to', target_upos="ADP", lemmas=[], grandparent_upos="VERB", path_1=None, path_2=None):
+    include_list = []
+    exclude_list = []
+    for i, sentence in enumerate(doc.sentences):
+        # get character indices to extract representations
+        start = 0
+        end = 0
+        for w in sentence.words:
+            end = end + len(w.text)
+            lem = w.lemma
+            lem_id = w.id
+            pos = w.upos
+            deprel = w.deprel
+            if lem == target_lemma and pos == target_upos:
+                parent = w.head
+                parent_word = None
+                for w_p in sentence.words:
+                    if w_p.id == parent:
+                        parent_word = w_p
+                        break
+                # these should be nouns
+                if parent.upos != "NOUN":
+                    continue
+                # this is to ensure we're getting a ditransitive
+                second_children_deps = [w_second.deprel for w_second in sentence.words if w_second.head == parent_word.id]
+                if "obj" not in second_children_deps and "nsubj:pass" not in second_children_deps:
+                    continue
+                # this is to get the identity of the verb so that we can use it to get representations
+                grandparent_lemma = ""
+                grandparent_start = 0
+                grandparent_end = 0
+                for w_g in sentence.words:
+                    # add the end of the current word
+                    grandparent_end = grandparent_end + len(w_g.text)
+                    if w_g.id == parent_word.head:
+                        grandparent_lemma = w_g.lemma
+                        grandparent_id = w_g.id
+                        grandparent = w_g
+                        break
+                    # add the spaces
+                    grandparent_start = grandparent_start + len(w_g.text) + 1
+                    grandparent_end = grandparent_end + 1
+                # these should be verbs
+                if grandparent.upos != "VERB":
+                    continue
+                output_text = " ".join([w.text for w in sentence.words]).strip()
+                if grandparent_lemma in lemmas:
+                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_id' : lem_id, 'target_slice' : (start, end), 
+                                  'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_id, 'dependent_slice' : (grandparent_start, grandparent_end)}
+                    include_list.append(sentence_d)
+                else: 
+                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_id' : lem_id, 'target_slice' : (start, end), 
+                                  'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_id, 'dependent_slice' : (grandparent_start, grandparent_end)}
+                    exclude_list.append(sentence_d)
+            start = start + len(w.text) + 1
+            end = end + 1
+    if path_1 != None:
+        utils.dump_json(include_list, path_1)
+    if path_2 != None:
+        utils.dump_json(exclude_list, path_2)
+    return include_list, exclude_list
+
+def structure_filtering_ditransitives(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], grandparent_upos="VERB", path_1=None, path_2=None):
+    include_list = []
+    exclude_list = []
+    reasons = []
+    for i, sentence in enumerate(doc_sentences):
+        # get character indices to extract representations
+        start = 0
+        end = 0
+        for w in sentence.words:
+            end = end + len(w.text)
+            lem = w.lemma
+            lem_id = w.id
+            pos = w.upos
+            deprel = w.deprel
+            if lem == target_lemma and pos == target_upos:
+                parent = w.head
+                if parent == 0:
+                    reasons.append("parent is root")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
+                parent_word = None
+                for w_p in sentence.words:
+                    if w_p.id == parent:
+                        parent_word = w_p
+                        break
+                # these should be nouns
+                if parent_word.upos != "NOUN":
+                    #print(parent_word.upos)
+                    reasons.append("parent not noun")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
+                # this is to get the identity of the verb so that we can use it to get representations
+                grandparent_lemma = ""
+                grandparent_start = 0
+                grandparent_end = 0
+                for w_g in sentence.words:
+                    # add the end of the current word
+                    grandparent_end = grandparent_end + len(w_g.text)
+                    if w_g.id == parent_word.head:
+                        grandparent_lemma = w_g.lemma
+                        grandparent_id = w_g.id
+                        grandparent_word = w_g
+                        break
+                    # add the spaces
+                    grandparent_start = grandparent_start + len(w_g.text) + 1
+                    grandparent_end = grandparent_end + 1
+                # these should be verbs
+                if grandparent_word.upos != "VERB":
+                    reasons.append("grandparent not verb")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
+                # this is to ensure we're getting a ditransitive
+                second_children_deps = [w_second.deprel for w_second in sentence.words if w_second.head == grandparent_id]
+                if "obj" not in second_children_deps and "nsubj:pass" not in second_children_deps:
+                    reasons.append("not ditransitive")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
+                output_text = " ".join([w.text for w in sentence.words]).strip()
+                if grandparent_lemma in lemmas:
+                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
+                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
+                    include_list.append(sentence_d)
+                else: 
+                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
+                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
+                    exclude_list.append(sentence_d)
+            start = start + len(w.text) + 1
+            end = end + 1
+    if path_1 != None:
+        utils.dump_json(include_list, path_1)
+    if path_2 != None:
+        utils.dump_json(exclude_list, path_2)
+    return include_list, exclude_list, reasons
+
+def structure_filtering_motion(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], grandparent_upos="VERB", path_1=None, path_2=None):
+    include_list = []
+    exclude_list = []
+    reasons = []
+    for i, sentence in enumerate(doc_sentences):
+        # get character indices to extract representations
+        start = 0
+        end = 0
+        for w in sentence.words:
+            end = end + len(w.text)
+            lem = w.lemma
+            lem_id = w.id
+            pos = w.upos
+            deprel = w.deprel
+            if lem == target_lemma and pos == target_upos:
+                parent = w.head
+                if parent == 0:
+                    reasons.append("parent is root")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
+                parent_word = None
+                for w_p in sentence.words:
+                    if w_p.id == parent:
+                        parent_word = w_p
+                        break
+                # these should be nouns
+                if parent_word.upos != "NOUN":
+                    #print(parent_word.upos)
+                    reasons.append("parent not noun")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
+                # this is to get the identity of the verb so that we can use it to get representations
+                grandparent_lemma = ""
+                grandparent_start = 0
+                grandparent_end = 0
+                for w_g in sentence.words:
+                    # add the end of the current word
+                    grandparent_end = grandparent_end + len(w_g.text)
+                    if w_g.id == parent_word.head:
+                        grandparent_lemma = w_g.lemma
+                        grandparent_id = w_g.id
+                        grandparent_word = w_g
+                        break
+                    # add the spaces
+                    grandparent_start = grandparent_start + len(w_g.text) + 1
+                    grandparent_end = grandparent_end + 1
+                # these should be verbs
+                if grandparent_word.upos != "VERB":
+                    reasons.append("grandparent not verb")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
+                output_text = " ".join([w.text for w in sentence.words]).strip()
+                if grandparent_lemma in lemmas:
+                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
+                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
+                    include_list.append(sentence_d)
+                else: 
+                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
+                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
+                    exclude_list.append(sentence_d)
+            start = start + len(w.text) + 1
+            end = end + 1
+    if path_1 != None:
+        utils.dump_json(include_list, path_1)
+    if path_2 != None:
+        utils.dump_json(exclude_list, path_2)
+    return include_list, exclude_list, reasons
 
 def main():
     # load lists of ditransitive and motion verbs

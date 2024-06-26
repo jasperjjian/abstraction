@@ -1,5 +1,6 @@
 from lemminflect import getAllInflections, getAllInflectionsOOV
 from tqdm import tqdm
+import json
 
 def get_all_inflections(word_list : list[str]):
     inflections = set()
@@ -40,3 +41,9 @@ def stanza_parsing_batched(sentences, pipeline, batch_size):
         parsed += docs.sentences
     
     return parsed
+
+def dump_json(list_of_dicts, path):
+    json_data = json.dumps(list_of_dicts, indent=4)
+    with open(path, "w") as json_file:
+        json_file.write(json_data)
+    return
