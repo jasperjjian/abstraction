@@ -34,11 +34,13 @@ def string_filtering_tokenized(dataset, target_verbs):
     
     return final
 
-def structure_filtering_ditransitives(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], grandparent_upos="VERB", path_1=None, path_2=None):
+def structure_filtering_ditransitives(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], path_1=None, path_2=None):
     include_list = []
     exclude_list = []
     reasons = []
     for i, sentence in enumerate(doc_sentences):
+        if "@-@" in sentence.text:
+            continue
         # get character indices to extract representations
         start = 0
         end = 0
@@ -118,6 +120,8 @@ def structure_filtering_motion(doc_sentences, target_lemma='to', target_upos="AD
     reasons = []
     for i, sentence in enumerate(doc_sentences):
         # get character indices to extract representations
+        if "@-@" in sentence.text:
+            continue
         start = 0
         end = 0
         for w in sentence.words:
@@ -138,6 +142,7 @@ def structure_filtering_motion(doc_sentences, target_lemma='to', target_upos="AD
                     if w_p.id == parent:
                         parent_word = w_p
                         break
+                
                 # these should be nouns
                 if parent_word.upos != "NOUN":
                     #print(parent_word.upos)
@@ -150,19 +155,33 @@ def structure_filtering_motion(doc_sentences, target_lemma='to', target_upos="AD
                 grandparent_start = 0
                 grandparent_end = 0
                 for w_g in sentence.words:
+                    interveners = []
                     # add the end of the current word
                     grandparent_end = grandparent_end + len(w_g.text)
                     if w_g.id == parent_word.head:
                         grandparent_lemma = w_g.lemma
                         grandparent_id = w_g.id
                         grandparent_word = w_g
-                        break
+                        if grandparent_id > lem_id:
+                            break
+                        else:
+                            for w_i in sentence.words:
+                                if w_i.id > grandparent_id and w_i.id < lem_id:
+                                    interveners.append(w_i.upos)
+                                elif w_i.id == lem_id:
+                                    break
+                            break
                     # add the spaces
                     grandparent_start = grandparent_start + len(w_g.text) + 1
                     grandparent_end = grandparent_end + 1
                 # these should be verbs
                 if grandparent_word.upos != "VERB":
                     reasons.append("grandparent not verb")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
+                if "NOUN" in interveners or "PROPN" in interveners or "PRON" in interveners:
+                    reasons.append("intervening noun")
                     start = start + len(w.text) + 1
                     end = end + 1
                     continue
@@ -253,8 +272,6 @@ def main():
 
 if __name__ == "__main__":
     #main()
-    # get from OS the path to a raw txt file of sentences
-
     print("Getting head")
     doc_ditransitive_head = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.head.parsed.conllu")
     print("Getting tail")
@@ -268,16 +285,16 @@ if __name__ == "__main__":
     ditransitives = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/ditransitives.txt", 'r').readlines()]
     include_list, exclude_list, reasons = structure_filtering_ditransitives(doc_ditransitive, lemmas=ditransitives, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.excluded.json")
     del doc_ditransitive
-
-    print("Getting head")
+    
+    print("Loading head")
     doc_motion_head = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/motion.raw.filtered.head.parsed.conllu")
-    print("Getting tail")
+    print("Loading tail")
     doc_motion_tail = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/motion.raw.filtered.tail.parsed.conllu")
     doc_motion = doc_motion_head.sentences + doc_motion_tail.sentences
 
     # remove doc_motion_head and tail
     del doc_motion_head
     del doc_motion_tail
-
+    print("Filtering")
     motion = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/motion.txt", 'r').readlines()]
     include_list, exclude_list, reasons = structure_filtering_motion(doc_motion, lemmas=motion, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/motion.excluded.json")

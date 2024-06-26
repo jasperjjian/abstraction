@@ -36,6 +36,8 @@ def structure_filtering_by(doc_sentences, target_lemma='by', target_upos="ADP", 
     passive_list = []
     reasons = []
     for i, sentence in enumerate(doc_sentences):
+        if "@-@" in sentence.text:
+            continue
         # get character indices to extract representations
         start = 0
         end = 0
@@ -136,10 +138,15 @@ if __name__ == "__main__":
     #main()
 
     # load the CoNLLs
+    print("Loading head")
     by_head = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/by.raw.unfiltered.head.parsed.conllu")
+    print("Loading tail")
     by_tail = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/by.raw.unfiltered.tail.parsed.conllu")
+    
     by_combined = by_head.sentences + by_tail.sentences
-
+    
+    del by_head
+    del by_tail
     # filter the CoNLLs
     
     passive_list, adjunct_list, reasons = structure_filtering_by(by_combined, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/by.passive.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/by.adjunct.parsed_filtered.json")
