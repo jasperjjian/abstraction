@@ -29,10 +29,12 @@ def get_checkpoint_results(model_name, metric, splits, rep="target", sample_a_ex
         sample_b = [np.array(x) for x in split_b.values()]
         
         # why do we have to remove? I don't know yet
-        sample_a = [x for i, x in enumerate(sample_a) if i not in sample_a_remove]
-        sample_b = [x for i, x in enumerate(sample_b) if i not in sample_b_remove]
-
-        results_df = metric(sample_a, sample_b, layers=range(0, 12), labels=splits, checkpoint_n=checkpoint)
+        sample_a = [x for i, x in enumerate(sample_a) if i not in sample_a_excl]
+        sample_b = [x for i, x in enumerate(sample_b) if i not in sample_b_excl]
+        try:
+            results_df = metric(sample_a, sample_b, layers=range(0, 12), labels=splits, checkpoint_n=checkpoint)
+        except IndexError:
+            print(f"IndexError at checkpoint {checkpoint}")
         # Append the DataFrame to the list
         all_results.append(results_df)
     
@@ -45,16 +47,16 @@ def get_checkpoint_results(model_name, metric, splits, rep="target", sample_a_ex
 if __name__ == "__main__":
     rep = sys.argv[1]
     # Define the splits and the metric
-    splits = ["motion", "ditrans"]
+    splits = ["by_adjunct", "by_passive"]
     metric = pca_classifier
-    sample_a_remove = [40, 578, 678, 801, 1509, 1759, 1404, 1418, 1537]
-    sample_b_remove = [3, 930, 631, 741, 1109, 1925]
+    #sample_a_remove = [40, 578, 678, 801, 1509, 1759, 1404, 1418, 1537]
+    #sample_b_remove = [3, 930, 631, 741, 1109, 1925]
 
     # Define the model name
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     
     # Get the results
-    results = get_checkpoint_results(model_name, metric, splits, rep=rep)
+    results = get_checkpoint_results(model_name, metric, splits, rep=rep, sample_a_excl=[], sample_b_excl=[], source="en_ewt")
 
     # Save the results
-    results.to_csv(f'results/wikitext/to/battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)
+    results.to_csv(f'results/en_ewt/by/battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)
