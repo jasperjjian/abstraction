@@ -33,7 +33,7 @@ def pca_classifier(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[],
             break
 
         # Perform PCA
-        pca = PCA(n_components=2)
+        pca = PCA(n_components=20)
         pca.fit(combined_data)
         transformed_data = pca.transform(combined_data)
         

@@ -34,7 +34,7 @@ def string_filtering_tokenized(dataset, target_verbs):
     
     return final
 
-def structure_filtering_ditransitives(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], path_1=None, path_2=None):
+def structure_filtering_ditransitives(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], path_1=None, path_2=None, path_3=None):
     include_list = []
     exclude_list = []
     reasons = []
@@ -112,9 +112,12 @@ def structure_filtering_ditransitives(doc_sentences, target_lemma='to', target_u
         utils.dump_json(include_list, path_1)
     if path_2 != None:
         utils.dump_json(exclude_list, path_2)
+    if path_3 != None:
+        with open(path_3, "w") as f:
+            f.write("\n".join(reasons) + "\n")
     return include_list, exclude_list, reasons
 
-def structure_filtering_motion(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], grandparent_upos="VERB", path_1=None, path_2=None):
+def structure_filtering_motion(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], grandparent_upos="VERB", path_1=None, path_2=None, path_3=None):
     include_list = []
     exclude_list = []
     reasons = []
@@ -200,6 +203,9 @@ def structure_filtering_motion(doc_sentences, target_lemma='to', target_upos="AD
         utils.dump_json(include_list, path_1)
     if path_2 != None:
         utils.dump_json(exclude_list, path_2)
+    if path_3 != None:
+        with open(path_3, "w") as f:
+            f.write("\n".join(reasons) + "\n")
     return include_list, exclude_list, reasons
 
 def main():
@@ -239,12 +245,6 @@ def main():
     with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/ditransitive.raw.unfiltered.txt", "w") as f:
         f.write("\n".join(ditransitive_list))
     
-    # load the raw txt files
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/motion.raw.unfiltered.txt", "r") as f:
-        motion_list = f.readlines()
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/ditransitive.raw.unfiltered.txt", "r") as f:
-        ditransitive_list = f.readlines()
-    
     # filter the lists based on the tokenized dataset
     motion_list = string_filtering_tokenized(motion_list, motion)
     ditransitive_list = string_filtering_tokenized(ditransitive_list, ditransitives)
@@ -283,7 +283,7 @@ if __name__ == "__main__":
     del doc_ditransitive_tail
 
     ditransitives = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/ditransitives.txt", 'r').readlines()]
-    include_list, exclude_list, reasons = structure_filtering_ditransitives(doc_ditransitive, lemmas=ditransitives, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.excluded.json")
+    include_list, exclude_list, reasons = structure_filtering_ditransitives(doc_ditransitive, lemmas=ditransitives, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.reasons.txt")
     del doc_ditransitive
     
     print("Loading head")
@@ -297,4 +297,4 @@ if __name__ == "__main__":
     del doc_motion_tail
     print("Filtering")
     motion = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/motion.txt", 'r').readlines()]
-    include_list, exclude_list, reasons = structure_filtering_motion(doc_motion, lemmas=motion, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/motion.excluded.json")
+    include_list, exclude_list, reasons = structure_filtering_motion(doc_motion, lemmas=motion, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/motion.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/motion.reasons.txt")
