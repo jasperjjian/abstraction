@@ -237,7 +237,7 @@ def main():
 
     # filter the dataset based on the regex patterns
     motion_list, ditransitive_list = string_based_filtering(dataset, "to", motion_regex, ditransitive_regex)
-    
+    del dataset
     # serialize the lists to raw txt files
     
     with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/motion.raw.unfiltered.txt", "w") as f:
@@ -245,6 +245,12 @@ def main():
     with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/ditransitive.raw.unfiltered.txt", "w") as f:
         f.write("\n".join(ditransitive_list))
     
+    # open the above files
+    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/motion.raw.unfiltered.txt", "r") as f:
+        motion_list = f.readlines()
+    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/ditransitive.raw.unfiltered.txt", "r") as f:
+        ditransitive_list = f.readlines()
+
     # filter the lists based on the tokenized dataset
     motion_list = string_filtering_tokenized(motion_list, motion)
     ditransitive_list = string_filtering_tokenized(ditransitive_list, ditransitives)
@@ -254,7 +260,7 @@ def main():
         f.write("".join(motion_list))
     with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/ditransitive.raw.filtered.txt", "w") as f:
         f.write("".join(ditransitive_list))
-
+    
     # TODO: this is not integrated with the stuff above.
     filepath = sys.argv[1]
     output_path = sys.argv[2]
@@ -263,7 +269,7 @@ def main():
         sentences = f.readlines()
     
     nlp = stanza.Pipeline(lang='en', processors='tokenize,mwt,pos,lemma,depparse')
-    parsed = utils.stanza_parsing(sentences, nlp)
+    parsed = utils.stanza_parsing_batched(sentences, nlp, 64)
 
     # serialize this 
     new_doc = Document([])
@@ -272,29 +278,22 @@ def main():
 
 if __name__ == "__main__":
     #main()
-    print("Getting head")
-    doc_ditransitive_head = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.head.parsed.conllu")
-    print("Getting tail")
-    doc_ditransitive_tail = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.tail.parsed.conllu")
-    doc_ditransitive = doc_ditransitive_head.sentences + doc_ditransitive_tail.sentences
-
-    # remove doc_ditransitive_head and tail
-    del doc_ditransitive_head
-    del doc_ditransitive_tail
-
+    
+    print("Getting Ditransitives")
+    doc_ditransitive = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.parsed.conllu")
+    doc_ditransitive = doc_ditransitive.sentences
     ditransitives = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/ditransitives.txt", 'r').readlines()]
+
+    print("Filtering")
     include_list, exclude_list, reasons = structure_filtering_ditransitives(doc_ditransitive, lemmas=ditransitives, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.reasons.txt")
     del doc_ditransitive
     
-    print("Loading head")
-    doc_motion_head = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/motion.raw.filtered.head.parsed.conllu")
-    print("Loading tail")
-    doc_motion_tail = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/motion.raw.filtered.tail.parsed.conllu")
-    doc_motion = doc_motion_head.sentences + doc_motion_tail.sentences
+    print("Getting Motion")
+    doc_motion = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/motion.raw.filtered.parsed.conllu")
+    doc_motion = doc_motion.sentences
 
     # remove doc_motion_head and tail
-    del doc_motion_head
-    del doc_motion_tail
     print("Filtering")
     motion = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/motion.txt", 'r').readlines()]
     include_list, exclude_list, reasons = structure_filtering_motion(doc_motion, lemmas=motion, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/motion.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/motion.reasons.txt")
+    
