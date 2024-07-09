@@ -47,16 +47,16 @@ def get_checkpoint_results(model_name, metric, splits, rep="target", sample_a_ex
 if __name__ == "__main__":
     rep = sys.argv[1]
     # Define the splits and the metric
-    splits = ["motion", "ditrans"]
+    splits = ["motion_balanced", "ditrans_balanced"]
     metric = pca_classifier
-    sample_a_remove = [40, 578, 678, 801, 1509, 1759, 1404, 1418, 1537]
-    sample_b_remove = [3, 930, 631, 741, 1109, 1925]
+    #sample_a_remove = [40, 578, 678, 801, 1509, 1759, 1404, 1418, 1537]
+    #sample_b_remove = [3, 930, 631, 741, 1109, 1925]
 
     # Define the model name
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     
     # Get the results
-    results = get_checkpoint_results(model_name, metric, splits, rep=rep, sample_a_excl=sample_a_remove, sample_b_excl=sample_b_remove, source="wikitext")
+    results = get_checkpoint_results(model_name, metric, splits, rep=rep, source="wikitext")
 
     # Save the results
     results.to_csv(f'results/wikitext/to/pca_20.battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)

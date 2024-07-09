@@ -89,6 +89,9 @@ def loop_checkpoints_and_save(model_name, split, instances, delete_from_cache=Fa
     
     for checkpoint in tqdm(branches, mininterval=5):
         model_name_preprocessed = model_name.split("/")[-1]
+        # check if the file already exists
+        if os.path.exists(f'/nlp/scr/jjian/data/wikitext/{split}/{rep}/{model_name_preprocessed}.{checkpoint}.{split}.embeddings.hdf5'):
+            continue
         save_embeddings_to_hdf5(f'/nlp/scr/jjian/data/wikitext/{split}/{rep}/', model_name, instances, split, model_shorthand=f"{model_name_preprocessed}.{checkpoint}", checkpoint=checkpoint, cache_dir=cache_dir, rep=rep)
         if delete_from_cache:
             model_path = model_name.replace('/', '--')
