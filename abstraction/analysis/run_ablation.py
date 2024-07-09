@@ -162,4 +162,4 @@ if __name__ == "__main__":
     outdir = "results/ablation/wikitext/to/pca_20"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    results.to_csv(f'{outdir}/batlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)
+    results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)

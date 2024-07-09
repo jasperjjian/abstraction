@@ -1,7 +1,5 @@
-brush
 cram
 crowd
-cultivate
 dab
 daub
 drape
@@ -21,7 +19,6 @@ pump
 rub
 scatter
 seed
-settle
 sew
 shower
 slather
@@ -32,12 +29,10 @@ spatter
 splash
 splatter
 spray
-spread
 sprinkle
 spritz
 squirt
 stack
-stick
 stock
 strew
 string
