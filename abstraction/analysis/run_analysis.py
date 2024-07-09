@@ -6,6 +6,7 @@ from huggingface_hub import list_repo_refs
 from tqdm import tqdm
 import random
 import json
+import os
 from abstraction.analysis.metrics import pca_classifier
 
 
@@ -20,8 +21,8 @@ def get_checkpoint_results(model_name, metric, splits, rep="target", sample_a_ex
     
     for checkpoint in tqdm(branches):
         try:
-            split_a = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[0]}/{rep}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[0]}.embeddings.hdf5", 'r')
-            split_b = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[1]}/{rep}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[1]}.embeddings.hdf5", 'r')
+            split_a = h5py.File(f"/nlp/scr/jjian/data/ablation/{source}/{splits[0]}/{rep}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[0]}.embeddings.hdf5", 'r')
+            split_b = h5py.File(f"/nlp/scr/jjian/data/ablation/{source}/{splits[1]}/{rep}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[1]}.embeddings.hdf5", 'r')
         except FileNotFoundError:
             continue
         
@@ -59,4 +60,7 @@ if __name__ == "__main__":
     results = get_checkpoint_results(model_name, metric, splits, rep=rep, source="wikitext")
 
     # Save the results
-    results.to_csv(f'results/wikitext/to/pca_20.battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)
+    outdir = "results/ablation/wikitext/to/pca_20"
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
+    results.to_csv(f'{outdir}/batlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)

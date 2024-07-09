@@ -35,7 +35,7 @@ def get_random_items_to_sum(counter, total_sum):
     return None
 
 
-def redistribution_ablation(sampled_dataset_a_path, sampled_dataset_b_path):
+def redistribution_ablation(sampled_dataset_a_path, sampled_dataset_b_path, splits=[]):
     random.seed(42)
     with open(sampled_dataset_a_path, 'r') as f:
         sampled_dataset_a = json.load(f)
@@ -63,15 +63,15 @@ def redistribution_ablation(sampled_dataset_a_path, sampled_dataset_b_path):
 
     for i, s in enumerate(sampled_dataset_a):
         if s['dependent_lemma'] in all_a_lemmas:
-            new_sampled_a.append(("a", i))
+            new_sampled_a.append((splits[0], i))
         else:
-            new_sampled_b.append(("a", i))
+            new_sampled_b.append((splits[0], i))
 
     for i, s in enumerate(sampled_dataset_b):
         if s['dependent_lemma'] in all_b_lemmas:
-            new_sampled_a.append(("b", i))
+            new_sampled_b.append((splits[0], i))
         else:
-            new_sampled_b.append(("b", i))
+            new_sampled_a.append((splits[0], i))
     
     return new_sampled_a, new_sampled_b
 
