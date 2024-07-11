@@ -21,7 +21,7 @@ def get_layer(dataset, layer=7):
         return [np.expand_dims(x[layer], 0) for x in dataset]
     return [x[layer] for x in dataset]
 
-def pca_classifier(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[], verbose=False, clf="ridge"):
+def pca_classifier(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[], verbose=False, clf="ridge", pca_rank=4):
     results_ridge = []
     for layer in layers:
         list1 = get_layer(dataset1, layer)
@@ -33,7 +33,7 @@ def pca_classifier(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[],
             break
 
         # Perform PCA
-        pca = PCA(n_components=20)
+        pca = PCA(n_components=pca_rank)
         pca.fit(combined_data)
         transformed_data = pca.transform(combined_data)
         

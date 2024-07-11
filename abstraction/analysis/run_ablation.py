@@ -104,7 +104,7 @@ def get_ablation_splits(samples, splits, ablation_idx):
     return new_sample_a, new_sample_b
 
 
-def get_checkpoint_results(model_name, metric, splits, ablation_idx, rep="target", source="wikitext"):
+def get_checkpoint_results(model_name, metric, splits, ablation_idx, rep="target", source="wikitext", pca_rank=4):
     all_results = []  # List to store all DataFrames
     out = list_repo_refs(model_name)
     branches = [int(b.name.split('checkpoint-')[-1]) for b in out.tags]
@@ -128,7 +128,7 @@ def get_checkpoint_results(model_name, metric, splits, ablation_idx, rep="target
         sample_a, sample_b = get_ablation_splits([sample_a, sample_b], splits, ablation_idx)
         
         try:
-            results_df = metric(sample_a, sample_b, layers=range(0, 12), labels=splits, checkpoint_n=checkpoint)
+            results_df = metric(sample_a, sample_b, layers=range(0, 12), labels=splits, checkpoint_n=checkpoint, pca_rank=pca_rank)
         except IndexError:
             print(f"IndexError at checkpoint {checkpoint}")
         # Append the DataFrame to the list
@@ -144,6 +144,7 @@ if __name__ == "__main__":
     split_a_sample_path = sys.argv[1]
     split_b_sample_path = sys.argv[2]
     rep = sys.argv[3]
+    pca_rank = 4
     
     # Define the splits and the metric
     splits = ["motion_balanced", "ditrans_balanced"]
@@ -156,10 +157,10 @@ if __name__ == "__main__":
     ablation_idx = redistribution_ablation(split_a_sample_path, split_b_sample_path, splits=splits)    
 
     # Get the results
-    results = get_checkpoint_results(model_name, metric, splits, ablation_idx, rep=rep, source="wikitext")
+    results = get_checkpoint_results(model_name, metric, splits, ablation_idx, rep=rep, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
-    outdir = "results/ablation/wikitext/to/pca_20"
+    outdir = f"results/ablation/wikitext/to/pca_{pca_rank}"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)
