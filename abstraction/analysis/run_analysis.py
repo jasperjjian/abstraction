@@ -45,8 +45,8 @@ def get_checkpoint_results(model_name, metric, splits, rep="target", sample_a_ex
 if __name__ == "__main__":
     rep = sys.argv[1]
     # Define the splits and the metric
-    splits = ["motion_balanced", "ditrans_balanced"]
-    pca_rank = 2
+    splits = ["with.substance", "with.adjunct"]
+    pca_rank = int(sys.argv[2])
     metric = pca_classifier
     #sample_a_remove = [40, 578, 678, 801, 1509, 1759, 1404, 1418, 1537]
     #sample_b_remove = [3, 930, 631, 741, 1109, 1925]
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     results = get_checkpoint_results(model_name, metric, splits, rep=rep, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
-    outdir = f"results/wikitext/to/pca_{pca_rank}"
+    outdir = f"results/wikitext/with/pca_{pca_rank}"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)
