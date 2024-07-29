@@ -7,6 +7,7 @@ from scipy.spatial import distance
 from scipy.spatial.distance import cdist
 from scipy.stats import gaussian_kde
 from sklearn.linear_model import RidgeClassifier, LogisticRegression
+import json
 
 
 """
@@ -81,6 +82,48 @@ def pca_classifier(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[],
             print("RidgeClassifier Score")
             print(results_ridge)
         
-        results_df = pd.DataFrame({checkpoint_n : results_ridge})
+    results_df = pd.DataFrame({checkpoint_n : results_ridge})
     return results_df
+
+def pca_classifier_per_lemma(dataset1, dataset2, mapping=None, checkpoint_n=None, layers=[7], labels=[], verbose=False, clf="ridge", pca_rank=4):
+    results_ridge = {}
+    for layer in layers:
+        list1 = get_layer(dataset1, layer)
+        list2 = get_layer(dataset2, layer)
+        try:
+            combined_data = np.concatenate([np.concatenate(list1), np.concatenate(list2)])
+        except ValueError:
+            print(checkpoint_n)
+            break
+
+        # Perform PCA
+        pca = PCA(n_components=pca_rank)
+        pca.fit(combined_data)
+        transformed_data = pca.transform(combined_data)
+        
+        # Separate transformed data based on their original lists
+        transformed_list1 = transformed_data[:len(list1)*len(list1[0])]
+        transformed_list2 = transformed_data[len(list1)*len(list1[0]):len(list1)*len(list1[0])+len(list2)*len(list2[0])]
+        
+        X = np.concatenate([transformed_list1, transformed_list2])
+        y = [0]*len(transformed_list1) + [1]*len(transformed_list2)
+        y = np.array(y)
+        clf = RidgeClassifier().fit(X, y)
+        predictions = clf.predict(X)
+        
+        for verb, indices in mapping.items():
+            predicted_labels = predictions[indices]
+            true_labels = y[indices]
+            assert true_labels.all() == 0 or true_labels.all() == 1
+            # get the accuracy
+            accuracy = np.mean(predicted_labels == true_labels)
+            if verb not in results_ridge:
+                results_ridge[verb] = []
+            results_ridge[verb].append(accuracy)
+    results_ridge["checkpoint"] = [checkpoint_n] * len(layers)
+    verb_results = pd.DataFrame(results_ridge)
+    row_labels = [f"Layer {i+1}" for i in range(len(verb_results))]
+    verb_results.set_index(pd.Index(row_labels), inplace=True)
+
+    return verb_results
         

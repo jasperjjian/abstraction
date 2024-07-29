@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Run the analysis
-python3 /sailhome/jjian/projects/abstraction/abstraction/analysis/run_analysis.py "target" 8
+python3 /sailhome/jjian/projects/abstraction/abstraction/analysis/run_analysis.py "dependent" 20
