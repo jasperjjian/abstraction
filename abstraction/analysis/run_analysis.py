@@ -99,7 +99,7 @@ def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split
 if __name__ == "__main__":
     rep = sys.argv[1]
     # Define the splits and the metric
-    splits = ["motion_balanced", "ditrans_balanced"]
+    splits = ["with.substance", "with.adjunct"]
     pca_rank = int(sys.argv[2])
     metric = pca_classifier_per_lemma
 
@@ -108,8 +108,8 @@ if __name__ == "__main__":
     
     # If needed the json files for the datasets
 
-    split_a_json = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.balanced_sampled.json"
-    split_b_json = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed_filtered.balanced_sampled.json"
+    split_a_json = "/nlp/scr/jjian/datasets/wikitext_parsed/with.substance.parsed_filtered.manual.json"
+    split_b_json = "/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.parsed_filtered.sampled.json"
 
     # Get the results
 
