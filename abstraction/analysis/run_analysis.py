@@ -99,24 +99,24 @@ def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split
 if __name__ == "__main__":
     rep = sys.argv[1]
     # Define the splits and the metric
-    splits = ["with.substance", "with.adjunct"]
+    splits = ["by_passive", "by_adjunct"]
     pca_rank = int(sys.argv[2])
-    metric = pca_classifier_per_lemma
+    metric = pca_classifier
 
     # Define the model name
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     
     # If needed the json files for the datasets
 
-    split_a_json = "/nlp/scr/jjian/datasets/wikitext_parsed/with.substance.parsed_filtered.manual.json"
-    split_b_json = "/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.parsed_filtered.sampled.json"
+    split_a_json = "/nlp/scr/jjian/datasets/wikitext_parsed/by.passive.sampled.json"
+    split_b_json = "/nlp/scr/jjian/datasets/wikitext_parsed/by.adjunct.constructed.json"
 
     # Get the results
 
-    results = get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split_b_json, rep=rep, source="wikitext", pca_rank=pca_rank)
+    results = get_checkpoint_results(model_name, metric, splits, rep=rep, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
-    outdir = f"results/wikitext/to/pca_{pca_rank}/lemma"
+    outdir = f"results/wikitext/by/pca_{pca_rank}"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=True)
