@@ -45,6 +45,11 @@ def batch_sentences(dataset, batch_size, rep='target'):
                 batch = [(sentence['text'], sentence['dependent_slice']) for sentence in dataset[i:]]
             else:
                 batch = [(sentence['text'], sentence['dependent_slice']) for sentence in dataset[i:i+batch_size]]
+        elif rep == 'object':
+            if i + batch_size > len(dataset):
+                batch = [(sentence['text'], sentence['object_slice']) for sentence in dataset[i:]]
+            else:
+                batch = [(sentence['text'], sentence['object_slice']) for sentence in dataset[i:i+batch_size]]
         yield batch
     
 def save_embeddings_to_hdf5(directory, model_name, dataset, split, batch_size=32, model_shorthand=None, checkpoint="main", cache_dir=None, rep='target'):

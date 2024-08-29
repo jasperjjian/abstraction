@@ -10,7 +10,7 @@ import os
 from abstraction.analysis.metrics import pca_classifier, pca_classifier_per_lemma
 
 
-def get_checkpoint_results(model_name, metric, splits, rep="target", sample_a_excl=[], sample_b_excl=[], source="wikitext", pca_rank=4):
+def get_checkpoint_results(model_name, metric, splits, rep_a="target", rep_b="target", sample_a_excl=[], sample_b_excl=[], source="wikitext", pca_rank=4):
     all_results = []  # List to store all DataFrames
     out = list_repo_refs(model_name)
     branches = [int(b.name.split('checkpoint-')[-1]) for b in out.tags]
@@ -21,8 +21,8 @@ def get_checkpoint_results(model_name, metric, splits, rep="target", sample_a_ex
     
     for checkpoint in tqdm(branches):
         try:
-            split_a = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[0]}/{rep}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[0]}.embeddings.hdf5", 'r')
-            split_b = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[1]}/{rep}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[1]}.embeddings.hdf5", 'r')
+            split_a = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[0]}/{rep_a}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[0]}.embeddings.hdf5", 'r')
+            split_b = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[1]}/{rep_b}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[1]}.embeddings.hdf5", 'r')
         except FileNotFoundError:
             continue
         
@@ -60,7 +60,7 @@ def get_verb_split_mapping(dataset1_json, dataset2_json):
 
     return mapping
 
-def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split_b_json, rep="target", sample_a_excl=[], sample_b_excl=[], source="wikitext", pca_rank=4):
+def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split_b_json, rep_a="target", rep_b="target", sample_a_excl=[], sample_b_excl=[], source="wikitext", pca_rank=4):
     all_results = []  # List to store all DataFrames
     out = list_repo_refs(model_name)
     branches = [int(b.name.split('checkpoint-')[-1]) for b in out.tags]
@@ -71,8 +71,8 @@ def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split
     mapping = get_verb_split_mapping(split_a_json, split_b_json)
     for checkpoint in tqdm(branches[:150]):
         try:
-            split_a = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[0]}/{rep}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[0]}.embeddings.hdf5", 'r')
-            split_b = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[1]}/{rep}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[1]}.embeddings.hdf5", 'r')
+            split_a = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[0]}/{rep_a}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[0]}.embeddings.hdf5", 'r')
+            split_b = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[1]}/{rep_b}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[1]}.embeddings.hdf5", 'r')
         except FileNotFoundError:
             continue
         
@@ -97,10 +97,11 @@ def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split
 
 
 if __name__ == "__main__":
-    rep = sys.argv[1]
+    rep_a = sys.argv[1]
+    rep_b = sys.argv[2]
     # Define the splits and the metric
     splits = ["by_passive", "by_adjunct"]
-    pca_rank = int(sys.argv[2])
+    pca_rank = int(sys.argv[3])
     metric = pca_classifier
 
     # Define the model name
@@ -113,10 +114,10 @@ if __name__ == "__main__":
 
     # Get the results
 
-    results = get_checkpoint_results(model_name, metric, splits, rep=rep, source="wikitext", pca_rank=pca_rank)
+    results = get_checkpoint_results(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
     outdir = f"results/wikitext/by/pca_{pca_rank}"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=True)
+    results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep_a}.tsv', sep='\t', index=True)
