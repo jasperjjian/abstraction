@@ -16,6 +16,7 @@ def get_checkpoint_results(model_name, metric, splits, rep_a="target", rep_b="ta
     branches = [int(b.name.split('checkpoint-')[-1]) for b in out.tags]
     #branches = random.sample(branches, k=60)
     branches = sorted(branches)
+    branches = branches[:150]
     
     model_name_preprocessed = model_name.split("/")[-1]
     
@@ -28,6 +29,38 @@ def get_checkpoint_results(model_name, metric, splits, rep_a="target", rep_b="ta
         
         sample_a = [np.array(x) for x in split_a.values()]
         sample_b = [np.array(x) for x in split_b.values()]
+        
+        try:
+            results_df = metric(sample_a, sample_b, layers=range(0, 12), labels=splits, checkpoint_n=checkpoint, pca_rank=pca_rank)
+        except IndexError:
+            print(f"IndexError at checkpoint {checkpoint}")
+        # Append the DataFrame to the list
+        all_results.append(results_df)
+    
+    # Concatenate all DataFrames in the list
+    concatenated_df = pd.concat(all_results, ignore_index=False, axis=1)
+    
+    return concatenated_df
+
+def get_checkpoint_results_nominals(model_name, metric, splits, rep_a="target", rep_b="target", rep_c="target", sample_a_excl=[], sample_b_excl=[], source="wikitext", pca_rank=4):
+    all_results = []  # List to store all DataFrames
+    out = list_repo_refs(model_name)
+    branches = [int(b.name.split('checkpoint-')[-1]) for b in out.tags]
+    #branches = random.sample(branches, k=60)
+    branches = sorted(branches)
+    
+    model_name_preprocessed = model_name.split("/")[-1]
+    
+    for checkpoint in tqdm(branches):
+        try:
+            split_a = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[0]}/{rep_a}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[0]}.embeddings.hdf5", 'r')
+            split_b = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[1]}/{rep_b}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[1]}.embeddings.hdf5", 'r')
+            split_c = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[2]}/{rep_c}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[2]}.embeddings.hdf5", 'r')
+        except FileNotFoundError:
+            continue
+        
+        sample_a = [np.array(x) for x in split_a.values()] + [np.array(x) for x in split_b.values()]
+        sample_b = [np.array(x) for x in split_c.values()]
         
         try:
             results_df = metric(sample_a, sample_b, layers=range(0, 12), labels=splits, checkpoint_n=checkpoint, pca_rank=pca_rank)
@@ -99,8 +132,9 @@ def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split
 if __name__ == "__main__":
     rep_a = sys.argv[1]
     rep_b = sys.argv[2]
+    #rep_c = sys.argv[3]
     # Define the splits and the metric
-    splits = ["by_passive", "by_adjunct"]
+    splits = ["motion_balanced", "ditrans_nominals"]
     pca_rank = int(sys.argv[3])
     metric = pca_classifier
 
@@ -114,10 +148,11 @@ if __name__ == "__main__":
 
     # Get the results
 
+    #results = get_checkpoint_results_nominals(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, rep_c=rep_c, source="wikitext", pca_rank=pca_rank)
     results = get_checkpoint_results(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
-    outdir = f"results/wikitext/by/pca_{pca_rank}"
+    outdir = f"results/wikitext/ditrans_nominals/pca_{pca_rank}"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep_a}.tsv', sep='\t', index=True)
