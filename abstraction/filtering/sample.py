@@ -8,7 +8,7 @@ from huggingface_hub import list_repo_refs
 from tqdm import tqdm
 import numpy as np
 
-def balanced_sample(dataset, sample_size):
+def balanced_sample(dataset, sample_size, threshold=None):
     random.seed(42)
 
     # split the dataset by the unique values of dependent_lemma
@@ -25,6 +25,9 @@ def balanced_sample(dataset, sample_size):
         count[key] = len(split[key])
     count = Counter(count)
     count = count.most_common()
+
+    if threshold != None:
+        count = [(key, counts) for key, counts in count if counts >= threshold]
 
     minimum_sample_size = sample_size // len(count)
 

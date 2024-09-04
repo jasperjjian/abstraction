@@ -35,21 +35,11 @@ def batch_sentences(dataset, batch_size, rep='target'):
     Batch sentences into chunks of size batch_size.
     """
     for i in range(0, len(dataset), batch_size):
-        if rep == 'target':
-            if i + batch_size > len(dataset):
-                batch = [(sentence['text'], sentence['target_slice']) for sentence in dataset[i:]]
-            else:
-                batch = [(sentence['text'], sentence['target_slice']) for sentence in dataset[i:i+batch_size]]
-        elif rep == 'dependent':
-            if i + batch_size > len(dataset):
-                batch = [(sentence['text'], sentence['dependent_slice']) for sentence in dataset[i:]]
-            else:
-                batch = [(sentence['text'], sentence['dependent_slice']) for sentence in dataset[i:i+batch_size]]
-        elif rep == 'object':
-            if i + batch_size > len(dataset):
-                batch = [(sentence['text'], sentence['object_slice']) for sentence in dataset[i:]]
-            else:
-                batch = [(sentence['text'], sentence['object_slice']) for sentence in dataset[i:i+batch_size]]
+        slice_name = f"{rep}_slice"
+        if i + batch_size > len(dataset):
+            batch = [(sentence['text'], sentence[slice_name]) for sentence in dataset[i:]]
+        else:
+            batch = [(sentence['text'], sentence[slice_name]) for sentence in dataset[i:i+batch_size]]
         yield batch
     
 def save_embeddings_to_hdf5(directory, model_name, dataset, split, batch_size=32, model_shorthand=None, checkpoint="main", cache_dir=None, rep='target'):
@@ -91,6 +81,8 @@ def load_dataset(instances_path, subsample=True, sample_size=2000):
 def loop_checkpoints_and_save(model_name, split, instances, delete_from_cache=False, cache_dir=None, rep="target"):
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
+    # sort the branches by the checkpoint number
+    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:150]
     
     for checkpoint in tqdm(branches, mininterval=5):
         model_name_preprocessed = model_name.split("/")[-1]

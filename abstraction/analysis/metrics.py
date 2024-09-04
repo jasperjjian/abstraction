@@ -7,6 +7,9 @@ from scipy.spatial import distance
 from scipy.spatial.distance import cdist
 from scipy.stats import gaussian_kde
 from sklearn.linear_model import RidgeClassifier, LogisticRegression
+from sklearn.utils._testing import ignore_warnings
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
 import json
 
 
@@ -81,6 +84,35 @@ def pca_classifier(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[],
             print(distance_between_means)
             print("RidgeClassifier Score")
             print(results_ridge)
+        
+    results_df = pd.DataFrame({checkpoint_n : results_ridge})
+    return results_df
+
+@ignore_warnings(category=Warning)
+def logistic_regression(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[], verbose=False, clf="ridge", pca_rank=4):
+    results_ridge = []
+    for layer in layers:
+        list1 = get_layer(dataset1, layer)
+        list2 = get_layer(dataset2, layer)
+        try:
+            combined_data = np.concatenate([np.concatenate(list1), np.concatenate(list2)])
+        except ValueError:
+            print(checkpoint_n)
+            break
+
+        
+        X = combined_data
+        y = [0]*len(list1) + [1]*len(list2)
+        fit_intercept=False 
+        penalty='l2'
+        solver="lbfgs" 
+        C=1.0
+        lr = LogisticRegression(random_state=0, max_iter=2000, 
+                                fit_intercept=fit_intercept, C=C,
+                                penalty=penalty, solver=solver)
+        pipe = make_pipeline(lr)
+        pipe.fit(X, y)
+        results_ridge.append(pipe.score(X, y))
         
     results_df = pd.DataFrame({checkpoint_n : results_ridge})
     return results_df

@@ -7,7 +7,7 @@ from tqdm import tqdm
 import random
 import json
 import os
-from abstraction.analysis.metrics import pca_classifier, pca_classifier_per_lemma
+from abstraction.analysis.metrics import pca_classifier, pca_classifier_per_lemma, logistic_regression
 
 
 def get_checkpoint_results(model_name, metric, splits, rep_a="target", rep_b="target", sample_a_excl=[], sample_b_excl=[], source="wikitext", pca_rank=4):
@@ -47,7 +47,7 @@ def get_checkpoint_results_nominals(model_name, metric, splits, rep_a="target", 
     out = list_repo_refs(model_name)
     branches = [int(b.name.split('checkpoint-')[-1]) for b in out.tags]
     #branches = random.sample(branches, k=60)
-    branches = sorted(branches)
+    branches = sorted(branches)[:150]
     
     model_name_preprocessed = model_name.split("/")[-1]
     
@@ -59,9 +59,10 @@ def get_checkpoint_results_nominals(model_name, metric, splits, rep_a="target", 
         except FileNotFoundError:
             continue
         
-        sample_a = [np.array(x) for x in split_a.values()] + [np.array(x) for x in split_b.values()]
+        #sample_a = [np.array(x) for x in split_a.values()] + [np.array(x) for x in split_b.values()]
         sample_b = [np.array(x) for x in split_c.values()]
-        
+        sample_b_n = len(sample_b)
+        sample_a = random.sample([np.array(x) for x in split_a.values()], sample_b_n // 2) + random.sample([np.array(x) for x in split_b.values()], sample_b_n // 2)
         try:
             results_df = metric(sample_a, sample_b, layers=range(0, 12), labels=splits, checkpoint_n=checkpoint, pca_rank=pca_rank)
         except IndexError:
@@ -113,8 +114,6 @@ def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split
         
         sample_a = [np.array(split_a[str(i)]) for i in range(len(split_a))]
         sample_b = [np.array(split_b[str(i)]) for i in range(len(split_b))]
-
-        
         
         try:
             results_df = metric(sample_a, sample_b, mapping=mapping, layers=range(0, 12), labels=splits, checkpoint_n=checkpoint, pca_rank=pca_rank)
@@ -134,7 +133,7 @@ if __name__ == "__main__":
     rep_b = sys.argv[2]
     #rep_c = sys.argv[3]
     # Define the splits and the metric
-    splits = ["motion_balanced", "ditrans_nominals"]
+    splits = ["ditrans_nominals", "ditrans_nominals"]
     pca_rank = int(sys.argv[3])
     metric = pca_classifier
 
