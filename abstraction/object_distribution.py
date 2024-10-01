@@ -5,6 +5,7 @@ from tqdm import tqdm
 import json
 import os
 from typing import List, Dict, Any
+import sys
 
 def get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_name="gpt2"):
     if model is None or tokenizer is None:
@@ -32,7 +33,6 @@ def get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_na
     return probabilities
 
 def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor, tokenizer: AutoTokenizer, top_k: float = 0.9) -> List[Dict[str, Any]]:
-    batch_size, vocab_size = probabilities.shape
     
     # Sort probabilities and get indices
     sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
@@ -63,10 +63,30 @@ def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probab
     ]
     return batch_results
 
+# do the same as above but save entropy of the distribution rather than the tokens
+
+def token_entropy_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor) -> List[Dict[str, Any]]:
+    
+    # Compute entropy of the distribution
+    entropy = -torch.sum(probabilities * torch.log(probabilities), dim=1)
+    
+    # Create the final results
+    batch_results = [
+        {
+            "input_prefix": prefix,
+            "verb": verb,
+            "entropy": ent.item()
+        }
+        for prefix, verb, ent in zip(input_prefixes, verbs, entropy)
+    ]
+    return batch_results
+
+
+
 def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep="verb_fragment", batch_size=32):
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
-    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[1:150]
+    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))
     tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
     if tokenizer.pad_token is None:
         tokenizer.add_special_tokens(
@@ -93,11 +113,12 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
             probabilities = get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_name)
 
             # Get token distribution for the batch
-            batch_results = token_distribution_batch(input_prefixes, verbs, probabilities, tokenizer, top_k=0.75)
+            #batch_results = token_distribution_batch(input_prefixes, verbs, probabilities, tokenizer, top_k=0.75)
+            batch_results = token_entropy_batch(input_prefixes, verbs, probabilities)
             results.extend(batch_results)
 
         model_name_preprocessed = model_name.split("/")[-1]
-        output_path = f'/nlp/scr/jjian/data/wikitext/{split}/{rep}/{model_name_preprocessed}.{checkpoint}.predictions.json'
+        output_path = f'/nlp/scr/jjian/data/wikitext/{split}/{rep}/{model_name_preprocessed}.{checkpoint}.entropy.json'
 
         # make dir if it doesn't exist
         if not os.path.exists(os.path.dirname(output_path)):
@@ -112,6 +133,7 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
     return
 
 if __name__ == "__main__":
+    rep = sys.argv[1]
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
     
@@ -119,4 +141,4 @@ if __name__ == "__main__":
     ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.fragments.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     
-    loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep="preposition_fragment", batch_size=16)
+    loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep=rep, batch_size=16)
