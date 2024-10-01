@@ -59,7 +59,6 @@ def get_checkpoint_results_nominals(model_name, metric, splits, rep_a="target", 
         except FileNotFoundError:
             continue
         
-        #sample_a = [np.array(x) for x in split_a.values()] + [np.array(x) for x in split_b.values()]
         sample_b = [np.array(x) for x in split_c.values()]
         sample_b_n = len(sample_b)
         sample_a = random.sample([np.array(x) for x in split_a.values()], sample_b_n // 2) + random.sample([np.array(x) for x in split_b.values()], sample_b_n // 2)
@@ -131,10 +130,10 @@ def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split
 if __name__ == "__main__":
     rep_a = sys.argv[1]
     rep_b = sys.argv[2]
-    #rep_c = sys.argv[3]
+    rep_c = sys.argv[3]
     # Define the splits and the metric
-    splits = ["ditrans_nominals", "ditrans_nominals"]
-    pca_rank = int(sys.argv[3])
+    splits = ["ditrans_nominals", "motion_balanced", "ditrans_balanced"]
+    pca_rank = int(sys.argv[4])
     metric = pca_classifier
 
     # Define the model name
@@ -148,10 +147,10 @@ if __name__ == "__main__":
     # Get the results
 
     #results = get_checkpoint_results_nominals(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, rep_c=rep_c, source="wikitext", pca_rank=pca_rank)
-    results = get_checkpoint_results(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, source="wikitext", pca_rank=pca_rank)
+    results = get_checkpoint_results_nominals(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, rep_c=rep_c, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
     outdir = f"results/wikitext/ditrans_nominals/pca_{pca_rank}"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep_a}.tsv', sep='\t', index=True)
+    results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{splits[2]}.{rep_a}.tsv', sep='\t', index=True)

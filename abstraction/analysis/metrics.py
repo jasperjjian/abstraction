@@ -88,6 +88,44 @@ def pca_classifier(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[],
     results_df = pd.DataFrame({checkpoint_n : results_ridge})
     return results_df
 
+def pca_classifier_train_test(train_datasets, test_datasets, checkpoint_n=None, layers=[7], labels=[], verbose=False, clf="ridge", pca_rank=4):
+    results_ridge = []
+    for layer in layers:
+        train_a = get_layer(train_datasets[0], layer)
+        train_b = get_layer(train_datasets[1], layer)
+        test_a = get_layer(test_datasets[0], layer)
+        test_b = get_layer(test_datasets[1], layer)
+    
+        try:
+            combined_data = np.concatenate([np.concatenate(train_a), np.concatenate(train_b)])
+        except ValueError:
+            print(checkpoint_n)
+            break
+
+        # Perform PCA
+        pca = PCA(n_components=pca_rank)
+        pca.fit(combined_data)
+        transformed_train_data = pca.transform(combined_data)
+        
+        # Separate transformed data based on their original lists
+        transformed_train_data_a = transformed_train_data[:len(train_a)*len(train_a[0])]
+        transformed_train_data_b = transformed_train_data[len(train_a)*len(train_a[0]):len(train_b)*len(train_b[0])+len(train_b)*len(train_b[0])]
+
+        
+        X = np.concatenate([transformed_train_data_a, transformed_train_data_b])
+        y = [0]*len(transformed_train_data_a) + [1]*len(transformed_train_data_b)
+        clf = RidgeClassifier().fit(X, y)
+
+        transformed_test_data = pca.transform(np.concatenate([np.concatenate(test_a), np.concatenate(test_b)]))
+        transformed_test_data_a = transformed_test_data[:len(test_a)*len(test_a[0])]
+        transformed_test_data_b = transformed_test_data[len(test_a)*len(test_a[0]):len(test_b)*len(test_b[0])+len(test_b)*len(test_b[0])]
+        X_test = np.concatenate([transformed_test_data_a, transformed_test_data_b])
+        y_test = [0]*len(transformed_test_data_a) + [1]*len(transformed_test_data_b)
+        results_ridge.append(clf.score(X_test, y_test))
+        
+    results_df = pd.DataFrame({checkpoint_n : results_ridge})
+    return results_df
+
 @ignore_warnings(category=Warning)
 def logistic_regression(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[], verbose=False, clf="ridge", pca_rank=4):
     results_ridge = []
