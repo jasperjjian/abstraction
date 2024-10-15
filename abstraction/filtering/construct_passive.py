@@ -87,13 +87,13 @@ def identify_predicate(sentence, parse):
 def inflect_pronoun(pronoun):
     if pronoun.lower() == "i":
         return "me"
-    elif pronoun == "he":
+    elif pronoun.lower() == "he":
         return "him"
-    elif pronoun == "she":
+    elif pronoun.lower() == "she":
         return "her"
-    elif pronoun == "we":
+    elif pronoun.lower() == "we":
         return "us"
-    elif pronoun == "they":
+    elif pronoun.lower() == "they":
         return "them"
 
 def get_new_sentence(sample, parses):

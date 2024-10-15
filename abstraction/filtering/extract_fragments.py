@@ -85,13 +85,13 @@ def get_fragments(sample, parses):
 if __name__ == "__main__":
     #main()
     print("Loading data...")
-    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed_filtered.balanced_sampled.json"
+    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.balanced_sampled.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     print("Loading parses...")
-    ditrans_parses = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.parsed.conllu")
+    ditrans_parses = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/motion.raw.filtered.parsed.conllu")
     ditrans_parses = ditrans_parses.sentences
     ditrans_sample_parses = [ditrans_parses[sentence["sent_id"]] for sentence in ditrans_json]
     del ditrans_parses
 
     sentence_fragments = get_fragments(ditrans_json, ditrans_sample_parses)
-    utils.dump_json(sentence_fragments, "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.fragments.json")
+    utils.dump_json(sentence_fragments, "/nlp/scr/jjian/datasets/wikitext_parsed/motion.fragments.json")
