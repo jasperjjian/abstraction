@@ -21,12 +21,13 @@ def get_checkpoint_results(model_name, metric, splits, source="wikitext"):
     
     for checkpoint in tqdm(branches):
         try:
-            split_a = json.load(open(f"/nlp/scr/jjian/data/{source}/ditransitive/{splits[0]}/{model_name_preprocessed}.checkpoint-{checkpoint}.entropy.json"))
+            split_a = json.load(open(f"/nlp/scr/jjian/data/{source}/ditransitive/predictions/{splits[0]}/{model_name_preprocessed}.checkpoint-{checkpoint}.predictions.json"))
         except FileNotFoundError:
             continue
         
         try:
             results_df = metric(split_a, checkpoint_n=checkpoint)
+            
         except IndexError:
             print(f"IndexError at checkpoint {checkpoint}")
         # Append the DataFrame to the list
@@ -48,7 +49,7 @@ def get_checkpoint_results_lemma(model_name, metric, splits, source="wikitext"):
     
     for checkpoint in tqdm(branches):
         try:
-            split_a = json.load(open(f"/nlp/scr/jjian/data/{source}/ditransitive/{splits[0]}/{model_name_preprocessed}.checkpoint-{checkpoint}.entropy.json"))
+            split_a = json.load(open(f"/nlp/scr/jjian/data/{source}/ditransitive/entropy/{splits[0]}/{model_name_preprocessed}.checkpoint-{checkpoint}.entropy.json"))
         except FileNotFoundError:
             continue
         # get the list of unique verbs
@@ -85,7 +86,12 @@ def get_verb_split_mapping(dataset1_json, dataset2_json):
         mapping[sentence["dependent_lemma"]].append(i)
 
     return mapping
-    
+
+def get_set_size(x, checkpoint_n):
+    # d is a list of dictionaries with a key "top_k_tokens"
+    # get the first element of each list within top_k_tokens, convert to a set, and get the length
+
+    return pd.DataFrame({checkpoint_n: [len([set(d["top_k_tokens"][0]) for d in x])]})
 
 if __name__ == "__main__":
     # Define the model name
@@ -95,13 +101,15 @@ if __name__ == "__main__":
 
     # lambda function to get the length of the token list and put that into the dataframe with the checkpoint name
     #metric = lambda x, checkpoint_n: pd.DataFrame({checkpoint_n : [sum([d["entropy"] for d in x]) / len(x)]})
-    metric = lambda x, checkpoint_n, verb: pd.DataFrame({checkpoint_n: [sum([d["entropy"] for d in x]) / len(x)]}, index=[verb])
-
-    #results = get_checkpoint_results_nominals(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, rep_c=rep_c, source="wikitext", pca_rank=pca_rank)
-    results = get_checkpoint_results_lemma(model_name, metric, splits, source="wikitext")
+    #metric = lambda x, checkpoint_n, verb: pd.DataFrame({checkpoint_n: [sum([d["entropy"] for d in x]) / len(x)]}, index=[verb])
+    # get the size of the full set of objects
+    metric = lambda x, checkpoint_n: pd.DataFrame({checkpoint_n: [len(set.union(*[set([y[0] for y in d["top_k_tokens"]]) for d in x]))]})
+    #results = get_checkpoint_results(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, rep_c=rep_c, source="wikitext", pca_rank=pca_rank)
+    #results = get_checkpoint_results_lemma(model_name, metric, splits, source="wikitext")
+    results = get_checkpoint_results(model_name, metric, splits, source="wikitext")
 
     # Save the results
     outdir = f"results/wikitext/ditransitive/{splits[0]}/"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    results.to_csv(f'{outdir}/battlestar_small.object_distribution.entropy.{splits[0]}.verb_wise.tsv', sep='\t', index=True)
+    results.to_csv(f'{outdir}/battlestar_small.object_distribution.spread_size.{splits[0]}.tsv', sep='\t', index=True)

@@ -15,24 +15,32 @@ def get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_na
     # Set the model to evaluation mode
     model.eval()
 
-    # Tokenize the batch of inputs
+    # Tokenize the batch of inputs save the original length of each sequence before padding to get the logits for the next token
     encoded = tokenizer(input_prefixes, return_tensors='pt', padding="longest")
     input_ids = encoded["input_ids"].to(model.device)
+    attention_mask = encoded["attention_mask"].to(model.device)
+    attention_mask = encoded["attention_mask"].to(model.device) 
+    sequence_lengths = attention_mask.sum(dim=1) - 1  
 
     # Forward pass to get the logits for the next token
     with torch.no_grad():
-        outputs = model(input_ids)
+        outputs = model(input_ids, attention_mask=attention_mask)
         logits = outputs.logits
 
     # Get the logits for the last token in each input sequence
-    next_token_logits = logits[:, -1, :]
+    batch_size = logits.shape[0]
+    next_token_logits = torch.stack([
+        logits[i, sequence_lengths[i], :] 
+        for i in range(batch_size)
+    ])
 
     # Apply softmax to get the probability distributions
     probabilities = torch.nn.functional.softmax(next_token_logits, dim=-1)
+    #print(probabilities.shape)
 
     return probabilities
 
-def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor, tokenizer: AutoTokenizer, top_k: float = 0.9) -> List[Dict[str, Any]]:
+"""def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor, tokenizer: AutoTokenizer, top_k: float = 0.9) -> List[Dict[str, Any]]:
     
     # Sort probabilities and get indices
     sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
@@ -56,12 +64,54 @@ def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probab
         {
             "input_prefix": prefix,
             "verb": verb,
-            "top_k_tokens": tokens,
-            #"top_k_tokens": list(zip(tokens, probs.tolist()))
+            #"top_k_tokens": tokens,
+            # round to two decimal places the probabilities
+            "top_k_tokens": list(zip(tokens, [round(p.item(), 2) for p in probs]))
         }
         for prefix, verb, tokens, probs in zip(input_prefixes, verbs, token_strings, relevant_probs)
     ]
+    return batch_results"""
+
+def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor, tokenizer: AutoTokenizer, top_k: float = 0.9) -> List[Dict[str, Any]]:
+    # Sort probabilities and get indices
+    sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
+    
+    # Compute cumulative probabilities
+    cumulative_probs = torch.cumsum(sorted_probs, dim=1)
+    
+    # Create a mask for probabilities below top_k
+    mask = cumulative_probs < top_k
+    
+    # Use the mask to get the relevant probabilities and indices
+    relevant_probs = [probs[m] for probs, m in zip(sorted_probs, mask)]
+    relevant_indices = [indices[m] for indices, m in zip(sorted_indices, mask)]
+    
+    # Flatten the indices list to pass all at once to the tokenizer
+    flattened_indices = torch.cat(relevant_indices).tolist()
+    
+    # Batch convert all token ids to tokens at once
+    all_tokens = tokenizer.convert_ids_to_tokens(flattened_indices)
+    
+    # Reconstruct the batch structure by splitting `all_tokens` back
+    split_sizes = [len(indices) for indices in relevant_indices]
+    token_lists = [all_tokens[offset:offset + size] for offset, size in zip(torch.cumsum(torch.tensor([0] + split_sizes[:-1]), dim=0).tolist(), split_sizes)]
+    
+    # Convert tokens to strings in batches
+    token_strings = [[tokenizer.convert_tokens_to_string([t]) for t in tokens] for tokens in token_lists]
+    
+    # Create the final results
+    batch_results = [
+        {
+            "input_prefix": prefix,
+            "verb": verb,
+            # round to two decimal places the probabilities
+            "top_k_tokens": list(zip(tokens, [round(p.item(), 3) for p in probs]))
+        }
+        for prefix, verb, tokens, probs in zip(input_prefixes, verbs, token_strings, relevant_probs)
+    ]
+    
     return batch_results
+
 
 # do the same as above but save entropy of the distribution rather than the tokens
 
@@ -86,7 +136,7 @@ def token_entropy_batch(input_prefixes: List[str], verbs: List[str], probabiliti
 def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep="verb_fragment", batch_size=32):
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
-    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:150]
+    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))
     tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
     if tokenizer.pad_token is None:
         tokenizer.add_special_tokens(
@@ -96,6 +146,16 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     for checkpoint in tqdm(branches):
+        model_name_preprocessed = model_name.split("/")[-1]
+        output_path = f'/nlp/scr/jjian/data/wikitext/{split}/predictions/{rep}/{model_name_preprocessed}.{checkpoint}.predictions.json'
+        
+        # make dir if it doesn't exist
+        if not os.path.exists(os.path.dirname(output_path)):
+            os.makedirs(os.path.dirname(output_path))
+
+        if os.path.exists(output_path):
+            continue
+
         model = AutoModelForCausalLM.from_pretrained(model_name, revision=checkpoint, cache_dir=cache_dir).to(device)
         model.resize_token_embeddings(len(tokenizer))
         model.eval()
@@ -113,19 +173,11 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
             probabilities = get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_name)
 
             # Get token distribution for the batch
-            #batch_results = token_distribution_batch(input_prefixes, verbs, probabilities, tokenizer, top_k=0.75)
-            batch_results = token_entropy_batch(input_prefixes, verbs, probabilities)
+            batch_results = token_distribution_batch(input_prefixes, verbs, probabilities, tokenizer, top_k=0.75)
+            #batch_results = token_entropy_batch(input_prefixes, verbs, probabilities)
             results.extend(batch_results)
 
-        model_name_preprocessed = model_name.split("/")[-1]
-        output_path = f'/nlp/scr/jjian/data/wikitext/{split}/{rep}/{model_name_preprocessed}.{checkpoint}.entropy.json'
-
-        # make dir if it doesn't exist
-        if not os.path.exists(os.path.dirname(output_path)):
-            os.makedirs(os.path.dirname(output_path))
-
-        if os.path.exists(output_path):
-            continue
+        
 
         with open(output_path, 'w') as f:
             json.dump(results, f, indent=4)
@@ -137,8 +189,8 @@ if __name__ == "__main__":
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
     
-    split = "motion"
-    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.fragments.json"
+    split = "ditransitive"
+    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.fragments.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     
     loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep=rep, batch_size=16)
