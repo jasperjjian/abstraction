@@ -10,7 +10,7 @@ def get_top_k_predictions_with_entropy(sentence, model_name="gpt2", top_k=15):
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
     branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))
-    checkpoint = branches[50]
+    checkpoint = branches[100]
     print(f"Using checkpoint: {checkpoint}")
     tokenizer = GPT2Tokenizer.from_pretrained(model_name, cache_dir="/nlp/scr/jjian/mistral-checkpoints/")
     model = GPT2LMHeadModel.from_pretrained(model_name, revision=checkpoint, cache_dir="/nlp/scr/jjian/mistral-checkpoints/")
@@ -42,7 +42,8 @@ def get_top_k_predictions_with_entropy(sentence, model_name="gpt2", top_k=15):
 
 
 # Example usage
-sentence = "Southey had been telling the story to the"
+sentence =  "The man that Perlmutter Rozines began  her stories to"
+#sentence = "The person that John told his story to"
 top_predictions = get_top_k_predictions_with_entropy(sentence, model_name="stanford-crfm/battlestar-gpt2-small-x49")
 for token, prob in top_predictions:
     print(f"Token: {token}, Probability: {prob:.4f}")

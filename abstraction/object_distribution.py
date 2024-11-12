@@ -136,7 +136,7 @@ def token_entropy_batch(input_prefixes: List[str], verbs: List[str], probabiliti
 def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep="verb_fragment", batch_size=32):
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
-    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))
+    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[1:]
     tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
     if tokenizer.pad_token is None:
         tokenizer.add_special_tokens(
@@ -167,6 +167,7 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
         for i in tqdm(range(0, len(instances), batch_size)):
             batch = instances[i:i + batch_size]
             input_prefixes = [data[rep].strip() for data in batch]
+            #input_prefixes = [data["text"].strip() for data in batch]
             verbs = [data["dependent_lemma"].strip() for data in batch]
 
             # Get the next token distribution for the batch
@@ -189,7 +190,7 @@ if __name__ == "__main__":
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
     
-    split = "ditransitive"
+    split = "motion"
     ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.fragments.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     

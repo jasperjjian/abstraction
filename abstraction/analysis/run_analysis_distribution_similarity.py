@@ -11,11 +11,11 @@ def get_checkpoint_results(model_name, metric, splits, verb_class, source="wikit
     out = list_repo_refs(model_name)
     branches = [int(b.name.split('checkpoint-')[-1]) for b in out.tags]
     #branches = random.sample(branches, k=60)
-    branches = sorted(branches)[3:130]
+    branches = sorted(branches)[3:]
     model_name_preprocessed = model_name.split("/")[-1]
     
     # make an h5py file to store the results
-    f = h5py.File(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/{model_name_preprocessed}.top75_cosine.combined_verb_prep.hdf5", "w")
+    f = h5py.File(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/{model_name_preprocessed}.top75_cosine.ditrans_prep.ditrans_verb.hdf5", "w")
 
     for checkpoint in tqdm(branches):
         try:
@@ -50,11 +50,28 @@ def top_75_pairwise_cosine(x):
             if p == 0:
                 arr[i, dict_of_words[w]] = 1e-4
     
-    sim_arr = cosine_similarity(arr)
+    # give a list of lists of rows to sum together
+    rows_to_sum = get_rows_to_sum(x)
+    empty_array = np.zeros((len(rows_to_sum), len(dict_of_words)))
+    for i, rows in enumerate(rows_to_sum):
+        new_row = np.sum(arr[rows], axis=0)
+        empty_array[i] = new_row
+    
+    sim_arr = cosine_similarity(empty_array)
 
     return sim_arr
 
+def get_rows_to_sum(combined_splits):
+    rows_to_sum = []
+    prev_verb = ""
+    for i, d in enumerate(combined_splits):
+        if d["verb"] != prev_verb:
+            rows_to_sum.append([i])
+            prev_verb = d["verb"]
+        else:
+            rows_to_sum[-1].append(i)
 
+    return rows_to_sum
 
 if __name__ == "__main__":
     # Define the model name
