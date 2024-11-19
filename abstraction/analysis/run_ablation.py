@@ -160,7 +160,7 @@ if __name__ == "__main__":
     results = get_checkpoint_results(model_name, metric, splits, ablation_idx, rep=rep, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
-    outdir = f"results/ablation/wikitext/to/pca_{pca_rank}.anisotropy"
+    outdir = f"results/ablation/wikitext/to/pca_{pca_rank}"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)

@@ -149,7 +149,7 @@ if __name__ == "__main__":
     #results = get_checkpoint_results_nominals(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, rep_c=rep_c, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
-    outdir = f"results/wikitext/to/pca_{pca_rank}.anisotropy"
+    outdir = f"results/wikitext/to/pca_{pca_rank}"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep_a}.tsv', sep='\t', index=True)
