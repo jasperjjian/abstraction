@@ -1,6 +1,7 @@
 from stanza.utils.conll import CoNLL
 from abstraction.filtering import utils
 import json 
+import ast
 
 def identify_predicate(sentence, parse):
     start = sentence["dependent_slice"][0]
@@ -53,7 +54,7 @@ def get_syntactic_object(sentence, parse, predicate_id, ensure_contiguity=True):
     
     return subject_text, [beginning, end], nsubj_count, pass_count
 
-def get_fragments(sample, parses):
+"""def get_fragments(sample, parses):
     constructed_samples = []
     for i, sentence in enumerate(sample):
         parse = parses[i]
@@ -80,18 +81,34 @@ def get_fragments(sample, parses):
         new_data_instance["preposition_fragment"] = fragment_text
 
         constructed_samples.append(new_data_instance)
+    return constructed_samples"""
+
+def get_fragments(sample):
+
+    constructed_samples = []
+    for i, sentence in enumerate(sample):
+        if sentence["decision"] != "y":
+            continue
+        new_data_instance = sentence
+        dep_slice = sentence["dependent_slice"]
+        target_slice = sentence["target_slice"]
+        new_data_instance["verb_fragment"] = sentence["text"][:dep_slice[1]] + " the"
+        new_data_instance["preposition_fragment"] = sentence["text"][:target_slice[1]] + " the"
+        constructed_samples.append(new_data_instance)
     return constructed_samples
+
 
 if __name__ == "__main__":
     #main()
     print("Loading data...")
-    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.balanced_sampled.json"
+    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed.annotated.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     print("Loading parses...")
-    ditrans_parses = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/motion.raw.filtered.parsed.conllu")
-    ditrans_parses = ditrans_parses.sentences
-    ditrans_sample_parses = [ditrans_parses[sentence["sent_id"]] for sentence in ditrans_json]
-    del ditrans_parses
+    #ditrans_parses = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.parsed.conllu")
+    #ditrans_parses = ditrans_parses.sentences
+    #ditrans_sample_parses = [ditrans_parses[sentence["sent_id"]] for sentence in ditrans_json]
+    #del ditrans_parses
 
-    sentence_fragments = get_fragments(ditrans_json, ditrans_sample_parses)
+    #sentence_fragments = get_fragments(ditrans_json, ditrans_sample_parses)
+    sentence_fragments = get_fragments(ditrans_json)
     utils.dump_json(sentence_fragments, "/nlp/scr/jjian/datasets/wikitext_parsed/motion.fragments.json")

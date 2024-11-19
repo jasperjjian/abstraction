@@ -82,7 +82,7 @@ def loop_checkpoints_and_save(model_name, split, instances, delete_from_cache=Fa
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
     # sort the branches by the checkpoint number
-    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:300]
+    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))
     
     for checkpoint in tqdm(branches, mininterval=5):
         model_name_preprocessed = model_name.split("/")[-1]

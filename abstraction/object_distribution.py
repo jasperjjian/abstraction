@@ -105,7 +105,7 @@ def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probab
             "input_prefix": prefix,
             "verb": verb,
             # round to two decimal places the probabilities
-            "top_k_tokens": list(zip(tokens, [round(p.item(), 3) for p in probs]))
+            "top_k_tokens": list(zip(tokens, [round(p.item(), 5) for p in probs]))
         }
         for prefix, verb, tokens, probs in zip(input_prefixes, verbs, token_strings, relevant_probs)
     ]
@@ -136,7 +136,7 @@ def token_entropy_batch(input_prefixes: List[str], verbs: List[str], probabiliti
 def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep="verb_fragment", batch_size=32):
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
-    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[150:]
+    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[10:150]
     tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
     if tokenizer.pad_token is None:
         tokenizer.add_special_tokens(
@@ -190,7 +190,7 @@ if __name__ == "__main__":
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
     
-    split = "motion"
+    split = "motion_annotated"
     ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.fragments.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     

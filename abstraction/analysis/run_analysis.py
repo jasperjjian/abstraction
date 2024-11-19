@@ -102,7 +102,7 @@ def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split
     
     model_name_preprocessed = model_name.split("/")[-1]
     mapping = get_verb_split_mapping(split_a_json, split_b_json)
-    for checkpoint in tqdm(branches[:150]):
+    for checkpoint in tqdm(branches):
         try:
             split_a = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[0]}/{rep_a}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[0]}.embeddings.hdf5", 'r')
             split_b = h5py.File(f"/nlp/scr/jjian/data/{source}/{splits[1]}/{rep_b}/{model_name_preprocessed}.checkpoint-{checkpoint}.{splits[1]}.embeddings.hdf5", 'r')
@@ -130,10 +130,9 @@ def get_checkpoint_results_lemma(model_name, metric, splits, split_a_json, split
 if __name__ == "__main__":
     rep_a = sys.argv[1]
     rep_b = sys.argv[2]
-    rep_c = sys.argv[3]
     # Define the splits and the metric
-    splits = ["ditrans_nominals", "motion_balanced", "ditrans_balanced"]
-    pca_rank = int(sys.argv[4])
+    splits = ["ditrans_annotated", "motion_annotated"]
+    pca_rank = int(sys.argv[3])
     metric = pca_classifier
 
     # Define the model name
@@ -141,16 +140,16 @@ if __name__ == "__main__":
     
     # If needed the json files for the datasets
 
-    split_a_json = "/nlp/scr/jjian/datasets/wikitext_parsed/by.passive.sampled.json"
-    split_b_json = "/nlp/scr/jjian/datasets/wikitext_parsed/by.adjunct.constructed.json"
+    split_a_json = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed.annotated.json"
+    split_b_json = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed.annotated.json"
 
     # Get the results
 
+    results = get_checkpoint_results(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, source="wikitext", pca_rank=pca_rank)
     #results = get_checkpoint_results_nominals(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, rep_c=rep_c, source="wikitext", pca_rank=pca_rank)
-    results = get_checkpoint_results_nominals(model_name, metric, splits, rep_a=rep_a, rep_b=rep_b, rep_c=rep_c, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
-    outdir = f"results/wikitext/ditrans_nominals/pca_{pca_rank}"
+    outdir = f"results/wikitext/to/pca_{pca_rank}.anisotropy"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{splits[2]}.{rep_a}.tsv', sep='\t', index=True)
+    results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep_a}.tsv', sep='\t', index=True)

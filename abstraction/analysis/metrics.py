@@ -39,7 +39,9 @@ def pca_classifier(dataset1, dataset2, checkpoint_n=None, layers=[7], labels=[],
         # Perform PCA
         pca = PCA(n_components=pca_rank)
         pca.fit(combined_data)
+        # get rid of top 3 components
         transformed_data = pca.transform(combined_data)
+        transformed_data = transformed_data[:, 1:]
         
         # Separate transformed data based on their original lists
         transformed_list1 = transformed_data[:len(list1)*len(list1[0])]

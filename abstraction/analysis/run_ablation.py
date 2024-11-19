@@ -144,10 +144,10 @@ if __name__ == "__main__":
     split_a_sample_path = sys.argv[1]
     split_b_sample_path = sys.argv[2]
     rep = sys.argv[3]
-    pca_rank = 4
+    pca_rank = int(sys.argv[4])
     
     # Define the splits and the metric
-    splits = ["motion_balanced", "ditrans_balanced"]
+    splits = ["ditrans_annotated", "motion_annotated"]
     metric = pca_classifier
 
     # Define the model name
@@ -160,7 +160,7 @@ if __name__ == "__main__":
     results = get_checkpoint_results(model_name, metric, splits, ablation_idx, rep=rep, source="wikitext", pca_rank=pca_rank)
 
     # Save the results
-    outdir = f"results/ablation/wikitext/to/pca_{pca_rank}"
+    outdir = f"results/ablation/wikitext/to/pca_{pca_rank}.anisotropy"
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     results.to_csv(f'{outdir}/battlestar_small.{splits[0]}.{splits[1]}.{rep}.tsv', sep='\t', index=False)

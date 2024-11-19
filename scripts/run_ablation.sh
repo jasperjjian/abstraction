@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sample_a="/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.balanced_sampled.json"
-sample_b="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed_filtered.balanced_sampled.json"
+sample_a="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed.annotated.json"
+sample_b="/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed.annotated.json"
 
-python3 /sailhome/jjian/projects/abstraction/abstraction/analysis/run_train_test_ablation.py $sample_a $sample_b "target" 20
+python3 /sailhome/jjian/projects/abstraction/abstraction/analysis/run_ablation.py $sample_a $sample_b "target" 20
