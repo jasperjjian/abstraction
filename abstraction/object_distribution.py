@@ -133,10 +133,17 @@ def token_entropy_batch(input_prefixes: List[str], verbs: List[str], probabiliti
 
 
 
-def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep="verb_fragment", batch_size=32):
+def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep="verb_fragment", batch_size=32, branch=None):
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
-    branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[10:150]
+    if branch is None:
+        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))
+    elif branch == 0:
+        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[2:10]
+    elif branch == 1:
+        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[10:150]
+    elif branch == 2:
+        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[150:]
     tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
     if tokenizer.pad_token is None:
         tokenizer.add_special_tokens(
@@ -187,11 +194,12 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
 
 if __name__ == "__main__":
     rep = sys.argv[1]
+    branch = int(sys.argv[2])
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
     
     split = "motion_annotated"
-    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.fragments.json"
+    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.rel_clause_obj.constructed.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     
-    loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep=rep, batch_size=16)
+    loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep=rep, batch_size=16, branch=branch)

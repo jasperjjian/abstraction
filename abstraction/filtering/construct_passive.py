@@ -21,12 +21,21 @@ def sample_ambiguous_sentences(passive_dataset, n=2000):
 
     return final_sample
 
-def get_syntactic_subject(sentence, parse, predicate_id, ensure_contiguity=True):
+def get_syntactic_subject(sentence, parse, predicate_id, ensure_contiguity=False):
     subject_dependent_id = -1
+    for w in parse.words:
+        if w.id == predicate_id:
+            if w.deprel == "conj" or w.deprel == "xcomp":
+                predicate_id = w.head
     for w in parse.words:
         if w.head == predicate_id:
             if w.deprel == "nsubj" or w.deprel == "nsubj:pass":
                 subject_dependent_id = w.id
+                break
+    
+    """if subject_dependent_id == -1:
+        print(f"{sentence["sent_id"]}, {predicate_id}")
+        return """""
     
     subject_constituent_ids = [subject_dependent_id]
     size = 0
@@ -70,7 +79,7 @@ def get_syntactic_subject(sentence, parse, predicate_id, ensure_contiguity=True)
     obj = " ".join([w.text for w in parse.words if w.id in object_constituent_ids])
 
     return obj"""
-def get_syntactic_object(sentence, parse, predicate_id, ensure_contiguity=True):
+def get_syntactic_object(sentence, parse, predicate_id, ensure_contiguity=False):
     object_dependent_id = -1
     for w in parse.words:
         if w.head == predicate_id:
@@ -80,6 +89,34 @@ def get_syntactic_object(sentence, parse, predicate_id, ensure_contiguity=True):
                         continue
                 object_dependent_id = w.id
                 break
+
+    object_constituent_ids = [object_dependent_id]
+    size = 0
+
+    while len(object_constituent_ids) > size:
+        size = len(object_constituent_ids)
+        for w in parse.words:
+            if w.head in object_constituent_ids and w.id not in object_constituent_ids and w.text.lower() != "by":
+                object_constituent_ids.append(w.id)
+
+    if ensure_contiguity:
+        object_constituent_ids.sort()
+        if object_constituent_ids != list(range(object_constituent_ids[0], object_constituent_ids[-1] + 1)):
+            return ""
+    
+    obj = " ".join([w.text for w in parse.words if w.id in object_constituent_ids])
+
+    return obj
+
+def get_syntactic_object_to(sentence, parse, predicate_id, ensure_contiguity=False):
+    object_dependent_id = -1
+    for w in parse.words:
+        if w.head == predicate_id:
+            if w.deprel == "obj" or w.deprel == "obl":
+                for w1 in parse.words:
+                    if w1.head == w.id and w1.deprel == "case" and w1.text.lower() == "to":
+                        object_dependent_id = w.id
+                        break
 
     object_constituent_ids = [object_dependent_id]
     size = 0
@@ -145,13 +182,13 @@ def get_new_sentence(sample, parses):
     object_problems = 0
 
     for i, sentence in enumerate(sample):
-        if sentence["decision"] != "y":
-            continue
+        """if sentence["decision"] != "y":
+            continue"""
         parse = parses[i]
         predicate_id = identify_predicate(sentence, parse)
         if predicate_id == -1:
             continue
-        logical_object = get_syntactic_subject(sentence, parse, predicate_id, ensure_contiguity=True)
+        """logical_object = get_syntactic_subject(sentence, parse, predicate_id, ensure_contiguity=False)
         #logical_object = logical_object.lower()
         if logical_object == "":
             object_problems += 1
@@ -159,14 +196,15 @@ def get_new_sentence(sample, parses):
         if "who" in logical_object.lower() or "which" in logical_object.lower():
             continue
         if logical_object.split()[0].lower() in ["the", "a", "an", "this", "that", "these", "those", "my", "your", "his", "her", "its", "our", "their", "you", "he", "she", "we", "they"]:
-            logical_object = logical_object[0].lower() + logical_object[1:]
+            logical_object = logical_object[0].lower() + logical_object[1:]"""
         """if logical_object.lower() in ["i", "he", "she", "we", "they"]:
             logical_object = inflect_pronoun(logical_object)"""
-        logical_subject = get_syntactic_object(sentence, parse, predicate_id, ensure_contiguity=True)
+        logical_subject = get_syntactic_object_to(sentence, parse, predicate_id, ensure_contiguity=False)
         if logical_subject == "":
             subject_problems += 1
             continue
-        
+        if logical_subject[:3].lower() == "to ":
+            logical_subject = logical_subject[3:]
         """if logical_subject[0].isalpha():
             logical_subject = logical_subject[0].upper() + logical_subject[1:]"""
         predicate = getInflection(sentence["dependent_lemma"], tag='VBD')[0]
@@ -178,14 +216,18 @@ def get_new_sentence(sample, parses):
         target_slice = [len(f"{logical_subject} {predicate} {logical_object} "), len(f"{logical_subject} {predicate} {logical_object} by")]
         dependent_slice = [len(f"{logical_subject} "), len(f"{logical_subject} {predicate}")]
         """
+        """
         text = f"The person that {logical_object} {predicate} {logical_subject} to"
         target_slice = [len(f"The person that {logical_object} {predicate} {logical_subject} "), len(f"The person that {logical_object} {predicate} {logical_subject} to")]
-        dependent_slice = [len(f"The person that {logical_object} "), len(f"The person that {logical_object} {predicate}")]
+        dependent_slice = [len(f"The person that {logical_object} "), len(f"The person that {logical_object} {predicate}")]"""
+        text = f"{logical_subject}"
+        #target_slice = [len(f"The place that {logical_object} {predicate} "), len(f"The place that {logical_object} {predicate} to")]
+        #dependent_slice = [len(f"The person that {logical_object} "), len(f"The person that {logical_object} {predicate}")]
 
         new_data_instance["text"] = text
-        new_data_instance["target_slice"] = target_slice
-        new_data_instance["dependent_slice"] = dependent_slice
-        new_data_instance["dependent_inflection"] = "VBD"
+        #new_data_instance["target_slice"] = target_slice
+        #new_data_instance["dependent_slice"] = dependent_slice
+        #new_data_instance["dependent_inflection"] = "VBD"
         constructed_samples.append(new_data_instance)
     
     print(f"Subject problems: {subject_problems}")
@@ -194,7 +236,8 @@ def get_new_sentence(sample, parses):
 
 def main():
     #passive_path = "/nlp/scr/jjian/datasets/wikitext_parsed/by.passive.parsed_filtered.json"
-    passive_path = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed.annotated.json"
+    #passive_path = "/nlp/scr/jjian/datasets/wikitext_parsed/unannotated/motion.parsed_filtered.json"
+    passive_path = "/nlp/scr/jjian/datasets/wikitext_parsed/unannotated/ditransitive.parsed_filtered.json"
     # load the passive json dataset 
     passive_json = json.load(open(passive_path, "r"))
     passive_sample = passive_json
@@ -229,7 +272,7 @@ def main():
     new_samples = get_new_sentence(passive_sample, passive_sample_parses)
 
     # dump the new samples
-    #utils.dump_json(new_samples, "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.rel_clause_obj.constructed.json")
+    utils.dump_json(new_samples, "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.objects.json")
 
 if __name__ == "__main__":
     main()

@@ -15,12 +15,12 @@ def get_checkpoint_results(model_name, metric, splits, verb_class, source="wikit
     model_name_preprocessed = model_name.split("/")[-1]
     
     # make an h5py file to store the results
-    f = h5py.File(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/{model_name_preprocessed}.top75_cosine.ditrans_annotated.motion_annotated.hdf5", "w")
+    f = h5py.File(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/{model_name_preprocessed}.top75_cosine.motion_annotated_bare.motion_rc.truncated.hdf5", "w")
 
     for checkpoint in tqdm(branches):
         try:
             split_a = json.load(open(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/{model_name_preprocessed}.checkpoint-{checkpoint}.predictions.json", "r"))
-            split_b = json.load(open(f"/nlp/scr/jjian/data/{source}/motion_annotated/predictions/{splits[1]}/{model_name_preprocessed}.checkpoint-{checkpoint}.predictions.json", "r"))
+            split_b = json.load(open(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[1]}/{model_name_preprocessed}.checkpoint-{checkpoint}.predictions.json", "r"))
             split_combined = split_a + split_b
         except FileNotFoundError:
             continue
@@ -44,7 +44,7 @@ def top_75_pairwise_cosine(x):
     arr = np.zeros((len(x), len(dict_of_words)))
 
     for i, d in enumerate(x):
-        for w, p in d["top_k_tokens"]:
+        for w, p in d["top_k_tokens"][:5]:
             if p != 0:
                 arr[i, dict_of_words[w]] = p
             if p == 0:
@@ -77,6 +77,6 @@ if __name__ == "__main__":
     # Define the model name
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     # Define the splits and the metric
-    splits = ["preposition_fragment", "preposition_fragment"]
-    verb_class = "ditrans_annotated"
+    splits = ["preposition_fragment_bare", "rel_clause_obj"]
+    verb_class = "motion_annotated"
     results = get_checkpoint_results(model_name, top_75_pairwise_cosine, splits, verb_class, source="wikitext")

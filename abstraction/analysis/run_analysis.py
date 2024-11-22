@@ -131,7 +131,7 @@ if __name__ == "__main__":
     rep_a = sys.argv[1]
     rep_b = sys.argv[2]
     # Define the splits and the metric
-    splits = ["ditrans_annotated", "motion_annotated"]
+    splits = ["ditrans_annotated", "ditrans_annotated.rc"]
     pca_rank = int(sys.argv[3])
     metric = pca_classifier
 
@@ -141,7 +141,7 @@ if __name__ == "__main__":
     # If needed the json files for the datasets
 
     split_a_json = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed.annotated.json"
-    split_b_json = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed.annotated.json"
+    split_b_json = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed.annotated.json"
 
     # Get the results
 
