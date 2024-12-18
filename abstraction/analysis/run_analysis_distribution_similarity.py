@@ -6,6 +6,7 @@ import json
 import os
 import h5py
 from sklearn.metrics.pairwise import cosine_similarity
+from scipy.spatial.distance import jensenshannon
 
 def get_checkpoint_results(model_name, metric, splits, verb_class, source="wikitext"):
     out = list_repo_refs(model_name)
@@ -15,7 +16,7 @@ def get_checkpoint_results(model_name, metric, splits, verb_class, source="wikit
     model_name_preprocessed = model_name.split("/")[-1]
     
     # make an h5py file to store the results
-    f = h5py.File(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/{model_name_preprocessed}.top75_cosine.motion_annotated_bare.motion_rc.truncated.hdf5", "w")
+    f = h5py.File(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/{model_name_preprocessed}.top75_cosine.reciprocal.substance.hdf5", "w")
 
     for checkpoint in tqdm(branches):
         try:
@@ -34,7 +35,7 @@ def get_checkpoint_results(model_name, metric, splits, verb_class, source="wikit
         # add to the h5py with the index equal to the checkpoint
 
         f.create_dataset(f"{checkpoint}", data=results_arr, compression="gzip", compression_opts=9)
-    
+
     f.close()
     return 
 
@@ -44,7 +45,7 @@ def top_75_pairwise_cosine(x):
     arr = np.zeros((len(x), len(dict_of_words)))
 
     for i, d in enumerate(x):
-        for w, p in d["top_k_tokens"][:5]:
+        for w, p in d["top_k_tokens"]:
             if p != 0:
                 arr[i, dict_of_words[w]] = p
             if p == 0:
@@ -55,10 +56,17 @@ def top_75_pairwise_cosine(x):
     empty_array = np.zeros((len(rows_to_sum), len(dict_of_words)))
     for i, rows in enumerate(rows_to_sum):
         new_row = np.sum(arr[rows], axis=0)
+        # normalize by sum
+        #new_row = new_row / np.sum(new_row)
         empty_array[i] = new_row
-    
-    sim_arr = cosine_similarity(empty_array)
 
+    sim_arr = cosine_similarity(empty_array)
+    # pairwise jensen shannon
+    # sim_arr = np.zeros((len(empty_array), len(empty_array)))
+    # for i in range(len(empty_array)):
+    #     for j in range(len(empty_array)):
+    #         sim_arr[i, j] = jensenshannon(empty_array[i], empty_array[j])
+    
     return sim_arr
 
 def get_rows_to_sum(combined_splits):
@@ -78,5 +86,5 @@ if __name__ == "__main__":
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     # Define the splits and the metric
     splits = ["preposition_fragment_bare", "rel_clause_obj"]
-    verb_class = "motion_annotated"
+    verb_class = "reciprocal"
     results = get_checkpoint_results(model_name, top_75_pairwise_cosine, splits, verb_class, source="wikitext")

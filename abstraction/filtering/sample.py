@@ -1,12 +1,7 @@
 import json
 import random
 import sys
-import h5py
-import os
 from collections import Counter
-from huggingface_hub import list_repo_refs
-from tqdm import tqdm
-import numpy as np
 
 def balanced_sample(dataset, sample_size, threshold=None):
     random.seed(42)
@@ -63,7 +58,10 @@ def main():
     with open(data_path, 'r') as f:
         data = json.load(f)
     
-    sample = balanced_sample(data, 2000)
+    verbs = ["cooperate", "correspond", "correlate", "conflict", "team", "consult", "intersperse", "talk", "mate", "affiliate"]
+    data = [s for s in data if s['dependent_lemma'] in verbs]
+    
+    sample = balanced_sample(data, 500)
 
     with open(sample_path, 'w') as f:
         json.dump(sample, f, indent=4)

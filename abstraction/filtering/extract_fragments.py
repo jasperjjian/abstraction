@@ -9,8 +9,8 @@ def identify_predicate(sentence, parse):
     count = 0
     for w in parse.words:
         if count == start and w.lemma == lemma:
-            if w.feats != None and "Voice=Pass" in w.feats:
-                break
+            """if w.feats != None and "Voice=Pass" in w.feats:
+                break"""
             id = w.id
             return id
         count += len(w.text) + 1
@@ -54,7 +54,7 @@ def get_syntactic_object(sentence, parse, predicate_id, ensure_contiguity=True):
     
     return subject_text, [beginning, end], nsubj_count, pass_count
 
-"""def get_fragments(sample, parses):
+def get_fragments(sample, parses):
     constructed_samples = []
     for i, sentence in enumerate(sample):
         parse = parses[i]
@@ -66,7 +66,7 @@ def get_syntactic_object(sentence, parse, predicate_id, ensure_contiguity=True):
         for w in parse.words:
             if w.id <= predicate_id:
                 fragment_text += w.text + " "
-        fragment_text += "the "
+        fragment_text += "the"
         new_data_instance = sentence
         new_data_instance["verb_fragment"] = fragment_text
 
@@ -77,13 +77,15 @@ def get_syntactic_object(sentence, parse, predicate_id, ensure_contiguity=True):
         for w in parse.words:
             if w.id <= preposition_id:
                 fragment_text += w.text + " "
-        fragment_text += "the "
-        new_data_instance["preposition_fragment"] = fragment_text
+        new_data_instance["preposition_fragment"] = fragment_text + "the"
+        new_data_instance["preposition_fragment_bare"] = fragment_text[:-1]
+        #fragment_text += "the"
+        #new_data_instance["preposition_fragment"] = fragment_text
 
         constructed_samples.append(new_data_instance)
-    return constructed_samples"""
+    return constructed_samples
 
-def get_fragments(sample):
+"""def get_fragments(sample):
 
     constructed_samples = []
     for i, sentence in enumerate(sample):
@@ -95,20 +97,20 @@ def get_fragments(sample):
         new_data_instance["verb_fragment"] = sentence["text"][:dep_slice[1]] + " the"
         new_data_instance["preposition_fragment"] = sentence["text"][:target_slice[1]] + " the"
         constructed_samples.append(new_data_instance)
-    return constructed_samples
+    return constructed_samples"""
 
 
 if __name__ == "__main__":
     #main()
     print("Loading data...")
-    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed.annotated.json"
+    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/substance.parsed.annotated.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     print("Loading parses...")
-    #ditrans_parses = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.parsed.conllu")
-    #ditrans_parses = ditrans_parses.sentences
-    #ditrans_sample_parses = [ditrans_parses[sentence["sent_id"]] for sentence in ditrans_json]
-    #del ditrans_parses
+    ditrans_parses = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/substance.raw.filtered.parsed.conllu")
+    ditrans_parses = ditrans_parses.sentences
+    ditrans_sample_parses = [ditrans_parses[sentence["sent_id"]] for sentence in ditrans_json]
+    del ditrans_parses
 
-    #sentence_fragments = get_fragments(ditrans_json, ditrans_sample_parses)
-    sentence_fragments = get_fragments(ditrans_json)
-    utils.dump_json(sentence_fragments, "/nlp/scr/jjian/datasets/wikitext_parsed/motion.fragments.json")
+    sentence_fragments = get_fragments(ditrans_json, ditrans_sample_parses)
+    #sentence_fragments = get_fragments(ditrans_json)
+    utils.dump_json(sentence_fragments, "/nlp/scr/jjian/datasets/wikitext_parsed/substance.fragments.json")

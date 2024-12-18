@@ -25,7 +25,7 @@ def get_syntactic_subject(sentence, parse, predicate_id, ensure_contiguity=False
     subject_dependent_id = -1
     for w in parse.words:
         if w.id == predicate_id:
-            if w.deprel == "conj" or w.deprel == "xcomp":
+            if w.deprel == "conj" or w.deprel == "xcomp" or w.deprel == "acl" or w.deprel == "advcl":
                 predicate_id = w.head
     for w in parse.words:
         if w.head == predicate_id:
@@ -85,7 +85,7 @@ def get_syntactic_object(sentence, parse, predicate_id, ensure_contiguity=False)
         if w.head == predicate_id:
             if w.deprel == "obj":
                 for w1 in parse.words:
-                    if w1.head == w.id and w1.deprel == "case" and w1.text.lower() == "to":
+                    if w1.head == w.id and w1.deprel == "case" and w1.text.lower() == "with":
                         continue
                 object_dependent_id = w.id
                 break
@@ -114,7 +114,7 @@ def get_syntactic_object_to(sentence, parse, predicate_id, ensure_contiguity=Fal
         if w.head == predicate_id:
             if w.deprel == "obj" or w.deprel == "obl":
                 for w1 in parse.words:
-                    if w1.head == w.id and w1.deprel == "case" and w1.text.lower() == "to":
+                    if w1.head == w.id and w1.deprel == "case" and w1.text.lower() == "with":
                         object_dependent_id = w.id
                         break
 
@@ -135,8 +135,8 @@ def get_syntactic_object_to(sentence, parse, predicate_id, ensure_contiguity=Fal
     obj = " ".join([w.text for w in parse.words if w.id in object_constituent_ids])
 
     return obj
-
-"""def identify_predicate(sentence, parse):
+"""
+def identify_predicate(sentence, parse):
     start = sentence["dependent_slice"][0]
     lemma = sentence["dependent_lemma"]
     count = 0
@@ -147,8 +147,8 @@ def get_syntactic_object_to(sentence, parse, predicate_id, ensure_contiguity=Fal
                 if w1.head == id and w1.deprel == "aux:pass" and w1.text.lower() != "be":
                     return id
         count += len(w.text) + 1
-    return -1"""
-
+    return -1
+"""
 def identify_predicate(sentence, parse):
     start = sentence["dependent_slice"][0]
     lemma = sentence["dependent_lemma"]
@@ -180,32 +180,35 @@ def get_new_sentence(sample, parses):
     constructed_samples = []
     subject_problems = 0
     object_problems = 0
+    verb_problems = 0
 
     for i, sentence in enumerate(sample):
-        """if sentence["decision"] != "y":
-            continue"""
+        if sentence["decision"] != "y":
+            continue
         parse = parses[i]
         predicate_id = identify_predicate(sentence, parse)
         if predicate_id == -1:
+            verb_problems += 1
             continue
-        """logical_object = get_syntactic_subject(sentence, parse, predicate_id, ensure_contiguity=False)
+        logical_object = get_syntactic_subject(sentence, parse, predicate_id, ensure_contiguity=False)
         #logical_object = logical_object.lower()
         if logical_object == "":
             object_problems += 1
+            print(f"Object problem: {sentence['sent_id']}")
             continue
         if "who" in logical_object.lower() or "which" in logical_object.lower():
             continue
         if logical_object.split()[0].lower() in ["the", "a", "an", "this", "that", "these", "those", "my", "your", "his", "her", "its", "our", "their", "you", "he", "she", "we", "they"]:
-            logical_object = logical_object[0].lower() + logical_object[1:]"""
+            logical_object = logical_object[0].lower() + logical_object[1:]
         """if logical_object.lower() in ["i", "he", "she", "we", "they"]:
             logical_object = inflect_pronoun(logical_object)"""
-        logical_subject = get_syntactic_object_to(sentence, parse, predicate_id, ensure_contiguity=False)
+        """logical_subject = get_syntactic_object_to(sentence, parse, predicate_id, ensure_contiguity=False)
         if logical_subject == "":
             subject_problems += 1
             continue
-        if logical_subject[:3].lower() == "to ":
-            logical_subject = logical_subject[3:]
-        """if logical_subject[0].isalpha():
+        if logical_subject[:5].lower() == "with ":
+            logical_subject = logical_subject[5:]
+        if logical_subject[0].isalpha():
             logical_subject = logical_subject[0].upper() + logical_subject[1:]"""
         predicate = getInflection(sentence["dependent_lemma"], tag='VBD')[0]
         #predicate = sentence["dependent_lemma"]
@@ -216,28 +219,30 @@ def get_new_sentence(sample, parses):
         target_slice = [len(f"{logical_subject} {predicate} {logical_object} "), len(f"{logical_subject} {predicate} {logical_object} by")]
         dependent_slice = [len(f"{logical_subject} "), len(f"{logical_subject} {predicate}")]
         """
-        """
-        text = f"The person that {logical_object} {predicate} {logical_subject} to"
-        target_slice = [len(f"The person that {logical_object} {predicate} {logical_subject} "), len(f"The person that {logical_object} {predicate} {logical_subject} to")]
-        dependent_slice = [len(f"The person that {logical_object} "), len(f"The person that {logical_object} {predicate}")]"""
-        text = f"{logical_subject}"
-        #target_slice = [len(f"The place that {logical_object} {predicate} "), len(f"The place that {logical_object} {predicate} to")]
-        #dependent_slice = [len(f"The person that {logical_object} "), len(f"The person that {logical_object} {predicate}")]
+        
+        """text = f"The substance that {logical_object} {predicate} {logical_subject} with"
+        target_slice = [len(f"The substance that {logical_object} {predicate} {logical_subject} "), len(f"The substance that {logical_object} {predicate} {logical_subject} with")]
+        dependent_slice = [len(f"The substance that {logical_object} "), len(f"The substance that {logical_object} {predicate}")]"""
+        #text = f"{logical_subject}"
+        text = f"The person that {logical_object} {predicate} with"
+        target_slice = [len(f"The person that {logical_object} {predicate} "), len(f"The person that {logical_object} {predicate} with")]
+        dependent_slice = [len(f"The person that {logical_object} "), len(f"The person that {logical_object} {predicate}")]
 
         new_data_instance["text"] = text
-        #new_data_instance["target_slice"] = target_slice
-        #new_data_instance["dependent_slice"] = dependent_slice
-        #new_data_instance["dependent_inflection"] = "VBD"
+        new_data_instance["target_slice"] = target_slice
+        new_data_instance["dependent_slice"] = dependent_slice
+        new_data_instance["dependent_inflection"] = "VBD"
         constructed_samples.append(new_data_instance)
     
     print(f"Subject problems: {subject_problems}")
     print(f"Object problems: {object_problems}")
+    print(f"Verb problems: {verb_problems}")
     return constructed_samples
 
 def main():
     #passive_path = "/nlp/scr/jjian/datasets/wikitext_parsed/by.passive.parsed_filtered.json"
     #passive_path = "/nlp/scr/jjian/datasets/wikitext_parsed/unannotated/motion.parsed_filtered.json"
-    passive_path = "/nlp/scr/jjian/datasets/wikitext_parsed/unannotated/ditransitive.parsed_filtered.json"
+    passive_path = "/nlp/scr/jjian/datasets/wikitext_parsed/reciprocal.parsed.annotated.json"
     # load the passive json dataset 
     passive_json = json.load(open(passive_path, "r"))
     passive_sample = passive_json
@@ -266,13 +271,13 @@ def main():
     
     """passive_sample_docs = Document([s.to_dict() for s in passive_sample_parses])
     CoNLL.write_doc2conll(passive_sample_docs, "/nlp/scr/jjian/datasets/wikitext_parsed/by.passive.interim.conllu")"""
-    passive_sample_parses = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.parsed.conllu").sentences
+    passive_sample_parses = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/reciprocal.raw.filtered.parsed.conllu").sentences
     passive_sample_parses = [passive_sample_parses[sentence["sent_id"]] for sentence in passive_sample]
     # get the new sentences
     new_samples = get_new_sentence(passive_sample, passive_sample_parses)
 
     # dump the new samples
-    utils.dump_json(new_samples, "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.objects.json")
+    utils.dump_json(new_samples, "/nlp/scr/jjian/datasets/wikitext_parsed/reciprocal.rel_clause_obj.constructed.json")
 
 if __name__ == "__main__":
     main()

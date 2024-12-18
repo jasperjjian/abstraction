@@ -105,6 +105,16 @@ def structure_filtering_substance(doc_sentences, target_lemma='with', target_upo
                     start = start + len(w.text) + 1
                     end = end + 1
                     continue
+                if "obj" in second_children_deps:
+                    reasons.append("ditransitive")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
+                if "nsubj:pass" in second_children_deps:
+                    reasons.append("passive")
+                    start = start + len(w.text) + 1
+                    end = end + 1
+                    continue
                 output_text = " ".join([w.text for w in sentence.words]).strip()
                 if grandparent_lemma in lemmas:
                     sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
@@ -204,7 +214,7 @@ def structure_filtering_adjunct(doc_sentences, target_lemma='with', target_upos=
 def main():    
     # load the dataset
     dataset = load_dataset("Salesforce/wikitext", "wikitext-103-raw-v1", cache_dir="/nlp/scr/jjian/datasets/wikitext-103-raw-v1")
-    dataset = dataset['train']
+    dataset = dataset['validation']
 
     # filter the dataset based on the regex patterns
     with_list = string_based_filtering(dataset, "with")
@@ -222,11 +232,11 @@ def main():
     
     """with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/with.adjunct.raw.unfiltered.txt", "w") as f:
         f.write("\n".join(adjunct_list))"""
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/with.substance.raw.unfiltered.txt", "w") as f:
+    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/with.substance.val.unfiltered.txt", "w") as f:
         f.write("\n".join(substance_list))
 
 if __name__ == "__main__":
-    #main()
+    main()
     
     # TODO: this is not integrated with the stuff above.
     """filepath = sys.argv[1]
@@ -245,15 +255,15 @@ if __name__ == "__main__":
     
     # load the CoNLLs
     print("Getting Substance")
-    doc_substance = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/with.substance.raw.filtered.parsed.conllu")
+    doc_substance = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/reciprocal.raw.unfiltered.parsed.conllu")
     doc_substance = doc_substance.sentences
-    substance = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/substance.txt", 'r').readlines()]
+    substance = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/reciprocals.txt", 'r').readlines()]
     
     
-    include_list, exclude_list, reasons = structure_filtering_substance(doc_substance, target_lemma="with", lemmas=substance, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/with.substance.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/with.substance.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/with.substance.reasons.txt")
+    include_list, exclude_list, reasons = structure_filtering_substance(doc_substance, target_lemma="with", lemmas=substance, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/with.reciprocal.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/with.reciprocal.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/with.reciprocal.reasons.txt")
     del doc_substance
     """
-
+    """
     print("Getting Adjunct")
     doc_adjunct = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.raw.filtered.parsed.conllu")
     doc_adjunct = doc_adjunct.sentences
@@ -266,5 +276,6 @@ if __name__ == "__main__":
 
     include_list, exclude_list, reasons = structure_filtering_adjunct(doc_adjunct, target_lemma="with", lemmas=argument_with, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.reasons.txt")
     del doc_adjunct
+    """
 
     

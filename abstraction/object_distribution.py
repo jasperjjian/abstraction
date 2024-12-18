@@ -198,8 +198,8 @@ if __name__ == "__main__":
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
     
-    split = "motion_annotated"
-    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.rel_clause_obj.constructed.json"
+    split = "reciprocal"
+    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/reciprocal.rel_clause_obj.constructed.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     
     loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep=rep, batch_size=16, branch=branch)

@@ -89,7 +89,7 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer
 model = GPT2LMHeadModel.from_pretrained('gpt2')
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 
-prompt = "The quick brown"
+prompt = "The person that Mary thinks that John said that Larry spoke with"
 outputs = generate_with_word_stopping(
     model, 
     tokenizer, 
