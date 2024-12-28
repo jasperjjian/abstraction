@@ -11,7 +11,8 @@ from abstraction.filtering import utils
 def string_based_filtering(dataset, target, motion_regex, ditransitive_regex):
     motion_list = []
     ditransitive_list = []
-    for data in tqdm(dataset, mininterval=5):
+    
+    for data in tqdm(dataset, mininterval=5, total=8000000):
         if data != "":
             sentences = sent_tokenize(data["text"])
             for sentence in sentences:
@@ -232,7 +233,8 @@ def main():
     ditransitive_regex = "|".join(ditransitive_regex_patterns)
 
     # load the dataset
-    dataset = load_dataset("Salesforce/wikitext", "wikitext-103-raw-v1", cache_dir="/nlp/scr/jjian/datasets/wikitext-103-raw-v1")
+    #dataset = load_dataset("Salesforce/wikitext", "wikitext-103-raw-v1", cache_dir="/nlp/scr/jjian/datasets/wikitext-103-raw-v1")
+    dataset = load_dataset("openwebtext", cache_dir="/nlp/scr/jjian/datasets/openwebtext", streaming=True)
     dataset = dataset['train']
 
     # filter the dataset based on the regex patterns
@@ -240,11 +242,11 @@ def main():
     del dataset
     # serialize the lists to raw txt files
     
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/motion.raw.unfiltered.txt", "w") as f:
+    with open("/nlp/scr/jjian/datasets/openwebtext/motion.raw.unfiltered.txt", "w") as f:
         f.write("\n".join(motion_list))
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/ditransitive.raw.unfiltered.txt", "w") as f:
+    with open("/nlp/scr/jjian/datasets/openwebtext/ditransitive.raw.unfiltered.txt", "w") as f:
         f.write("\n".join(ditransitive_list))
-    
+    """
     # open the above files
     with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/motion.raw.unfiltered.txt", "r") as f:
         motion_list = f.readlines()
@@ -274,11 +276,11 @@ def main():
     # serialize this 
     new_doc = Document([])
     new_doc.sentences = parsed
-    CoNLL.write_doc2conll(new_doc, output_path)
+    CoNLL.write_doc2conll(new_doc, output_path)"""
 
 if __name__ == "__main__":
-    #main()
-    
+    main()
+    """
     print("Getting Ditransitives")
     doc_ditransitive = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.parsed.conllu")
     doc_ditransitive = doc_ditransitive.sentences
@@ -296,4 +298,4 @@ if __name__ == "__main__":
     print("Filtering")
     motion = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/motion.txt", 'r').readlines()]
     include_list, exclude_list, reasons = structure_filtering_motion(doc_motion, lemmas=motion, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/motion.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/motion.reasons.txt")
-    
+    """

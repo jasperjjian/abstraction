@@ -74,7 +74,7 @@ def get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_na
 
 def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor, tokenizer: AutoTokenizer, top_k: float = 0.9) -> List[Dict[str, Any]]:
     # Sort probabilities and get indices
-    sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
+    """sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
     
     # Compute cumulative probabilities
     cumulative_probs = torch.cumsum(sorted_probs, dim=1)
@@ -108,6 +108,17 @@ def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probab
             "top_k_tokens": list(zip(tokens, [round(p.item(), 5) for p in probs]))
         }
         for prefix, verb, tokens, probs in zip(input_prefixes, verbs, token_strings, relevant_probs)
+    ]"""
+    # turn probabilities into a list
+    probabilities = probabilities.tolist()
+    batch_results = [
+        {
+            "input_prefix": prefix,
+            "verb": verb,
+            # round to two decimal places the probabilities
+            "top_k_tokens": [" police", probs[1644]]
+        }
+        for prefix, verb, probs in zip(input_prefixes, verbs, probabilities)
     ]
     
     return batch_results
@@ -139,11 +150,11 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
     if branch is None:
         branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))
     elif branch == 0:
-        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[2:10]
+        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:10]
     elif branch == 1:
-        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[10:150]
+        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:300]
     elif branch == 2:
-        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[150:]
+        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[300:]
     tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
     if tokenizer.pad_token is None:
         tokenizer.add_special_tokens(
@@ -154,7 +165,7 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
     
     for checkpoint in tqdm(branches):
         model_name_preprocessed = model_name.split("/")[-1]
-        output_path = f'/nlp/scr/jjian/data/wikitext/{split}/predictions/{rep}/{model_name_preprocessed}.{checkpoint}.predictions.json'
+        output_path = f'/nlp/scr/jjian/data/wikitext/{split}/predictions/{rep}/police/{model_name_preprocessed}.{checkpoint}.predictions.json'
         
         # make dir if it doesn't exist
         if not os.path.exists(os.path.dirname(output_path)):
@@ -198,8 +209,8 @@ if __name__ == "__main__":
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
     
-    split = "reciprocal"
-    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/reciprocal.rel_clause_obj.constructed.json"
+    split = "ditrans_annotated"
+    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.fragments.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     
     loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep=rep, batch_size=16, branch=branch)
