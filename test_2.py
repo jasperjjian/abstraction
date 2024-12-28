@@ -45,8 +45,18 @@ def get_top_k_predictions_with_entropy(sentence, model_name="gpt2", top_k=15):
 
 
 # Example usage
-sentence =  "The police that Cutzinas agreed the"
+"""sentence =  "The police that Cutzinas agreed the"
 #sentence = "The person that John told his story to"
 top_predictions = get_top_k_predictions_with_entropy(sentence, model_name="stanford-crfm/battlestar-gpt2-small-x49", top_k=15)
 for token, prob in top_predictions:
-    print(f"Token: {token}, Probability: {prob:.4f}")
+    print(f"Token: {token}, Probability: {prob:.4f}")"""
+
+tokens = ['public', 'children', 'audience', 'people', 'company', 'family', 'New', 'British', 'player', 'state', 'team', 'new', 'best', 'police', 'world', 'top', 'front', 'surface', 'United', 'hospital', 'scene', 'ground', 'door', 'airport', 'north', 'finish', 'bottom', 'south', 'west', 'sea']
+tokens = [" " + t for t in tokens]
+print(tokens)
+model_name="gpt2"
+tokenizer = GPT2Tokenizer.from_pretrained(model_name, cache_dir="/nlp/scr/jjian/mistral-checkpoints/")
+token_ids = []
+for t in tokens:
+    token_ids.extend(tokenizer.encode(t))
+print(token_ids)

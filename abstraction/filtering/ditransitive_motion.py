@@ -1,3 +1,9 @@
+import os
+cache_dir = "/nlp/scr/jjian/datasets/openwebtext"
+    
+os.environ['HF_HOME'] = cache_dir
+os.environ['HF_DATASETS_CACHE'] = cache_dir
+
 import re
 from tqdm import tqdm
 from datasets import load_dataset
@@ -8,9 +14,37 @@ from nltk.tokenize import sent_tokenize
 import sys
 from abstraction.filtering import utils
 
-def string_based_filtering(dataset, target, motion_regex, ditransitive_regex):
-    motion_list = []
-    ditransitive_list = []
+# def string_based_filtering(dataset, target, motion_regex, ditransitive_regex, ditrans_path, motion_path):
+#     motion_list = []
+#     ditransitive_list = []
+#     f_ditrans = open(ditrans_path, "w")
+#     f_motion = open(motion_path, "w")
+#     for data in tqdm(dataset, mininterval=5, total=8000000):
+#         if data != "":
+#             sentences = sent_tokenize(data["text"])
+#             for sentence in sentences:
+#                 sentence_lower = sentence.lower()
+#                 if target in sentence_lower:
+#                     if re.search(rf"""{motion_regex}""", sentence_lower):
+#                         f_motion.write(sentence + "\n")
+#                     if re.search(rf"""{ditransitive_regex}""", sentence_lower):
+#                         f_ditrans.write(sentence + "\n")
+#     f_ditrans.close()
+#     f_motion.close()
+#     return motion_list, ditransitive_list    
+
+def string_based_filtering(dataset, target, motion_regex, ditransitive_regex, ditrans_path, motion_path, batch_size=1000):
+    # Precompile regex patterns
+    motion_pattern = re.compile(motion_regex)
+    ditransitive_pattern = re.compile(ditransitive_regex)
+    
+    # Open files for writing
+    f_ditrans = open(ditrans_path, "w")
+    f_motion = open(motion_path, "w")
+    
+    # Prepare buffers for batch writing
+    motion_buffer = []
+    ditrans_buffer = []
     
     for data in tqdm(dataset, mininterval=5, total=8000000):
         if data != "":
@@ -18,22 +52,31 @@ def string_based_filtering(dataset, target, motion_regex, ditransitive_regex):
             for sentence in sentences:
                 sentence_lower = sentence.lower()
                 if target in sentence_lower:
-                    if re.search(rf"""{motion_regex}""", sentence_lower):
-                        motion_list.append(sentence)
-                    if re.search(rf"""{ditransitive_regex}""", sentence_lower):
-                        ditransitive_list.append(sentence)
-
-    return motion_list, ditransitive_list        
-
-def string_filtering_tokenized(dataset, target_verbs):
-    final = []
-
-    for data in tqdm(dataset, mininterval=5):
-        sentence_split = data.split()
-        if any([word in sentence_split for word in target_verbs]):
-            final.append(data)
+                    if motion_pattern.search(sentence_lower):
+                        motion_buffer.append(sentence + "\n")
+                    if ditransitive_pattern.search(sentence_lower):
+                        ditrans_buffer.append(sentence + "\n")
+        
+        # Write in batches
+        if len(motion_buffer) >= batch_size:
+            f_motion.writelines(motion_buffer)
+            motion_buffer.clear()
+        if len(ditrans_buffer) >= batch_size:
+            f_ditrans.writelines(ditrans_buffer)
+            ditrans_buffer.clear()
     
-    return final
+    # Write remaining buffers
+    if motion_buffer:
+        f_motion.writelines(motion_buffer)
+    if ditrans_buffer:
+        f_ditrans.writelines(ditrans_buffer)
+    
+    # Close files
+    f_ditrans.close()
+    f_motion.close()
+    
+    return motion_buffer, ditrans_buffer
+
 
 def structure_filtering_ditransitives(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], path_1=None, path_2=None, path_3=None):
     include_list = []
@@ -234,19 +277,21 @@ def main():
 
     # load the dataset
     #dataset = load_dataset("Salesforce/wikitext", "wikitext-103-raw-v1", cache_dir="/nlp/scr/jjian/datasets/wikitext-103-raw-v1")
-    dataset = load_dataset("openwebtext", cache_dir="/nlp/scr/jjian/datasets/openwebtext", streaming=True)
+    dataset = load_dataset("openwebtext", cache_dir="/nlp/scr/jjian/datasets/openwebtext", trust_remote_code=True)
     dataset = dataset['train']
 
     # filter the dataset based on the regex patterns
-    motion_list, ditransitive_list = string_based_filtering(dataset, "to", motion_regex, ditransitive_regex)
+    f_ditrans = "/nlp/scr/jjian/datasets/openwebtext_filtered/ditransitive.raw.unfiltered.txt"
+    f_motion = "/nlp/scr/jjian/datasets/openwebtext_filtered/motion.raw.unfiltered.txt"
+    motion_list, ditransitive_list = string_based_filtering(dataset, "to", motion_regex, ditransitive_regex, f_ditrans, f_motion)
     del dataset
     # serialize the lists to raw txt files
-    
-    with open("/nlp/scr/jjian/datasets/openwebtext/motion.raw.unfiltered.txt", "w") as f:
-        f.write("\n".join(motion_list))
-    with open("/nlp/scr/jjian/datasets/openwebtext/ditransitive.raw.unfiltered.txt", "w") as f:
-        f.write("\n".join(ditransitive_list))
     """
+    with open("/nlp/scr/jjian/datasets/openwebtext_filtered/motion.raw.unfiltered.txt", "w") as f:
+        f.write("\n".join(motion_list))
+    with open("/nlp/scr/jjian/datasets/openwebtext_filtered/ditransitive.raw.unfiltered.txt", "w") as f:
+        f.write("\n".join(ditransitive_list))
+    
     # open the above files
     with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/motion.raw.unfiltered.txt", "r") as f:
         motion_list = f.readlines()
