@@ -46,9 +46,9 @@ def string_based_filtering(dataset, target, motion_regex, ditransitive_regex, di
     motion_buffer = []
     ditrans_buffer = []
     
-    for data in tqdm(dataset, mininterval=5, total=8000000):
+    for data in tqdm(dataset["text"], mininterval=5, total=2000000):
         if data != "":
-            sentences = sent_tokenize(data["text"])
+            sentences = sent_tokenize(data)
             for sentence in sentences:
                 sentence_lower = sentence.lower()
                 if target in sentence_lower:
@@ -278,11 +278,11 @@ def main():
     # load the dataset
     #dataset = load_dataset("Salesforce/wikitext", "wikitext-103-raw-v1", cache_dir="/nlp/scr/jjian/datasets/wikitext-103-raw-v1")
     dataset = load_dataset("openwebtext", cache_dir="/nlp/scr/jjian/datasets/openwebtext", trust_remote_code=True)
-    dataset = dataset['train']
+    dataset = dataset['train'][6000000:]
 
     # filter the dataset based on the regex patterns
-    f_ditrans = "/nlp/scr/jjian/datasets/openwebtext_filtered/ditransitive.raw.unfiltered.txt"
-    f_motion = "/nlp/scr/jjian/datasets/openwebtext_filtered/motion.raw.unfiltered.txt"
+    f_ditrans = "/nlp/scr/jjian/datasets/openwebtext_filtered/ditransitive.raw.unfiltered.tail.3.txt"
+    f_motion = "/nlp/scr/jjian/datasets/openwebtext_filtered/motion.raw.unfiltered.tail.3.txt"
     motion_list, ditransitive_list = string_based_filtering(dataset, "to", motion_regex, ditransitive_regex, f_ditrans, f_motion)
     del dataset
     # serialize the lists to raw txt files

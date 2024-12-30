@@ -11,7 +11,7 @@ def get_checkpoint_results(model_name, metric, splits, verb_class, noun, source=
     out = list_repo_refs(model_name)
     branches = [int(b.name.split('checkpoint-')[-1]) for b in out.tags]
     #branches = random.sample(branches, k=60)
-    branches = sorted(branches)[5:]
+    branches = sorted(branches)[:]
     model_name_preprocessed = model_name.split("/")[-1]
     # results array should have each row equal to a checkpoint
     results_arr = []
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     TARGET_NOUN = sys.argv[1]
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     # Define the splits and the metric
-    splits = ["preposition_fragment", "preposition_fragment"]
+    splits = ["preposition_fragment/prototype_nouns", "preposition_fragment/prototype_nouns"]
     verb_class = "ditrans_annotated"
     results_ditrans_landlord = get_checkpoint_results(model_name, heuristic_scoring_4, splits, verb_class, TARGET_NOUN, source="wikitext")
     results_ditrans_landlord.to_csv(f"/afs/cs.stanford.edu/u/jjian/projects/abstraction/results/prototype_nouns/ditrans_motion_{TARGET_NOUN}.verbwise.csv")
