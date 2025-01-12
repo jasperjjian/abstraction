@@ -16,12 +16,12 @@ def get_checkpoint_results(model_name, metric, splits, verb_class, source="wikit
     model_name_preprocessed = model_name.split("/")[-1]
     
     # make an h5py file to store the results
-    f = h5py.File(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/{model_name_preprocessed}.top75_cosine.reciprocal.substance.hdf5", "w")
+    f = h5py.File(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/prototype_nouns/{model_name_preprocessed}.top75_jsd.reciprocal.substance.hdf5", "w")
 
     for checkpoint in tqdm(branches):
         try:
-            split_a = json.load(open(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/{model_name_preprocessed}.checkpoint-{checkpoint}.predictions.json", "r"))
-            split_b = json.load(open(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[1]}/{model_name_preprocessed}.checkpoint-{checkpoint}.predictions.json", "r"))
+            split_a = json.load(open(f"/nlp/scr/jjian/data/{source}/{verb_class}/predictions/{splits[0]}/prototype_nouns/{model_name_preprocessed}.checkpoint-{checkpoint}.predictions.json", "r"))
+            split_b = json.load(open(f"/nlp/scr/jjian/data/{source}/motion_annotated/predictions/{splits[1]}/prototype_nouns/{model_name_preprocessed}.checkpoint-{checkpoint}.predictions.json", "r"))
             split_combined = split_a + split_b
         except FileNotFoundError:
             continue
@@ -60,12 +60,12 @@ def top_75_pairwise_cosine(x):
         #new_row = new_row / np.sum(new_row)
         empty_array[i] = new_row
 
-    sim_arr = cosine_similarity(empty_array)
-    # pairwise jensen shannon
-    # sim_arr = np.zeros((len(empty_array), len(empty_array)))
-    # for i in range(len(empty_array)):
-    #     for j in range(len(empty_array)):
-    #         sim_arr[i, j] = jensenshannon(empty_array[i], empty_array[j])
+    #sim_arr = cosine_similarity(empty_array)
+    #pairwise jensen shannon
+    sim_arr = np.zeros((len(empty_array), len(empty_array)))
+    for i in range(len(empty_array)):
+        for j in range(len(empty_array)):
+            sim_arr[i, j] = jensenshannon(empty_array[i], empty_array[j])
     
     return sim_arr
 
@@ -85,6 +85,6 @@ if __name__ == "__main__":
     # Define the model name
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     # Define the splits and the metric
-    splits = ["preposition_fragment_bare", "rel_clause_obj"]
-    verb_class = "reciprocal"
+    splits = ["preposition_fragment", "preposition_fragment"]
+    verb_class = "ditrans_annotated"
     results = get_checkpoint_results(model_name, top_75_pairwise_cosine, splits, verb_class, source="wikitext")

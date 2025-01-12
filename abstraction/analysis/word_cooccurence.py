@@ -13,6 +13,7 @@ from scipy.sparse import csr_matrix, save_npz, load_npz
 from scipy.sparse.linalg import svds
 from transformers import GPT2Tokenizer
 import sys
+import gc
 
 
 def fast_cooccurrence_matrix(words, window_size=2, offset=0):
@@ -55,15 +56,16 @@ def fast_cooccurrence_matrix(words, window_size=2, offset=0):
                 # Could add distance-based weighting here if desired
                 data.append(1)
 
-        if i % 10000000 == 0 and i != 0:
+        if i % 10000 == 0 and i != 0:
             co_matrix = csr_matrix((data, (rows, cols)), shape=(vocab_size, vocab_size))
-            save_npz(f"/nlp/scr/jjian/datasets/openwebtext_filtered/cooccurence/openwebtext_co_matrix_0{7 + (i // 10000000)}.npz", co_matrix)
+            save_npz(f"/nlp/scr/jjian/datasets/openwebtext_filtered/cooccurence_earliest/openwebtext_co_matrix_0{(i // 10000)}.npz", co_matrix)
             rows = []
             cols = []
             data = []
+            gc.collect()
 
     co_matrix = csr_matrix((data, (rows, cols)), shape=(vocab_size, vocab_size))
-    save_npz(f"/nlp/scr/jjian/datasets/openwebtext_filtered/cooccurence/openwebtext_co_matrix_0{7 + (i // 10000000) + 1}.npz", co_matrix)
+    save_npz(f"/nlp/scr/jjian/datasets/openwebtext_filtered/cooccurence_earliest/openwebtext_co_matrix_0{(i // 10000) + 1}.npz", co_matrix)
     return co_matrix
 
 
@@ -73,12 +75,17 @@ def run_svd(file_prefix, total, k=300):
     """
     co_matrix_sum = csr_matrix((50257, 50257))
     for i in tqdm(range(1, total+1)):
-        a = load_npz(f"/nlp/scr/jjian/datasets/openwebtext_filtered/cooccurence/{file_prefix}{i}.npz")
+        a = load_npz(f"/nlp/scr/jjian/datasets/openwebtext_filtered/cooccurence_earliest/{file_prefix}{i}.npz")
         co_matrix_sum += a
         del a
-        if i % 2 == 0:
-            u, _, _ = svds(co_matrix_sum.sqrt(), k=k, return_singular_vectors="u", solver="propack")
-            np.save(f"/nlp/scr/jjian/datasets/openwebtext_filtered/word_vectors/{file_prefix}{i}.svd_s.propack.npy", u)
+        gc.collect()
+        if i % 2 == 0 and i != 0:
+            co_matrix_log = co_matrix_sum.log1p()
+            u, _, _ = svds(co_matrix_log, k=k, return_singular_vectors="u", solver="propack")
+            np.save(f"/nlp/scr/jjian/datasets/openwebtext_filtered/word_vectors_earliest/{file_prefix}{i}.svd_l.propack.npy", u)
+            # free up memory 
+            del u, co_matrix_log
+            gc.collect()
     return
 
 if __name__ == "__main__":
@@ -88,8 +95,8 @@ if __name__ == "__main__":
     print("Loading token ids")
     words = np.load("/nlp/scr/jjian/datasets/openwebtext_filtered/openwebtext_token_ids.42.1M.true.npy")
     print("Loaded token ids")
-    words = words[70000000:(offset+1)*100000000]
+    words = words[0:(offset+1)*200000]
     
     co_matrix = fast_cooccurrence_matrix(words, window_size, offset)"""
-    run_svd("openwebtext_co_matrix_0", 110)
+    run_svd("openwebtext_co_matrix_0", 20)
 
