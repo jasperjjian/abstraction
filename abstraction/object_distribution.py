@@ -74,7 +74,7 @@ def get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_na
 
 def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor, tokenizer: AutoTokenizer, top_k: float = 0.9) -> List[Dict[str, Any]]:
     # Sort probabilities and get indices
-    """sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
+    sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
     
     # Compute cumulative probabilities
     cumulative_probs = torch.cumsum(sorted_probs, dim=1)
@@ -108,21 +108,21 @@ def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probab
             "top_k_tokens": list(zip(tokens, [round(p.item(), 5) for p in probs]))
         }
         for prefix, verb, tokens, probs in zip(input_prefixes, verbs, token_strings, relevant_probs)
-    ]"""
-    # turn probabilities into a list
-    probabilities = probabilities.tolist()
-    token_ids = [1171, 1751, 5386, 661, 1664, 1641, 968, 3517, 2137, 1181, 1074, 649, 1266, 1644, 995, 1353, 2166, 4417, 1578, 4436, 3715, 2323, 3420, 9003, 5093, 5461, 4220, 5366, 7421, 5417]
-    tokens = [' public', ' children', ' audience', ' people', ' company', ' family', ' New', ' British', ' player', ' state', ' team', ' new', ' best', ' police', ' world', ' top', ' front', ' surface', ' United', 
-              ' hospital', ' scene', ' ground', ' door', ' airport', ' north', ' finish', ' bottom', ' south', ' west', ' sea']
-    batch_results = [
-        {
-            "input_prefix": prefix,
-            "verb": verb,
-            # round to two decimal places the probabilities
-            "top_k_tokens": [[t, probs[i]] for i, t in zip(token_ids, tokens)]
-        }
-        for prefix, verb, probs in zip(input_prefixes, verbs, probabilities)
     ]
+    # turn probabilities into a list
+    # probabilities = probabilities.tolist()
+    # token_ids = [1171, 1751, 5386, 661, 1664, 1641, 968, 3517, 2137, 1181, 1074, 649, 1266, 1644, 995, 1353, 2166, 4417, 1578, 4436, 3715, 2323, 3420, 9003, 5093, 5461, 4220, 5366, 7421, 5417]
+    # tokens = [' public', ' children', ' audience', ' people', ' company', ' family', ' New', ' British', ' player', ' state', ' team', ' new', ' best', ' police', ' world', ' top', ' front', ' surface', ' United', 
+    #           ' hospital', ' scene', ' ground', ' door', ' airport', ' north', ' finish', ' bottom', ' south', ' west', ' sea']
+    # batch_results = [
+    #     {
+    #         "input_prefix": prefix,
+    #         "verb": verb,
+    #         # round to two decimal places the probabilities
+    #         "top_k_tokens": [[t, probs[i]] for i, t in zip(token_ids, tokens)]
+    #     }
+    #     for prefix, verb, probs in zip(input_prefixes, verbs, probabilities)
+    # ]
     
     return batch_results
 
@@ -168,7 +168,7 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
     
     for checkpoint in tqdm(branches):
         model_name_preprocessed = model_name.split("/")[-1]
-        output_path = f'/nlp/scr/jjian/data/wikitext/{split}/predictions/{rep}/prototype_nouns/{model_name_preprocessed}.{checkpoint}.predictions.json'
+        output_path = f'/nlp/scr/jjian/data/blimp/{split}/predictions/{rep}/{model_name_preprocessed}.{checkpoint}.predictions.json'
         
         # make dir if it doesn't exist
         if not os.path.exists(os.path.dirname(output_path)):
@@ -209,11 +209,12 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
 if __name__ == "__main__":
     rep = sys.argv[1]
     branch = int(sys.argv[2])
+    
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
     
-    split = "motion_annotated"
-    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/motion.fragments.json"
+    split = "determiner_noun"
+    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/blimp_data/determiner_noun_agreement_with_adj_2.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     
     loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep=rep, batch_size=16, branch=branch)
