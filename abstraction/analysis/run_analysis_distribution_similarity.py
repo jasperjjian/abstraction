@@ -7,6 +7,7 @@ import os
 import h5py
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.spatial.distance import jensenshannon
+import sys
 
 def get_checkpoint_results(model_name, metric, splits, verb_class, source="wikitext"):
     out = list_repo_refs(model_name)
@@ -120,6 +121,6 @@ if __name__ == "__main__":
     # Define the model name
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     # Define the splits and the metric
-    splits = ["preposition_fragment_bare_constructed", "rel_clause_obj"]
-    verb_class = "motion_annotated"
+    splits = ["preposition_fragment_bare_constructed_biclausal", "rel_clause_obj_biclausal"]
+    verb_class = sys.argv[1]
     results = get_checkpoint_results(model_name, sentence_wise_jsd, splits, verb_class, source="wikitext")

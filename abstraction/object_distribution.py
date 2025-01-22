@@ -168,7 +168,7 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
     
     for checkpoint in tqdm(branches):
         model_name_preprocessed = model_name.split("/")[-1]
-        output_path = f'/nlp/scr/jjian/data/blimp/{split}/predictions/{rep}/{model_name_preprocessed}.{checkpoint}.predictions.json'
+        output_path = f'/nlp/scr/jjian/data/wikitext/{split}/predictions/{rep}/{model_name_preprocessed}.{checkpoint}.predictions.json'
         
         # make dir if it doesn't exist
         if not os.path.exists(os.path.dirname(output_path)):
@@ -209,12 +209,13 @@ def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep=
 if __name__ == "__main__":
     rep = sys.argv[1]
     branch = int(sys.argv[2])
-    
+    ditrans_sampled = sys.argv[3]
+    split = sys.argv[4]
     model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
     
-    split = "determiner_noun"
-    ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/blimp_data/determiner_noun_agreement_with_adj_2.json"
+    #split = "determiner_noun"
+    #ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/blimp_data/determiner_noun_agreement_with_adj_2.json"
     ditrans_json = json.load(open(ditrans_sampled, "r"))
     
     loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep=rep, batch_size=16, branch=branch)
