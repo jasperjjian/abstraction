@@ -64,7 +64,7 @@ def loop_checkpoints_and_save(model_name, split, instances_class_one, instances_
     if branch == 10:
         branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))
     elif branch == 0:
-        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:20]
+        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:50]
     elif branch == 1:
         branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:300]
     elif branch == 2:
@@ -77,7 +77,7 @@ def loop_checkpoints_and_save(model_name, split, instances_class_one, instances_
         tokenizer.pad_token = "<|pad|>"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model_name_preprocessed = model_name.split("/")[-1]
-    if rep_two is not None:
+    if rep_two is not None and comparison_setting == "pairwise":
         output_path = f'/nlp/scr/jjian/data/{source}/final/{split}/predictions/{model_name_preprocessed}.full_jsd.{rep}.{rep_two}.{comparison_setting}.hdf5'
     else:
         output_path = f'/nlp/scr/jjian/data/{source}/final/{split}/predictions/{model_name_preprocessed}.full_jsd.{rep}.{rep}.{comparison_setting}.hdf5'
@@ -170,9 +170,13 @@ def main():
     parser.add_argument("--class_one_file", type=str, required=True, help="Class one file")
     parser.add_argument("--class_two_file", type=str, required=True, help="Class two file")
     parser.add_argument("--source", type=str, required=True, help="Source")
+    parser.add_argument("--model_name", type=str, required=False, help="Model name")
     args = parser.parse_args()
 
-    model_name = "stanford-crfm/battlestar-gpt2-small-x49"
+    if args.model_name is not None:
+        model_name = f"stanford-crfm/{args.model_name}"
+    else:
+        model_name = "stanford-crfm/battlestar-gpt2-small-x49"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
 
     class_one_json = json.load(open(args.class_one_file, "r"))
