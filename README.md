@@ -1,4 +1,4 @@
-# Abstraction
+# Humans and transformer LMs: Abstraction drives language learning
 
 This is code for Jian & Manning (2026): 'Humans and transformer LMs: Abstraction drives language learning'. It provides a pipeline for analysing linguistic behaviours of language models over the course of training using a distributional divergence-based metric.
 
