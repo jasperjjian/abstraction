@@ -1,281 +1,405 @@
 import os
 import re
+import argparse
 from tqdm import tqdm
+
 from datasets import load_dataset
-import stanza
 from stanza.utils.conll import CoNLL
 from stanza.models.common.doc import Document
 from nltk.tokenize import sent_tokenize
-import sys
+
 from abstraction.filtering import utils
 
-def string_based_filtering(dataset, target):
-    by_list = []
-    for data in tqdm(dataset, mininterval=5):
-        if data != "":
-            sentences = sent_tokenize(data["text"])
-            for sentence in sentences:
+
+# =============================================================================
+# STEP 1 — STRING-BASED FILTERING
+# Scans raw text for sentences containing 'with' and splits them into
+# candidate substance vs. adjunct sentences by regex.
+# =============================================================================
+
+def string_based_filtering(
+    texts,
+    substance_regex: str,
+    substance_path: str,
+    adjunct_path: str,
+    batch_size: int = 1000,
+):
+    """Filter sentences containing 'with' into substance and adjunct candidates.
+
+    Substance candidates match the substance verb regex. Everything else that
+    contains 'with' is treated as a potential adjunct.
+
+    Args:
+        texts: Iterable of raw text strings (one document per item).
+        substance_regex: Compiled-ready regex pattern for substance verbs.
+        substance_path: Output path for substance candidate sentences.
+        adjunct_path: Output path for adjunct candidate sentences.
+        batch_size: Number of sentences to buffer before flushing to disk.
+    """
+    substance_pattern = re.compile(substance_regex)
+
+    substance_buffer = []
+    adjunct_buffer   = []
+
+    with open(substance_path, "w") as f_sub, open(adjunct_path, "w") as f_adj:
+        for text in tqdm(texts, mininterval=5):
+            if not text:
+                continue
+            for sentence in sent_tokenize(text):
                 sentence_lower = sentence.lower()
-                if target in sentence_lower.split():
-                    by_list.append(sentence)
+                if "with" not in sentence_lower:
+                    continue
+                if substance_pattern.search(sentence_lower):
+                    substance_buffer.append(sentence + "\n")
+                else:
+                    adjunct_buffer.append(sentence + "\n")
 
-    return by_list
+            if len(substance_buffer) >= batch_size:
+                f_sub.writelines(substance_buffer)
+                substance_buffer.clear()
+            if len(adjunct_buffer) >= batch_size:
+                f_adj.writelines(adjunct_buffer)
+                adjunct_buffer.clear()
 
-def regex_splitting(sentences, target, substance_regex):
-    substance_list = []
-    adjunct_list = []
-    for sentence in tqdm(sentences, mininterval=5):
-        sentence_lower = sentence.lower()
-        if target in sentence_lower:
-            if re.search(rf"""{substance_regex}""", sentence_lower):
-                substance_list.append(sentence)
-            else:
-                adjunct_list.append(sentence)
+        if substance_buffer:
+            f_sub.writelines(substance_buffer)
+        if adjunct_buffer:
+            f_adj.writelines(adjunct_buffer)
 
-    return substance_list, adjunct_list
 
-def string_filtering_tokenized(dataset, target_verbs):
-    final = []
+# =============================================================================
+# STEP 2 — STRUCTURAL FILTERING
+# =============================================================================
 
-    for data in tqdm(dataset, mininterval=5):
-        sentence_split = data.split()
-        if any([word in sentence_split for word in target_verbs]):
-            final.append(data)
-    
-    return final
+def structure_filtering_substance(
+    doc_sentences,
+    target_lemma: str = 'with',
+    target_upos: str = "ADP",
+    lemmas: list = [],
+    path_include=None,
+    path_exclude=None,
+    path_reasons=None,
+):
+    """Filter parsed sentences for spray-load (substance) constructions.
 
-def structure_filtering_substance(doc_sentences, target_lemma='with', target_upos="ADP", lemmas=[], path_1=None, path_2=None, path_3=None):
-    include_list = []
-    exclude_list = []
-    reasons = []
+    Looks for 'with NP' where the governing verb has a direct object or
+    passive subject.
+
+    Returns:
+        Tuple of (include_list, exclude_list, reasons).
+    """
+    include_list, exclude_list, reasons = [], [], []
+
     for i, sentence in enumerate(doc_sentences):
         if "@-@" in sentence.text:
             continue
-        # get character indices to extract representations
-        start = 0
-        end = 0
+
+        char_start = char_end = 0
         for w in sentence.words:
-            end = end + len(w.text)
-            lem = w.lemma
-            pos = w.upos
-            if lem == target_lemma and pos == target_upos:
-                parent = w.head
-                if parent == 0:
+            char_end += len(w.text)
+
+            if w.lemma == target_lemma and w.upos == target_upos:
+                if w.head == 0:
                     reasons.append("parent is root")
-                    start = start + len(w.text) + 1
-                    end = end + 1
+                    char_start += len(w.text) + 1
+                    char_end += 1
                     continue
-                parent_word = None
-                for w_p in sentence.words:
-                    if w_p.id == parent:
-                        parent_word = w_p
-                        break
-                # these should be nouns
-                if parent_word.upos != "NOUN":
-                    #print(parent_word.upos)
+
+                parent_word = next(
+                    (p for p in sentence.words if p.id == w.head), None
+                )
+                if parent_word is None or parent_word.upos != "NOUN":
                     reasons.append("parent not noun")
-                    start = start + len(w.text) + 1
-                    end = end + 1
+                    char_start += len(w.text) + 1
+                    char_end += 1
                     continue
-                # this is to get the identity of the verb so that we can use it to get representations
-                grandparent_lemma = ""
-                grandparent_start = 0
-                grandparent_end = 0
+
+                gp_lemma = gp_start = gp_end = 0
                 for w_g in sentence.words:
-                    # add the end of the current word
-                    grandparent_end = grandparent_end + len(w_g.text)
+                    gp_end += len(w_g.text)
                     if w_g.id == parent_word.head:
-                        grandparent_lemma = w_g.lemma
-                        grandparent_id = w_g.id
-                        grandparent_word = w_g
+                        gp_lemma = w_g.lemma
+                        gp_id    = w_g.id
+                        gp_word  = w_g
                         break
-                    # add the spaces
-                    grandparent_start = grandparent_start + len(w_g.text) + 1
-                    grandparent_end = grandparent_end + 1
-                # these should be verbs
-                if grandparent_word.upos != "VERB":
+                    gp_start += len(w_g.text) + 1
+                    gp_end   += 1
+
+                if gp_word.upos != "VERB":
                     reasons.append("grandparent not verb")
-                    start = start + len(w.text) + 1
-                    end = end + 1
+                    char_start += len(w.text) + 1
+                    char_end   += 1
                     continue
-                # this is to ensure we're getting a ditransitive
-                second_children_deps = [w_second.deprel for w_second in sentence.words if w_second.head == grandparent_id]
-                if "obj" not in second_children_deps and "nsubj:pass" not in second_children_deps:
+
+                sibling_deps = [
+                    s.deprel for s in sentence.words if s.head == gp_id
+                ]
+                if "obj" not in sibling_deps and "nsubj:pass" not in sibling_deps:
                     reasons.append("not ditransitive")
-                    start = start + len(w.text) + 1
-                    end = end + 1
+                    char_start += len(w.text) + 1
+                    char_end   += 1
                     continue
-                if "obj" in second_children_deps:
+                if "obj" in sibling_deps:
                     reasons.append("ditransitive")
-                    start = start + len(w.text) + 1
-                    end = end + 1
+                    char_start += len(w.text) + 1
+                    char_end   += 1
                     continue
-                if "nsubj:pass" in second_children_deps:
+                if "nsubj:pass" in sibling_deps:
                     reasons.append("passive")
-                    start = start + len(w.text) + 1
-                    end = end + 1
+                    char_start += len(w.text) + 1
+                    char_end   += 1
                     continue
-                output_text = " ".join([w.text for w in sentence.words]).strip()
-                if grandparent_lemma in lemmas:
-                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
-                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
-                    include_list.append(sentence_d)
-                else: 
-                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
-                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
-                    exclude_list.append(sentence_d)
-            start = start + len(w.text) + 1
-            end = end + 1
-    if path_1 != None:
-        utils.dump_json(include_list, path_1)
-    if path_2 != None:
-        utils.dump_json(exclude_list, path_2)
-    if path_3 != None:
-        with open(path_3, "w") as f:
+
+                output_text = " ".join(ww.text for ww in sentence.words).strip()
+                entry = {
+                    'sent_id': i,
+                    'text': output_text,
+                    'target_lemma': target_lemma,
+                    'target_slice': (char_start, char_end),
+                    'dependent_lemma': gp_lemma,
+                    'dependent_slice': (gp_start, gp_end),
+                }
+                (include_list if gp_lemma in lemmas else exclude_list).append(entry)
+
+            char_start += len(w.text) + 1
+            char_end   += 1
+
+    if path_include:
+        utils.dump_json(include_list, path_include)
+    if path_exclude:
+        utils.dump_json(exclude_list, path_exclude)
+    if path_reasons:
+        with open(path_reasons, "w") as f:
             f.write("\n".join(reasons) + "\n")
+
     return include_list, exclude_list, reasons
 
-def structure_filtering_adjunct(doc_sentences, target_lemma='with', target_upos="ADP", lemmas=[], path_1=None, path_2=None, path_3=None):
-    include_list = []
-    exclude_list = []
-    reasons = []
+
+def structure_filtering_adjunct(
+    doc_sentences,
+    target_lemma: str = 'with',
+    target_upos: str = "ADP",
+    lemmas: list = [],
+    path_include=None,
+    path_exclude=None,
+    path_reasons=None,
+):
+    """Filter parsed sentences for with-adjunct constructions.
+
+    Includes any 'with NP' governed by a verb, EXCLUDING those whose verb
+    appears in the substance/reciprocal lemma list (i.e. argument uses of
+    'with' are excluded, leaving only adjunct uses).
+
+    Returns:
+        Tuple of (include_list, exclude_list, reasons).
+    """
+    include_list, exclude_list, reasons = [], [], []
+
     for i, sentence in enumerate(doc_sentences):
         if "@-@" in sentence.text:
             continue
-        # get character indices to extract representations
-        start = 0
-        end = 0
+
+        char_start = char_end = 0
         for w in sentence.words:
-            end = end + len(w.text)
-            lem = w.lemma
-            pos = w.upos
-            if lem == target_lemma and pos == target_upos:
-                parent = w.head
-                if parent == 0:
+            char_end += len(w.text)
+
+            if w.lemma == target_lemma and w.upos == target_upos:
+                if w.head == 0:
                     reasons.append("parent is root")
-                    start = start + len(w.text) + 1
-                    end = end + 1
+                    char_start += len(w.text) + 1
+                    char_end   += 1
                     continue
-                parent_word = None
-                for w_p in sentence.words:
-                    if w_p.id == parent:
-                        parent_word = w_p
-                        break
-                # these should be nouns
-                if parent_word.upos != "NOUN":
-                    #print(parent_word.upos)
+
+                parent_word = next(
+                    (p for p in sentence.words if p.id == w.head), None
+                )
+                if parent_word is None or parent_word.upos != "NOUN":
                     reasons.append("parent not noun")
-                    start = start + len(w.text) + 1
-                    end = end + 1
+                    char_start += len(w.text) + 1
+                    char_end   += 1
                     continue
-                # this is to get the identity of the verb so that we can use it to get representations
-                grandparent_lemma = ""
-                grandparent_start = 0
-                grandparent_end = 0
+
+                gp_lemma = gp_start = gp_end = 0
                 for w_g in sentence.words:
-                    # add the end of the current word
-                    grandparent_end = grandparent_end + len(w_g.text)
+                    gp_end += len(w_g.text)
                     if w_g.id == parent_word.head:
-                        grandparent_lemma = w_g.lemma
-                        grandparent_id = w_g.id
-                        grandparent_word = w_g
+                        gp_lemma = w_g.lemma
+                        gp_word  = w_g
                         break
-                    # add the spaces
-                    grandparent_start = grandparent_start + len(w_g.text) + 1
-                    grandparent_end = grandparent_end + 1
-                # these should be verbs
-                if grandparent_word.upos != "VERB":
+                    gp_start += len(w_g.text) + 1
+                    gp_end   += 1
+
+                if gp_word.upos != "VERB":
                     reasons.append("grandparent not verb")
-                    start = start + len(w.text) + 1
-                    end = end + 1
+                    char_start += len(w.text) + 1
+                    char_end   += 1
                     continue
-                output_text = " ".join([w.text for w in sentence.words]).strip()
-                # make sure that if the grandparent is a substance verb we exclude it
-                if grandparent_lemma in lemmas:
-                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
-                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
-                    exclude_list.append(sentence_d)
-                else: 
-                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
-                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
-                    include_list.append(sentence_d)
-            start = start + len(w.text) + 1
-            end = end + 1
-    if path_1 != None:
-        utils.dump_json(include_list, path_1)
-    if path_2 != None:
-        utils.dump_json(exclude_list, path_2)
-    if path_3 != None:
-        with open(path_3, "w") as f:
+
+                output_text = " ".join(ww.text for ww in sentence.words).strip()
+                entry = {
+                    'sent_id': i,
+                    'text': output_text,
+                    'target_lemma': target_lemma,
+                    'target_slice': (char_start, char_end),
+                    'dependent_lemma': gp_lemma,
+                    'dependent_slice': (gp_start, gp_end),
+                }
+                # Argument verbs (substance + reciprocal) go to exclude;
+                # everything else is a genuine adjunct.
+                (exclude_list if gp_lemma in lemmas else include_list).append(entry)
+
+            char_start += len(w.text) + 1
+            char_end   += 1
+
+    if path_include:
+        utils.dump_json(include_list, path_include)
+    if path_exclude:
+        utils.dump_json(exclude_list, path_exclude)
+    if path_reasons:
+        with open(path_reasons, "w") as f:
             f.write("\n".join(reasons) + "\n")
+
     return include_list, exclude_list, reasons
 
 
-def main():    
-    # load the dataset
-    dataset = load_dataset("Salesforce/wikitext", "wikitext-103-raw-v1", cache_dir="/nlp/scr/jjian/datasets/wikitext-103-raw-v1")
-    dataset = dataset['validation']
+# =============================================================================
+# SHARED UTILITIES
+# =============================================================================
 
-    # filter the dataset based on the regex patterns
-    with_list = string_based_filtering(dataset, "with")
-    
-    substance_path = "/afs/cs.stanford.edu/u/jjian/projects/abstraction/data/substance.txt"
-    with open(substance_path, "r") as f:
-        substances = f.readlines()
-    substances = [str(w).strip() for w in substances]
-    substances = utils.get_all_inflections(substances)
-    substance_regex_patterns = [rf"with(?:\s+\w+){{0,10}}\s+{verb}|{verb}(?:\s+\w+){{0,10}}\s+with" for verb in list(substances)]
-    substance_regex = "|".join(substance_regex_patterns)
+def load_texts(dataset_name: str, cache_dir: str):
+    """Load raw texts from a HuggingFace dataset.
 
-    substance_list, adjunct_list = regex_splitting(with_list, "with", substance_regex)
-    # serialize the lists to raw txt files
-    
-    """with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/with.adjunct.raw.unfiltered.txt", "w") as f:
-        f.write("\n".join(adjunct_list))"""
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/with.substance.val.unfiltered.txt", "w") as f:
-        f.write("\n".join(substance_list))
+    Args:
+        dataset_name: Either 'openwebtext' or 'wikitext'.
+        cache_dir: Directory for HuggingFace cache.
+
+    Returns:
+        An iterable of text strings.
+    """
+    if dataset_name == "openwebtext":
+        dataset = load_dataset(
+            "openwebtext", cache_dir=cache_dir, trust_remote_code=True
+        )
+        return dataset['train']['text']
+    elif dataset_name == "wikitext":
+        dataset = load_dataset(
+            "Salesforce/wikitext", "wikitext-103-raw-v1", cache_dir=cache_dir
+        )
+        return dataset['train']['text']
+    else:
+        raise ValueError(
+            f"Unsupported dataset: {dataset_name}. Use 'openwebtext' or 'wikitext'."
+        )
+
+
+def parse_and_save(raw_path: str, conllu_path: str, batch_size: int = 64):
+    """Parse a raw text file with Stanza and write CoNLL-U output."""
+    sentences = open(raw_path).readlines()
+    nlp = utils.get_stanza_pipeline()
+    parsed = utils.stanza_parsing_batched(sentences, nlp, batch_size=batch_size)
+    doc = Document([])
+    doc.sentences = parsed
+    CoNLL.write_doc2conll(doc, conllu_path)
+    print(f"  Parsed → {conllu_path}")
+
+
+# =============================================================================
+# MAIN
+# =============================================================================
+
+def main():
+    parser = argparse.ArgumentParser(
+        description=(
+            "Filter a text dataset for spray-load (substance) and adjunct "
+            "'with' constructions."
+        )
+    )
+    parser.add_argument(
+        "--dataset", type=str, required=True, choices=["openwebtext", "wikitext"],
+        help="Dataset to filter."
+    )
+    parser.add_argument(
+        "--cache_dir", type=str, default="/nlp/scr/jjian/datasets",
+        help="HuggingFace cache directory."
+    )
+    parser.add_argument(
+        "--output_dir", type=str, default="/nlp/scr/jjian/datasets/filtered",
+        help="Directory for all output files."
+    )
+    parser.add_argument(
+        "--substance_list", type=str,
+        default="/afs/cs.stanford.edu/u/jjian/projects/abstraction/data/substance.txt",
+        help="Path to newline-separated list of substance (spray-load) verbs."
+    )
+    parser.add_argument(
+        "--reciprocals_list", type=str,
+        default="/afs/cs.stanford.edu/u/jjian/projects/abstraction/data/reciprocals.txt",
+        help="Path to newline-separated list of reciprocal verbs."
+    )
+    args = parser.parse_args()
+
+    os.makedirs(args.output_dir, exist_ok=True)
+    os.environ['HF_HOME'] = args.cache_dir
+    os.environ['HF_DATASETS_CACHE'] = args.cache_dir
+    d = args.dataset
+
+    # --- Load and inflect verb lists ---
+    substance   = [w.strip() for w in open(args.substance_list).readlines()]
+    reciprocals = [w.strip() for w in open(args.reciprocals_list).readlines()]
+    substance_inf = utils.get_all_inflections(substance)
+
+    # Adjunct filtering excludes both substance and reciprocal verbs
+    argument_with = substance + reciprocals
+
+    # --- Build regex pattern for substance verbs ---
+    substance_regex = "|".join(
+        rf"with(?:\s+\w+){{0,10}}\s+{v}|{v}(?:\s+\w+){{0,10}}\s+with"
+        for v in substance_inf
+    )
+
+    # --- Step 1: String-based filtering ---
+    print(f"Step 1: String-based filtering on {d}...")
+    substance_raw = os.path.join(args.output_dir, f"{d}.substance.raw.txt")
+    adjunct_raw   = os.path.join(args.output_dir, f"{d}.adjunct.raw.txt")
+
+    string_based_filtering(
+        load_texts(args.dataset, args.cache_dir),
+        substance_regex=substance_regex,
+        substance_path=substance_raw,
+        adjunct_path=adjunct_raw,
+    )
+    print(f"  Substance sentences → {substance_raw}")
+    print(f"  Adjunct sentences   → {adjunct_raw}")
+
+    # --- Step 2: Parse ---
+    print("Step 2: Parsing...")
+    substance_conllu = os.path.join(args.output_dir, f"{d}.substance.parsed.conllu")
+    adjunct_conllu   = os.path.join(args.output_dir, f"{d}.adjunct.parsed.conllu")
+    parse_and_save(substance_raw, substance_conllu)
+    parse_and_save(adjunct_raw, adjunct_conllu)
+
+    # --- Step 3: Structural filtering ---
+    print("Step 3: Structural filtering...")
+
+    structure_filtering_substance(
+        CoNLL.conll2doc(substance_conllu).sentences,
+        lemmas=substance,
+        path_include=os.path.join(args.output_dir, f"{d}.substance.filtered.json"),
+        path_exclude=os.path.join(args.output_dir, f"{d}.substance.excluded.json"),
+        path_reasons=os.path.join(args.output_dir, f"{d}.substance.reasons.txt"),
+    )
+    print("  Substance filtering done.")
+
+    structure_filtering_adjunct(
+        CoNLL.conll2doc(adjunct_conllu).sentences,
+        lemmas=argument_with,
+        path_include=os.path.join(args.output_dir, f"{d}.adjunct.filtered.json"),
+        path_exclude=os.path.join(args.output_dir, f"{d}.adjunct.excluded.json"),
+        path_reasons=os.path.join(args.output_dir, f"{d}.adjunct.reasons.txt"),
+    )
+    print("  Adjunct filtering done.")
+    print("Done.")
+
 
 if __name__ == "__main__":
     main()
-    
-    # TODO: this is not integrated with the stuff above.
-    """filepath = sys.argv[1]
-    output_path = sys.argv[2]
-
-    with open(filepath, "r") as f:
-        sentences = f.readlines()
-    
-    nlp = stanza.Pipeline(lang='en', processors='tokenize,mwt,pos,lemma,depparse')
-    parsed = utils.stanza_parsing_batched(sentences, nlp, 64)
-
-    # serialize this 
-    new_doc = Document([])
-    new_doc.sentences = parsed
-    CoNLL.write_doc2conll(new_doc, output_path)
-    
-    # load the CoNLLs
-    print("Getting Substance")
-    doc_substance = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/reciprocal.raw.unfiltered.parsed.conllu")
-    doc_substance = doc_substance.sentences
-    substance = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/reciprocals.txt", 'r').readlines()]
-    
-    
-    include_list, exclude_list, reasons = structure_filtering_substance(doc_substance, target_lemma="with", lemmas=substance, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/with.reciprocal.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/with.reciprocal.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/with.reciprocal.reasons.txt")
-    del doc_substance
-    """
-    """
-    print("Getting Adjunct")
-    doc_adjunct = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.raw.filtered.parsed.conllu")
-    doc_adjunct = doc_adjunct.sentences
-    substance = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/substance.txt", 'r').readlines()]
-    reciprocals = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/reciprocals.txt", 'r').readlines()]
-
-    argument_with = substance + reciprocals
-
-    print("Filtering")
-
-    include_list, exclude_list, reasons = structure_filtering_adjunct(doc_adjunct, target_lemma="with", lemmas=argument_with, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/with.adjunct.reasons.txt")
-    del doc_adjunct
-    """
-
-    

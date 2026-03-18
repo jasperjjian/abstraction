@@ -1,346 +1,410 @@
 import os
-cache_dir = "/nlp/scr/jjian/datasets/openwebtext"
-    
-os.environ['HF_HOME'] = cache_dir
-os.environ['HF_DATASETS_CACHE'] = cache_dir
-
 import re
+import sys
+import argparse
 from tqdm import tqdm
+ 
 from datasets import load_dataset
-import stanza
 from stanza.utils.conll import CoNLL
 from stanza.models.common.doc import Document
 from nltk.tokenize import sent_tokenize
-import sys
+ 
 from abstraction.filtering import utils
-
-# def string_based_filtering(dataset, target, motion_regex, ditransitive_regex, ditrans_path, motion_path):
-#     motion_list = []
-#     ditransitive_list = []
-#     f_ditrans = open(ditrans_path, "w")
-#     f_motion = open(motion_path, "w")
-#     for data in tqdm(dataset, mininterval=5, total=8000000):
-#         if data != "":
-#             sentences = sent_tokenize(data["text"])
-#             for sentence in sentences:
-#                 sentence_lower = sentence.lower()
-#                 if target in sentence_lower:
-#                     if re.search(rf"""{motion_regex}""", sentence_lower):
-#                         f_motion.write(sentence + "\n")
-#                     if re.search(rf"""{ditransitive_regex}""", sentence_lower):
-#                         f_ditrans.write(sentence + "\n")
-#     f_ditrans.close()
-#     f_motion.close()
-#     return motion_list, ditransitive_list    
-
-def string_based_filtering(dataset, target, motion_regex, ditransitive_regex, ditrans_path, motion_path, batch_size=1000):
-    # Precompile regex patterns
+ 
+ 
+# =============================================================================
+# STEP 1 — STRING-BASED FILTERING
+# Scans raw text for sentences containing candidate verb patterns and writes
+# them to disk for subsequent parsing and structural filtering.
+# =============================================================================
+ 
+def string_based_filtering(
+    texts,
+    target: str,
+    motion_regex: str,
+    ditransitive_regex: str,
+    ditrans_path: str,
+    motion_path: str,
+    batch_size: int = 1000,
+):
+    """Filter sentences by regex and write matching ones to separate files.
+ 
+    Args:
+        texts: Iterable of raw text strings (one document per item).
+        target: A string that must appear in a sentence (lowercased) before
+            the more expensive regex checks are applied.
+        motion_regex: Compiled-ready regex pattern for motion verbs.
+        ditransitive_regex: Compiled-ready regex pattern for ditransitive verbs.
+        ditrans_path: Output path for ditransitive sentences.
+        motion_path: Output path for motion sentences.
+        batch_size: Number of sentences to buffer before flushing to disk.
+    """
     motion_pattern = re.compile(motion_regex)
     ditransitive_pattern = re.compile(ditransitive_regex)
-    
-    # Open files for writing
-    f_ditrans = open(ditrans_path, "w")
-    f_motion = open(motion_path, "w")
-    
-    # Prepare buffers for batch writing
+ 
     motion_buffer = []
     ditrans_buffer = []
-    
-    for data in tqdm(dataset["text"], mininterval=5, total=2000000):
-        if data != "":
-            sentences = sent_tokenize(data)
-            for sentence in sentences:
+ 
+    with open(ditrans_path, "w") as f_ditrans, open(motion_path, "w") as f_motion:
+        for text in tqdm(texts, mininterval=5):
+            if not text:
+                continue
+            for sentence in sent_tokenize(text):
                 sentence_lower = sentence.lower()
-                if target in sentence_lower:
-                    if motion_pattern.search(sentence_lower):
-                        motion_buffer.append(sentence + "\n")
-                    if ditransitive_pattern.search(sentence_lower):
-                        ditrans_buffer.append(sentence + "\n")
-        
-        # Write in batches
-        if len(motion_buffer) >= batch_size:
+                if target not in sentence_lower:
+                    continue
+                if motion_pattern.search(sentence_lower):
+                    motion_buffer.append(sentence + "\n")
+                if ditransitive_pattern.search(sentence_lower):
+                    ditrans_buffer.append(sentence + "\n")
+ 
+            if len(motion_buffer) >= batch_size:
+                f_motion.writelines(motion_buffer)
+                motion_buffer.clear()
+            if len(ditrans_buffer) >= batch_size:
+                f_ditrans.writelines(ditrans_buffer)
+                ditrans_buffer.clear()
+ 
+        if motion_buffer:
             f_motion.writelines(motion_buffer)
-            motion_buffer.clear()
-        if len(ditrans_buffer) >= batch_size:
+        if ditrans_buffer:
             f_ditrans.writelines(ditrans_buffer)
-            ditrans_buffer.clear()
-    
-    # Write remaining buffers
-    if motion_buffer:
-        f_motion.writelines(motion_buffer)
-    if ditrans_buffer:
-        f_ditrans.writelines(ditrans_buffer)
-    
-    # Close files
-    f_ditrans.close()
-    f_motion.close()
-    
-    return motion_buffer, ditrans_buffer
-
-
-def structure_filtering_ditransitives(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], path_1=None, path_2=None, path_3=None):
-    include_list = []
-    exclude_list = []
-    reasons = []
-    for i, sentence in enumerate(doc_sentences):
-        if "@-@" in sentence.text:
-            continue
-        # get character indices to extract representations
-        start = 0
-        end = 0
-        for w in sentence.words:
-            end = end + len(w.text)
-            lem = w.lemma
-            lem_id = w.id
-            pos = w.upos
-            deprel = w.deprel
-            if lem == target_lemma and pos == target_upos:
-                parent = w.head
-                if parent == 0:
-                    reasons.append("parent is root")
-                    start = start + len(w.text) + 1
-                    end = end + 1
-                    continue
-                parent_word = None
-                for w_p in sentence.words:
-                    if w_p.id == parent:
-                        parent_word = w_p
-                        break
-                # these should be nouns
-                if parent_word.upos != "NOUN":
-                    #print(parent_word.upos)
-                    reasons.append("parent not noun")
-                    start = start + len(w.text) + 1
-                    end = end + 1
-                    continue
-                # this is to get the identity of the verb so that we can use it to get representations
-                grandparent_lemma = ""
-                grandparent_start = 0
-                grandparent_end = 0
-                for w_g in sentence.words:
-                    # add the end of the current word
-                    grandparent_end = grandparent_end + len(w_g.text)
-                    if w_g.id == parent_word.head:
-                        grandparent_lemma = w_g.lemma
-                        grandparent_id = w_g.id
-                        grandparent_word = w_g
-                        break
-                    # add the spaces
-                    grandparent_start = grandparent_start + len(w_g.text) + 1
-                    grandparent_end = grandparent_end + 1
-                # these should be verbs
-                if grandparent_word.upos != "VERB":
-                    reasons.append("grandparent not verb")
-                    start = start + len(w.text) + 1
-                    end = end + 1
-                    continue
-                # this is to ensure we're getting a ditransitive
-                second_children_deps = [w_second.deprel for w_second in sentence.words if w_second.head == grandparent_id]
-                if "obj" not in second_children_deps and "nsubj:pass" not in second_children_deps:
-                    reasons.append("not ditransitive")
-                    start = start + len(w.text) + 1
-                    end = end + 1
-                    continue
-                output_text = " ".join([w.text for w in sentence.words]).strip()
-                if grandparent_lemma in lemmas:
-                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
-                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
-                    include_list.append(sentence_d)
-                else: 
-                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
-                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
-                    exclude_list.append(sentence_d)
-            start = start + len(w.text) + 1
-            end = end + 1
-    if path_1 != None:
-        utils.dump_json(include_list, path_1)
-    if path_2 != None:
-        utils.dump_json(exclude_list, path_2)
-    if path_3 != None:
-        with open(path_3, "w") as f:
-            f.write("\n".join(reasons) + "\n")
-    return include_list, exclude_list, reasons
-
-def structure_filtering_motion(doc_sentences, target_lemma='to', target_upos="ADP", lemmas=[], grandparent_upos="VERB", path_1=None, path_2=None, path_3=None):
-    include_list = []
-    exclude_list = []
-    reasons = []
-    for i, sentence in enumerate(doc_sentences):
-        # get character indices to extract representations
-        if "@-@" in sentence.text:
-            continue
-        start = 0
-        end = 0
-        for w in sentence.words:
-            end = end + len(w.text)
-            lem = w.lemma
-            lem_id = w.id
-            pos = w.upos
-            deprel = w.deprel
-            if lem == target_lemma and pos == target_upos:
-                parent = w.head
-                if parent == 0:
-                    reasons.append("parent is root")
-                    start = start + len(w.text) + 1
-                    end = end + 1
-                    continue
-                parent_word = None
-                for w_p in sentence.words:
-                    if w_p.id == parent:
-                        parent_word = w_p
-                        break
-                
-                # these should be nouns
-                if parent_word.upos != "NOUN":
-                    #print(parent_word.upos)
-                    reasons.append("parent not noun")
-                    start = start + len(w.text) + 1
-                    end = end + 1
-                    continue
-                # this is to get the identity of the verb so that we can use it to get representations
-                grandparent_lemma = ""
-                grandparent_start = 0
-                grandparent_end = 0
-                for w_g in sentence.words:
-                    interveners = []
-                    # add the end of the current word
-                    grandparent_end = grandparent_end + len(w_g.text)
-                    if w_g.id == parent_word.head:
-                        grandparent_lemma = w_g.lemma
-                        grandparent_id = w_g.id
-                        grandparent_word = w_g
-                        if grandparent_id > lem_id:
-                            break
-                        else:
-                            for w_i in sentence.words:
-                                if w_i.id > grandparent_id and w_i.id < lem_id:
-                                    interveners.append(w_i.upos)
-                                elif w_i.id == lem_id:
-                                    break
-                            break
-                    # add the spaces
-                    grandparent_start = grandparent_start + len(w_g.text) + 1
-                    grandparent_end = grandparent_end + 1
-                # these should be verbs
-                if grandparent_word.upos != "VERB":
-                    reasons.append("grandparent not verb")
-                    start = start + len(w.text) + 1
-                    end = end + 1
-                    continue
-                if "NOUN" in interveners or "PROPN" in interveners or "PRON" in interveners:
-                    reasons.append("intervening noun")
-                    start = start + len(w.text) + 1
-                    end = end + 1
-                    continue
-                output_text = " ".join([w.text for w in sentence.words]).strip()
-                if grandparent_lemma in lemmas:
-                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
-                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
-                    include_list.append(sentence_d)
-                else: 
-                    sentence_d = {'sent_id' : i, 'text' : output_text, 'target_lemma' : target_lemma, 'target_slice' : (start, end), 
-                                'dependent_lemma' : grandparent_lemma, 'dependent_lemma' : grandparent_lemma, 'dependent_slice' : (grandparent_start, grandparent_end)}
-                    exclude_list.append(sentence_d)
-            start = start + len(w.text) + 1
-            end = end + 1
-    if path_1 != None:
-        utils.dump_json(include_list, path_1)
-    if path_2 != None:
-        utils.dump_json(exclude_list, path_2)
-    if path_3 != None:
-        with open(path_3, "w") as f:
-            f.write("\n".join(reasons) + "\n")
-    return include_list, exclude_list, reasons
-
-def main():
-    # load lists of ditransitive and motion verbs
-    ditranstive_path = "/afs/cs.stanford.edu/u/jjian/projects/abstraction/data/ditransitives.txt"
-    with open(ditranstive_path, "r") as f:
-        ditransitives = f.readlines()
-    ditransitives = [str(w).strip() for w in ditransitives]
-
-    motion_path = "/afs/cs.stanford.edu/u/jjian/projects/abstraction/data/motion.txt"
-    with open(motion_path, "r") as f:
-        motion = f.readlines()
-    motion = [str(w).strip() for w in motion]
-
-    # create a set of each list with all the possible inflections
-    ditransitives = utils.get_all_inflections(ditransitives)
-    motion = utils.get_all_inflections(motion)
-    
-    # create regex patterns for each list
-    motion_regex_patterns = [rf"to(?:\s+\w+){{0,2}}\s+{verb}|{verb}(?:\s+\w+){{0,2}}\s+to" for verb in list(motion)]
-    motion_regex = "|".join(motion_regex_patterns)
-
-    ditransitive_regex_patterns = [rf"to(?:\s+\w+){{0,5}}\s+{verb}|{verb}(?:\s+\w+){{0,5}}\s+to" for verb in list(ditransitives)]
-    ditransitive_regex = "|".join(ditransitive_regex_patterns)
-
-    # load the dataset
-    #dataset = load_dataset("Salesforce/wikitext", "wikitext-103-raw-v1", cache_dir="/nlp/scr/jjian/datasets/wikitext-103-raw-v1")
-    dataset = load_dataset("openwebtext", cache_dir="/nlp/scr/jjian/datasets/openwebtext", trust_remote_code=True)
-    dataset = dataset['train'][6000000:]
-
-    # filter the dataset based on the regex patterns
-    f_ditrans = "/nlp/scr/jjian/datasets/openwebtext_filtered/ditransitive.raw.unfiltered.tail.3.txt"
-    f_motion = "/nlp/scr/jjian/datasets/openwebtext_filtered/motion.raw.unfiltered.tail.3.txt"
-    motion_list, ditransitive_list = string_based_filtering(dataset, "to", motion_regex, ditransitive_regex, f_ditrans, f_motion)
-    del dataset
-    # serialize the lists to raw txt files
+ 
+ 
+# =============================================================================
+# STEP 2 — STRUCTURAL FILTERING
+# Walks parsed CoNLL-U sentences and applies dependency-based heuristics to
+# identify genuine ditransitive and motion-to constructions.
+# =============================================================================
+ 
+def structure_filtering_ditransitives(
+    doc_sentences,
+    target_lemma: str = 'to',
+    target_upos: str = "ADP",
+    lemmas: list = [],
+    path_include=None,
+    path_exclude=None,
+    path_reasons=None,
+):
+    """Filter parsed sentences for ditransitive constructions.
+ 
+    Looks for a preposition matching target_lemma whose grandparent is a verb
+    that also has a direct object or passive subject — the hallmark of a
+    ditransitive.
+ 
+    Returns:
+        Tuple of (include_list, exclude_list, reasons).
     """
-    with open("/nlp/scr/jjian/datasets/openwebtext_filtered/motion.raw.unfiltered.txt", "w") as f:
-        f.write("\n".join(motion_list))
-    with open("/nlp/scr/jjian/datasets/openwebtext_filtered/ditransitive.raw.unfiltered.txt", "w") as f:
-        f.write("\n".join(ditransitive_list))
-    
-    # open the above files
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/motion.raw.unfiltered.txt", "r") as f:
-        motion_list = f.readlines()
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/ditransitive.raw.unfiltered.txt", "r") as f:
-        ditransitive_list = f.readlines()
-
-    # filter the lists based on the tokenized dataset
-    motion_list = string_filtering_tokenized(motion_list, motion)
-    ditransitive_list = string_filtering_tokenized(ditransitive_list, ditransitives)
-
-    # serialize the filtered lists to raw txt files
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/motion.raw.filtered.txt", "w") as f:
-        f.write("".join(motion_list))
-    with open("/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/ditransitive.raw.filtered.txt", "w") as f:
-        f.write("".join(ditransitive_list))
-    
-    # TODO: this is not integrated with the stuff above.
-    filepath = sys.argv[1]
-    output_path = sys.argv[2]
-
-    with open(filepath, "r") as f:
-        sentences = f.readlines()
-    
-    nlp = stanza.Pipeline(lang='en', processors='tokenize,mwt,pos,lemma,depparse')
-    parsed = utils.stanza_parsing_batched(sentences, nlp, 64)
-
-    # serialize this 
-    new_doc = Document([])
-    new_doc.sentences = parsed
-    CoNLL.write_doc2conll(new_doc, output_path)"""
-
+    include_list, exclude_list, reasons = [], [], []
+ 
+    for i, sentence in enumerate(doc_sentences):
+        if "@-@" in sentence.text:
+            continue
+ 
+        char_start = char_end = 0
+        for w in sentence.words:
+            char_end += len(w.text)
+ 
+            if w.lemma == target_lemma and w.upos == target_upos:
+                if w.head == 0:
+                    reasons.append("parent is root")
+                    char_start += len(w.text) + 1
+                    char_end += 1
+                    continue
+ 
+                parent_word = next(
+                    (p for p in sentence.words if p.id == w.head), None
+                )
+                if parent_word is None or parent_word.upos != "NOUN":
+                    reasons.append("parent not noun")
+                    char_start += len(w.text) + 1
+                    char_end += 1
+                    continue
+ 
+                # Walk up to the grandparent (the governing verb)
+                gp_lemma = gp_start = gp_end = 0
+                for w_g in sentence.words:
+                    gp_end += len(w_g.text)
+                    if w_g.id == parent_word.head:
+                        gp_lemma = w_g.lemma
+                        gp_id = w_g.id
+                        gp_word = w_g
+                        break
+                    gp_start += len(w_g.text) + 1
+                    gp_end += 1
+ 
+                if gp_word.upos != "VERB":
+                    reasons.append("grandparent not verb")
+                    char_start += len(w.text) + 1
+                    char_end += 1
+                    continue
+ 
+                sibling_deps = [
+                    s.deprel for s in sentence.words if s.head == gp_id
+                ]
+                if "obj" not in sibling_deps and "nsubj:pass" not in sibling_deps:
+                    reasons.append("not ditransitive")
+                    char_start += len(w.text) + 1
+                    char_end += 1
+                    continue
+ 
+                output_text = " ".join(ww.text for ww in sentence.words).strip()
+                entry = {
+                    'sent_id': i,
+                    'text': output_text,
+                    'target_lemma': target_lemma,
+                    'target_slice': (char_start, char_end),
+                    'dependent_lemma': gp_lemma,
+                    'dependent_slice': (gp_start, gp_end),
+                }
+                (include_list if gp_lemma in lemmas else exclude_list).append(entry)
+ 
+            char_start += len(w.text) + 1
+            char_end += 1
+ 
+    if path_include:
+        utils.dump_json(include_list, path_include)
+    if path_exclude:
+        utils.dump_json(exclude_list, path_exclude)
+    if path_reasons:
+        with open(path_reasons, "w") as f:
+            f.write("\n".join(reasons) + "\n")
+ 
+    return include_list, exclude_list, reasons
+ 
+ 
+def structure_filtering_motion(
+    doc_sentences,
+    target_lemma: str = 'to',
+    target_upos: str = "ADP",
+    lemmas: list = [],
+    path_include=None,
+    path_exclude=None,
+    path_reasons=None,
+):
+    """Filter parsed sentences for motion-to constructions.
+ 
+    Like the ditransitive filter but additionally checks that no intervening
+    noun phrase sits between the verb and the 'to' preposition, which would
+    indicate a ditransitive rather than a motion construction.
+ 
+    Returns:
+        Tuple of (include_list, exclude_list, reasons).
+    """
+    include_list, exclude_list, reasons = [], [], []
+ 
+    for i, sentence in enumerate(doc_sentences):
+        if "@-@" in sentence.text:
+            continue
+ 
+        char_start = char_end = 0
+        for w in sentence.words:
+            char_end += len(w.text)
+ 
+            if w.lemma == target_lemma and w.upos == target_upos:
+                if w.head == 0:
+                    reasons.append("parent is root")
+                    char_start += len(w.text) + 1
+                    char_end += 1
+                    continue
+ 
+                parent_word = next(
+                    (p for p in sentence.words if p.id == w.head), None
+                )
+                if parent_word is None or parent_word.upos != "NOUN":
+                    reasons.append("parent not noun")
+                    char_start += len(w.text) + 1
+                    char_end += 1
+                    continue
+ 
+                gp_lemma = gp_start = gp_end = 0
+                interveners = []
+                for w_g in sentence.words:
+                    gp_end += len(w_g.text)
+                    if w_g.id == parent_word.head:
+                        gp_lemma = w_g.lemma
+                        gp_id = w_g.id
+                        gp_word = w_g
+                        if gp_id < w.id:
+                            interveners = [
+                                wi.upos for wi in sentence.words
+                                if gp_id < wi.id < w.id
+                            ]
+                        break
+                    gp_start += len(w_g.text) + 1
+                    gp_end += 1
+ 
+                if gp_word.upos != "VERB":
+                    reasons.append("grandparent not verb")
+                    char_start += len(w.text) + 1
+                    char_end += 1
+                    continue
+ 
+                if any(pos in interveners for pos in ("NOUN", "PROPN", "PRON")):
+                    reasons.append("intervening noun")
+                    char_start += len(w.text) + 1
+                    char_end += 1
+                    continue
+ 
+                output_text = " ".join(ww.text for ww in sentence.words).strip()
+                entry = {
+                    'sent_id': i,
+                    'text': output_text,
+                    'target_lemma': target_lemma,
+                    'target_slice': (char_start, char_end),
+                    'dependent_lemma': gp_lemma,
+                    'dependent_slice': (gp_start, gp_end),
+                }
+                (include_list if gp_lemma in lemmas else exclude_list).append(entry)
+ 
+            char_start += len(w.text) + 1
+            char_end += 1
+ 
+    if path_include:
+        utils.dump_json(include_list, path_include)
+    if path_exclude:
+        utils.dump_json(exclude_list, path_exclude)
+    if path_reasons:
+        with open(path_reasons, "w") as f:
+            f.write("\n".join(reasons) + "\n")
+ 
+    return include_list, exclude_list, reasons
+ 
+ 
+# =============================================================================
+# DATASET LOADING
+# =============================================================================
+ 
+def load_texts(dataset_name: str, cache_dir: str):
+    """Load raw texts from a HuggingFace dataset.
+ 
+    Args:
+        dataset_name: Either 'openwebtext' or 'wikitext'.
+        cache_dir: Directory for HuggingFace cache.
+ 
+    Returns:
+        An iterable of text strings.
+    """
+    if dataset_name == "openwebtext":
+        dataset = load_dataset(
+            "openwebtext", cache_dir=cache_dir, trust_remote_code=True
+        )
+        return dataset['train']['text']
+    elif dataset_name == "wikitext":
+        dataset = load_dataset(
+            "Salesforce/wikitext", "wikitext-103-raw-v1", cache_dir=cache_dir
+        )
+        return dataset['train']['text']
+    else:
+        raise ValueError(f"Unsupported dataset: {dataset_name}. Use 'openwebtext' or 'wikitext'.")
+ 
+ 
+# =============================================================================
+# MAIN
+# =============================================================================
+ 
+def main():
+    parser = argparse.ArgumentParser(
+        description="Filter a text dataset for ditransitive and motion-to constructions."
+    )
+    parser.add_argument(
+        "--dataset", type=str, required=True, choices=["openwebtext", "wikitext"],
+        help="Dataset to filter."
+    )
+    parser.add_argument(
+        "--cache_dir", type=str, default="/nlp/scr/jjian/datasets",
+        help="HuggingFace cache directory."
+    )
+    parser.add_argument(
+        "--output_dir", type=str, default="/nlp/scr/jjian/datasets/filtered",
+        help="Directory for all output files."
+    )
+    parser.add_argument(
+        "--ditransitives_list", type=str,
+        default="/afs/cs.stanford.edu/u/jjian/projects/abstraction/data/ditransitives.txt",
+        help="Path to newline-separated list of ditransitive verbs."
+    )
+    parser.add_argument(
+        "--motion_list", type=str,
+        default="/afs/cs.stanford.edu/u/jjian/projects/abstraction/data/motion.txt",
+        help="Path to newline-separated list of motion verbs."
+    )
+    args = parser.parse_args()
+ 
+    os.makedirs(args.output_dir, exist_ok=True)
+    os.environ['HF_HOME'] = args.cache_dir
+    os.environ['HF_DATASETS_CACHE'] = args.cache_dir
+ 
+    # --- Load verb lists ---
+    ditransitives = [w.strip() for w in open(args.ditransitives_list).readlines()]
+    motion = [w.strip() for w in open(args.motion_list).readlines()]
+    ditransitives_inflected = utils.get_all_inflections(ditransitives)
+    motion_inflected = utils.get_all_inflections(motion)
+ 
+    # --- Build regex patterns ---
+    motion_regex = "|".join(
+        rf"to(?:\s+\w+){{0,2}}\s+{v}|{v}(?:\s+\w+){{0,2}}\s+to"
+        for v in motion_inflected
+    )
+    ditransitive_regex = "|".join(
+        rf"to(?:\s+\w+){{0,5}}\s+{v}|{v}(?:\s+\w+){{0,5}}\s+to"
+        for v in ditransitives_inflected
+    )
+ 
+    # --- Step 1: String-based filtering ---
+    print(f"Step 1: String-based filtering on {args.dataset}...")
+    ditrans_raw_path = os.path.join(args.output_dir, f"{args.dataset}.ditransitive.raw.txt")
+    motion_raw_path = os.path.join(args.output_dir, f"{args.dataset}.motion.raw.txt")
+ 
+    texts = load_texts(args.dataset, args.cache_dir)
+    string_based_filtering(
+        texts, "to", motion_regex, ditransitive_regex,
+        ditrans_raw_path, motion_raw_path
+    )
+    print(f"  Ditransitive sentences → {ditrans_raw_path}")
+    print(f"  Motion sentences       → {motion_raw_path}")
+ 
+    # --- Step 2: Parse ---
+    print("Step 2: Parsing...")
+    ditrans_conllu = os.path.join(args.output_dir, f"{args.dataset}.ditransitive.parsed.conllu")
+    motion_conllu = os.path.join(args.output_dir, f"{args.dataset}.motion.parsed.conllu")
+ 
+    for raw_path, conllu_path in [
+        (ditrans_raw_path, ditrans_conllu),
+        (motion_raw_path, motion_conllu),
+    ]:
+        sentences = open(raw_path).readlines()
+        nlp = utils.get_stanza_pipeline()
+        parsed = utils.stanza_parsing_batched(sentences, nlp, batch_size=64)
+        doc = Document([])
+        doc.sentences = parsed
+        CoNLL.write_doc2conll(doc, conllu_path)
+        print(f"  Parsed → {conllu_path}")
+ 
+    # --- Step 3: Structural filtering ---
+    print("Step 3: Structural filtering...")
+ 
+    doc_ditransitive = CoNLL.conll2doc(ditrans_conllu).sentences
+    structure_filtering_ditransitives(
+        doc_ditransitive,
+        lemmas=ditransitives,
+        path_include=os.path.join(args.output_dir, f"{args.dataset}.ditransitive.filtered.json"),
+        path_exclude=os.path.join(args.output_dir, f"{args.dataset}.ditransitive.excluded.json"),
+        path_reasons=os.path.join(args.output_dir, f"{args.dataset}.ditransitive.reasons.txt"),
+    )
+    print(f"  Ditransitive filtering done.")
+ 
+    doc_motion = CoNLL.conll2doc(motion_conllu).sentences
+    structure_filtering_motion(
+        doc_motion,
+        lemmas=motion,
+        path_include=os.path.join(args.output_dir, f"{args.dataset}.motion.filtered.json"),
+        path_exclude=os.path.join(args.output_dir, f"{args.dataset}.motion.excluded.json"),
+        path_reasons=os.path.join(args.output_dir, f"{args.dataset}.motion.reasons.txt"),
+    )
+    print(f"  Motion filtering done.")
+    print("Done.")
+ 
+ 
 if __name__ == "__main__":
     main()
-    """
-    print("Getting Ditransitives")
-    doc_ditransitive = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.raw.filtered.parsed.conllu")
-    doc_ditransitive = doc_ditransitive.sentences
-    ditransitives = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/ditransitives.txt", 'r').readlines()]
-
-    print("Filtering")
-    include_list, exclude_list, reasons = structure_filtering_ditransitives(doc_ditransitive, lemmas=ditransitives, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/ditransitive.reasons.txt")
-    del doc_ditransitive
-    
-    print("Getting Motion")
-    doc_motion = CoNLL.conll2doc("/nlp/scr/jjian/datasets/wikitext_parsed/motion.raw.filtered.parsed.conllu")
-    doc_motion = doc_motion.sentences
-
-    # remove doc_motion_head and tail
-    print("Filtering")
-    motion = [w.strip() for w in open("/sailhome/jjian/projects/abstraction/data/motion.txt", 'r').readlines()]
-    include_list, exclude_list, reasons = structure_filtering_motion(doc_motion, lemmas=motion, path_1="/nlp/scr/jjian/datasets/wikitext_parsed/motion.parsed_filtered.json", path_2="/nlp/scr/jjian/datasets/wikitext_parsed/motion.excluded.json", path_3="/nlp/scr/jjian/datasets/wikitext_parsed/motion.reasons.txt")
-    """
