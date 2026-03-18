@@ -4,218 +4,223 @@ from huggingface_hub import list_repo_refs
 from tqdm import tqdm
 import json
 import os
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 import sys
 
-def get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_name="gpt2"):
-    if model is None or tokenizer is None:
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-        model = AutoModelForCausalLM.from_pretrained(model_name)
 
-    # Set the model to evaluation mode
+# Token IDs and string forms for the 30 prototype nouns of interest.
+PROTOTYPE_TOKEN_IDS = [
+    1171, 1751, 5386, 661, 1664, 1641, 968, 3517, 2137, 1181,
+    1074, 649, 1266, 1644, 995, 1353, 2166, 4417, 1578, 4436,
+    3715, 2323, 3420, 9003, 5093, 5461, 4220, 5366, 7421, 5417,
+]
+PROTOTYPE_TOKENS = [
+    ' public', ' children', ' audience', ' people', ' company',
+    ' family', ' New', ' British', ' player', ' state',
+    ' team', ' new', ' best', ' police', ' world',
+    ' top', ' front', ' surface', ' United', ' hospital',
+    ' scene', ' ground', ' door', ' airport', ' north',
+    ' finish', ' bottom', ' south', ' west', ' sea',
+]
+
+
+def get_next_token_distribution_batch(
+    input_prefixes: List[str],
+    model: AutoModelForCausalLM,
+    tokenizer: AutoTokenizer,
+) -> torch.Tensor:
+    """Run a batch of input prefixes through the model and return next-token
+    probability distributions (one row per prefix)."""
     model.eval()
 
-    # Tokenize the batch of inputs save the original length of each sequence before padding to get the logits for the next token
     encoded = tokenizer(input_prefixes, return_tensors='pt', padding="longest")
     input_ids = encoded["input_ids"].to(model.device)
     attention_mask = encoded["attention_mask"].to(model.device)
-    attention_mask = encoded["attention_mask"].to(model.device) 
-    sequence_lengths = attention_mask.sum(dim=1) - 1  
+    sequence_lengths = attention_mask.sum(dim=1) - 1
 
-    # Forward pass to get the logits for the next token
     with torch.no_grad():
         outputs = model(input_ids, attention_mask=attention_mask)
         logits = outputs.logits
 
-    # Get the logits for the last token in each input sequence
-    batch_size = logits.shape[0]
     next_token_logits = torch.stack([
-        logits[i, sequence_lengths[i], :] 
-        for i in range(batch_size)
+        logits[i, sequence_lengths[i], :]
+        for i in range(logits.shape[0])
     ])
-
-    # Apply softmax to get the probability distributions
-    probabilities = torch.nn.functional.softmax(next_token_logits, dim=-1)
-    #print(probabilities.shape)
-
-    return probabilities
-
-"""def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor, tokenizer: AutoTokenizer, top_k: float = 0.9) -> List[Dict[str, Any]]:
-    
-    # Sort probabilities and get indices
-    sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
-    
-    # Compute cumulative probabilities
-    cumulative_probs = torch.cumsum(sorted_probs, dim=1)
-    
-    # Create a mask for probabilities below top_k
-    mask = cumulative_probs < top_k
-    
-    # Use the mask to get the relevant probabilities and indices
-    relevant_probs = [probs[m] for probs, m in zip(sorted_probs, mask)]
-    relevant_indices = [indices[m] for indices, m in zip(sorted_indices, mask)]
-    
-    # Convert indices to tokens
-    token_lists = [tokenizer.convert_ids_to_tokens(indices) for indices in relevant_indices]
-    token_strings = [[tokenizer.convert_tokens_to_string([t]) for t in tokens] for tokens in token_lists]
-    
-    # Create the final results
-    batch_results = [
-        {
-            "input_prefix": prefix,
-            "verb": verb,
-            #"top_k_tokens": tokens,
-            # round to two decimal places the probabilities
-            "top_k_tokens": list(zip(tokens, [round(p.item(), 2) for p in probs]))
-        }
-        for prefix, verb, tokens, probs in zip(input_prefixes, verbs, token_strings, relevant_probs)
-    ]
-    return batch_results"""
-
-def token_distribution_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor, tokenizer: AutoTokenizer, top_k: float = 0.9) -> List[Dict[str, Any]]:
-    # Sort probabilities and get indices
-    sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
-    
-    # Compute cumulative probabilities
-    cumulative_probs = torch.cumsum(sorted_probs, dim=1)
-    
-    # Create a mask for probabilities below top_k
-    mask = cumulative_probs < top_k
-    
-    # Use the mask to get the relevant probabilities and indices
-    relevant_probs = [probs[m] for probs, m in zip(sorted_probs, mask)]
-    relevant_indices = [indices[m] for indices, m in zip(sorted_indices, mask)]
-    
-    # Flatten the indices list to pass all at once to the tokenizer
-    flattened_indices = torch.cat(relevant_indices).tolist()
-    
-    # Batch convert all token ids to tokens at once
-    all_tokens = tokenizer.convert_ids_to_tokens(flattened_indices)
-    
-    # Reconstruct the batch structure by splitting `all_tokens` back
-    split_sizes = [len(indices) for indices in relevant_indices]
-    token_lists = [all_tokens[offset:offset + size] for offset, size in zip(torch.cumsum(torch.tensor([0] + split_sizes[:-1]), dim=0).tolist(), split_sizes)]
-    
-    # Convert tokens to strings in batches
-    token_strings = [[tokenizer.convert_tokens_to_string([t]) for t in tokens] for tokens in token_lists]
-    
-    # Create the final results
-    batch_results = [
-        {
-            "input_prefix": prefix,
-            "verb": verb,
-            # round to two decimal places the probabilities
-            "top_k_tokens": list(zip(tokens, [round(p.item(), 5) for p in probs]))
-        }
-        for prefix, verb, tokens, probs in zip(input_prefixes, verbs, token_strings, relevant_probs)
-    ]
-    # turn probabilities into a list
-    # probabilities = probabilities.tolist()
-    # token_ids = [1171, 1751, 5386, 661, 1664, 1641, 968, 3517, 2137, 1181, 1074, 649, 1266, 1644, 995, 1353, 2166, 4417, 1578, 4436, 3715, 2323, 3420, 9003, 5093, 5461, 4220, 5366, 7421, 5417]
-    # tokens = [' public', ' children', ' audience', ' people', ' company', ' family', ' New', ' British', ' player', ' state', ' team', ' new', ' best', ' police', ' world', ' top', ' front', ' surface', ' United', 
-    #           ' hospital', ' scene', ' ground', ' door', ' airport', ' north', ' finish', ' bottom', ' south', ' west', ' sea']
-    # batch_results = [
-    #     {
-    #         "input_prefix": prefix,
-    #         "verb": verb,
-    #         # round to two decimal places the probabilities
-    #         "top_k_tokens": [[t, probs[i]] for i, t in zip(token_ids, tokens)]
-    #     }
-    #     for prefix, verb, probs in zip(input_prefixes, verbs, probabilities)
-    # ]
-    
-    return batch_results
+    return torch.nn.functional.softmax(next_token_logits, dim=-1)
 
 
-# do the same as above but save entropy of the distribution rather than the tokens
+def token_distribution_batch(
+    input_prefixes: List[str],
+    verbs: List[str],
+    probabilities: torch.Tensor,
+    tokenizer: AutoTokenizer,
+    token_ids: Optional[List[int]] = None,
+    tokens: Optional[List[str]] = None,
+    top_k: float = 0.9,
+) -> List[Dict[str, Any]]:
+    """Extract token probabilities from a batch of next-token distributions.
 
-def token_entropy_batch(input_prefixes: List[str], verbs: List[str], probabilities: torch.Tensor) -> List[Dict[str, Any]]:
-    
-    # Compute entropy of the distribution
-    entropy = -torch.sum(probabilities * torch.log(probabilities), dim=1)
-    
-    # Create the final results
-    batch_results = [
-        {
-            "input_prefix": prefix,
-            "verb": verb,
-            "entropy": ent.item()
-        }
-        for prefix, verb, ent in zip(input_prefixes, verbs, entropy)
-    ]
-    return batch_results
+    If token_ids and tokens are provided, returns probabilities only for those
+    specific tokens. Otherwise falls back to a top-k cutoff over the full
+    vocabulary.
+
+    Args:
+        input_prefixes: The input strings fed to the model.
+        verbs: The verb label for each input.
+        probabilities: Softmax output from the model, shape (batch, vocab).
+        token_ids: Optional list of specific token IDs to extract.
+        tokens: Optional list of string labels corresponding to token_ids.
+        top_k: Cumulative probability cutoff used when token_ids is not given.
+    """
+    if token_ids is not None and tokens is not None:
+        # Specific token list mode
+        probabilities_list = probabilities.tolist()
+        return [
+            {
+                "input_prefix": prefix,
+                "verb": verb,
+                "top_k_tokens": [
+                    [token, probs[tid]]
+                    for tid, token in zip(token_ids, tokens)
+                ],
+            }
+            for prefix, verb, probs in zip(input_prefixes, verbs, probabilities_list)
+        ]
+    else:
+        # Top-k mode: include tokens until cumulative probability exceeds top_k
+        sorted_probs, sorted_indices = torch.sort(probabilities, dim=1, descending=True)
+        cumulative_probs = torch.cumsum(sorted_probs, dim=1)
+        mask = cumulative_probs < top_k
+
+        relevant_probs = [probs[m] for probs, m in zip(sorted_probs, mask)]
+        relevant_indices = [indices[m] for indices, m in zip(sorted_indices, mask)]
+
+        # Batch-convert all token ids to strings
+        flattened_indices = torch.cat(relevant_indices).tolist()
+        all_tokens = tokenizer.convert_ids_to_tokens(flattened_indices)
+        split_sizes = [len(idx) for idx in relevant_indices]
+        offsets = [0] + list(torch.cumsum(torch.tensor(split_sizes[:-1]), dim=0).tolist())
+        token_lists = [
+            all_tokens[offset:offset + size]
+            for offset, size in zip(offsets, split_sizes)
+        ]
+        token_strings = [
+            [tokenizer.convert_tokens_to_string([t]) for t in tokens_]
+            for tokens_ in token_lists
+        ]
+
+        return [
+            {
+                "input_prefix": prefix,
+                "verb": verb,
+                "top_k_tokens": list(zip(tok_strs, [round(p.item(), 5) for p in probs])),
+            }
+            for prefix, verb, tok_strs, probs in zip(
+                input_prefixes, verbs, token_strings, relevant_probs
+            )
+        ]
 
 
+def loop_checkpoints_and_save(
+    model_name: str,
+    split: str,
+    instances: List[Dict],
+    cache_dir: str = None,
+    rep: str = "verb_fragment",
+    batch_size: int = 32,
+    branch: int = 0,
+    token_ids: Optional[List[int]] = None,
+    tokens: Optional[List[str]] = None,
+    top_k: float = 0.9,
+) -> None:
+    """Iterate over model checkpoints, run inference, and save results.
 
-def loop_checkpoints_and_save(model_name, split, instances, cache_dir=None, rep="verb_fragment", batch_size=32, branch=None):
+    Args:
+        branch: Controls which checkpoints to run.
+            0 = all checkpoints
+            1 = first half
+            2 = second half
+        token_ids: If provided (with tokens), only record probabilities for
+            these specific token IDs. Otherwise uses top-k.
+        tokens: String labels corresponding to token_ids.
+        top_k: Cumulative probability cutoff for top-k mode.
+
+    Skips checkpoints whose output file already exists.
+    """
     out = list_repo_refs(model_name)
-    branches = [b.name for b in out.tags]
-    if branch is None:
-        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))
-    elif branch == 0:
-        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:10]
+    all_branches = sorted(
+        [b.name for b in out.tags],
+        key=lambda x: int(x.split('checkpoint-')[-1])
+    )
+
+    midpoint = len(all_branches) // 2
+    if branch == 0:
+        branches = all_branches
     elif branch == 1:
-        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[:300]
+        branches = all_branches[:midpoint]
     elif branch == 2:
-        branches = sorted(branches, key=lambda x: int(x.split('checkpoint-')[-1]))[300:]
+        branches = all_branches[midpoint:]
+    else:
+        raise ValueError(f"branch must be 0, 1, or 2 — got {branch}")
+
     tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
     if tokenizer.pad_token is None:
-        tokenizer.add_special_tokens(
-            {"additional_special_tokens": ["<|pad|>"]}
-        )
+        tokenizer.add_special_tokens({"additional_special_tokens": ["<|pad|>"]})
         tokenizer.pad_token = "<|pad|>"
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    
+    model_name_short = model_name.split("/")[-1]
+
     for checkpoint in tqdm(branches):
-        model_name_preprocessed = model_name.split("/")[-1]
-        output_path = f'/nlp/scr/jjian/data/wikitext/{split}/predictions/{rep}/{model_name_preprocessed}.{checkpoint}.predictions.json'
-        
-        # make dir if it doesn't exist
-        if not os.path.exists(os.path.dirname(output_path)):
-            os.makedirs(os.path.dirname(output_path))
+        output_path = (
+            f"/nlp/scr/jjian/data/wikitext/{split}/predictions/"
+            f"{rep}/prototype_nouns/{model_name_short}.{checkpoint}.predictions.json"
+        )
+
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
         if os.path.exists(output_path):
             continue
 
-        model = AutoModelForCausalLM.from_pretrained(model_name, revision=checkpoint, cache_dir=cache_dir).to(device)
+        model = AutoModelForCausalLM.from_pretrained(
+            model_name, revision=checkpoint, cache_dir=cache_dir
+        ).to(device)
         model.resize_token_embeddings(len(tokenizer))
         model.eval()
 
-        # Process instances in batches
         results = []
-        # add tqdm to the loop
-
         for i in tqdm(range(0, len(instances), batch_size)):
             batch = instances[i:i + batch_size]
             input_prefixes = [data[rep].strip() for data in batch]
-            #input_prefixes = [data["text"].strip() for data in batch]
             verbs = [data["dependent_lemma"].strip() for data in batch]
 
-            # Get the next token distribution for the batch
-            probabilities = get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_name)
-
-            # Get token distribution for the batch
-            batch_results = token_distribution_batch(input_prefixes, verbs, probabilities, tokenizer, top_k=0.75)
-            #batch_results = token_entropy_batch(input_prefixes, verbs, probabilities)
-            results.extend(batch_results)
-
-        
+            probabilities = get_next_token_distribution_batch(
+                input_prefixes, model, tokenizer
+            )
+            results.extend(token_distribution_batch(
+                input_prefixes, verbs, probabilities, tokenizer,
+                token_ids=token_ids, tokens=tokens, top_k=top_k
+            ))
 
         with open(output_path, 'w') as f:
             json.dump(results, f, indent=4)
 
-    return
 
 if __name__ == "__main__":
     rep = sys.argv[1]
     branch = int(sys.argv[2])
     ditrans_sampled = sys.argv[3]
     split = sys.argv[4]
-    model_name = "stanford-crfm/battlestar-gpt2-small-x49"
+
+    model_name = "stanford-crfm/darkmatter-gpt2-small-x343"
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
-    
-    #split = "determiner_noun"
-    #ditrans_sampled = "/nlp/scr/jjian/datasets/wikitext_parsed/blimp_data/determiner_noun_agreement_with_adj_2.json"
+
     ditrans_json = json.load(open(ditrans_sampled, "r"))
-    
-    loop_checkpoints_and_save(model_name, split, ditrans_json, cache_dir=cache_dir, rep=rep, batch_size=16, branch=branch)
+
+    # Use the hardcoded prototype noun list. Pass token_ids=None and tokens=None
+    # instead to fall back to top-k over the full vocabulary.
+    loop_checkpoints_and_save(
+        model_name, split, ditrans_json,
+        cache_dir=cache_dir, rep=rep, batch_size=16, branch=branch,
+        token_ids=PROTOTYPE_TOKEN_IDS, tokens=PROTOTYPE_TOKENS,
+    )

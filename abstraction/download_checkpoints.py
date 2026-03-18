@@ -15,9 +15,12 @@ from tqdm import tqdm
 
 
 if __name__ == "__main__":
-    model_name = "stanford-crfm/expanse-gpt2-small-x777"
+    model_name = "stanford-crfm/durin-gpt2-medium-x343"
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
+    # order branches named like `checkpoint-99000' by the number
+    branches.sort(key=lambda x: int(x.split('-')[-1]) if x.startswith('checkpoint-') else float('inf'))
+    branches = branches[:300]  # limit to the first 300 checkpoints
     cache_dir = "/nlp/scr/jjian/mistral-checkpoints"
     for checkpoint in tqdm(branches):
         model = AutoModel.from_pretrained(model_name, return_dict=True, output_hidden_states=True, revision=checkpoint, cache_dir=cache_dir)
