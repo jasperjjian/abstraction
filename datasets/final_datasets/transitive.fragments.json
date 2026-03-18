@@ -1,0 +1,3187 @@
+[
+  {
+    "text": "Many senators' niece admires",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Many senators' niece admires"
+  },
+  {
+    "text": "That girl can admire",
+    "dependent_lemma": "admire",
+    "verb_fragment": "That girl can admire"
+  },
+  {
+    "text": "All doctors didn't admire",
+    "dependent_lemma": "admire",
+    "verb_fragment": "All doctors didn't admire"
+  },
+  {
+    "text": "Anne was admiring",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Anne was admiring"
+  },
+  {
+    "text": "Those boys admire",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Those boys admire"
+  },
+  {
+    "text": "Margaret's mothers aren't admiring",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Margaret's mothers aren't admiring"
+  },
+  {
+    "text": "Vanessa is admiring",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Vanessa is admiring"
+  },
+  {
+    "text": "Every organization admired",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Every organization admired"
+  },
+  {
+    "text": "Every man's granddaughter admired",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Every man's granddaughter admired"
+  },
+  {
+    "text": "Nicole admired",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Nicole admired"
+  },
+  {
+    "text": "Valerie's mothers haven't admired",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Valerie's mothers haven't admired"
+  },
+  {
+    "text": "Tina's employee admired",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Tina's employee admired"
+  },
+  {
+    "text": "A lot of drivers weren't admiring",
+    "dependent_lemma": "admire",
+    "verb_fragment": "A lot of drivers weren't admiring"
+  },
+  {
+    "text": "Nicole's contractors admire",
+    "dependent_lemma": "admire",
+    "verb_fragment": "Nicole's contractors admire"
+  },
+  {
+    "text": "Angela hasn't aggravated",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "Angela hasn't aggravated"
+  },
+  {
+    "text": "Lisa is aggravating",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "Lisa is aggravating"
+  },
+  {
+    "text": "All pies aggravate",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "All pies aggravate"
+  },
+  {
+    "text": "Jane does aggravate",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "Jane does aggravate"
+  },
+  {
+    "text": "Michelle aggravated",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "Michelle aggravated"
+  },
+  {
+    "text": "Patrick had aggravated",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "Patrick had aggravated"
+  },
+  {
+    "text": "The organization aggravates",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "The organization aggravates"
+  },
+  {
+    "text": "Many guys aggravates",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "Many guys aggravates"
+  },
+  {
+    "text": "Angela does aggravate",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "Angela does aggravate"
+  },
+  {
+    "text": "That commentary aggravates",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "That commentary aggravates"
+  },
+  {
+    "text": "This truck aggravates",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "This truck aggravates"
+  },
+  {
+    "text": "Hamsters aggravated",
+    "dependent_lemma": "aggravate",
+    "verb_fragment": "Hamsters aggravated"
+  },
+  {
+    "text": "Some turtles alarm",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "Some turtles alarm"
+  },
+  {
+    "text": "Phillip's senators alarm",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "Phillip's senators alarm"
+  },
+  {
+    "text": "A lot of photographs have alarmed",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "A lot of photographs have alarmed"
+  },
+  {
+    "text": "Every teacher hasn't alarmed",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "Every teacher hasn't alarmed"
+  },
+  {
+    "text": "Renee would alarm",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "Renee would alarm"
+  },
+  {
+    "text": "Deborah's hairdressers have alarmed",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "Deborah's hairdressers have alarmed"
+  },
+  {
+    "text": "That movie theater alarmed",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "That movie theater alarmed"
+  },
+  {
+    "text": "Every son of Meredith doesn't alarm",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "Every son of Meredith doesn't alarm"
+  },
+  {
+    "text": "A lot of actors alarm",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "A lot of actors alarm"
+  },
+  {
+    "text": "The mirror alarmed",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "The mirror alarmed"
+  },
+  {
+    "text": "This projector alarms",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "This projector alarms"
+  },
+  {
+    "text": "Carla alarmed",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "Carla alarmed"
+  },
+  {
+    "text": "The school hasn't alarmed",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "The school hasn't alarmed"
+  },
+  {
+    "text": "Most cars alarmed",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "Most cars alarmed"
+  },
+  {
+    "text": "Some daughters of Becca had alarmed",
+    "dependent_lemma": "alarm",
+    "verb_fragment": "Some daughters of Becca had alarmed"
+  },
+  {
+    "text": "Rhonda was arguing about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "Rhonda was arguing about"
+  },
+  {
+    "text": "Daniel's guest argued about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "Daniel's guest argued about"
+  },
+  {
+    "text": "All associations argue about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "All associations argue about"
+  },
+  {
+    "text": "The museums argue about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "The museums argue about"
+  },
+  {
+    "text": "Many governments might argue about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "Many governments might argue about"
+  },
+  {
+    "text": "Carlos argued about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "Carlos argued about"
+  },
+  {
+    "text": "Vincent argued about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "Vincent argued about"
+  },
+  {
+    "text": "Joel argued about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "Joel argued about"
+  },
+  {
+    "text": "Beth hasn't argued about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "Beth hasn't argued about"
+  },
+  {
+    "text": "Leslie hadn't argued about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "Leslie hadn't argued about"
+  },
+  {
+    "text": "Those cousins of Sonia argued about",
+    "dependent_lemma": "argue",
+    "verb_fragment": "Those cousins of Sonia argued about"
+  },
+  {
+    "text": "Valerie's electricians arrive at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Valerie's electricians arrive at"
+  },
+  {
+    "text": "Dan hadn't arrived at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Dan hadn't arrived at"
+  },
+  {
+    "text": "Elaine arrived at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Elaine arrived at"
+  },
+  {
+    "text": "Kendra might arrive at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Kendra might arrive at"
+  },
+  {
+    "text": "Regina has arrived at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Regina has arrived at"
+  },
+  {
+    "text": "Some person's tutor arrived at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Some person's tutor arrived at"
+  },
+  {
+    "text": "The guy's associates arrive at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "The guy's associates arrive at"
+  },
+  {
+    "text": "Matt arrived at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Matt arrived at"
+  },
+  {
+    "text": "Danielle's oncologist arrives at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Danielle's oncologist arrives at"
+  },
+  {
+    "text": "A pedestrian's partners are arriving at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "A pedestrian's partners are arriving at"
+  },
+  {
+    "text": "Beverly arrives at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Beverly arrives at"
+  },
+  {
+    "text": "That daughter of Becca shouldn't arrive at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "That daughter of Becca shouldn't arrive at"
+  },
+  {
+    "text": "Stephanie arrives at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Stephanie arrives at"
+  },
+  {
+    "text": "Samuel's students arrive at",
+    "dependent_lemma": "arrive",
+    "verb_fragment": "Samuel's students arrive at"
+  },
+  {
+    "text": "Some senators have attacked",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Some senators have attacked"
+  },
+  {
+    "text": "Many brothers of Monica attack",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Many brothers of Monica attack"
+  },
+  {
+    "text": "Connie attacks",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Connie attacks"
+  },
+  {
+    "text": "Linda's nieces attack",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Linda's nieces attack"
+  },
+  {
+    "text": "Melissa's doctors attack",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Melissa's doctors attack"
+  },
+  {
+    "text": "That boy's cousins are attacking",
+    "dependent_lemma": "attack",
+    "verb_fragment": "That boy's cousins are attacking"
+  },
+  {
+    "text": "The girls' nieces attacked",
+    "dependent_lemma": "attack",
+    "verb_fragment": "The girls' nieces attacked"
+  },
+  {
+    "text": "Bradley attacks",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Bradley attacks"
+  },
+  {
+    "text": "Lisa couldn't attack",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Lisa couldn't attack"
+  },
+  {
+    "text": "Those ladies attacked",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Those ladies attacked"
+  },
+  {
+    "text": "Valerie attacks",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Valerie attacks"
+  },
+  {
+    "text": "Sandra is attacking",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Sandra is attacking"
+  },
+  {
+    "text": "Nina attacks",
+    "dependent_lemma": "attack",
+    "verb_fragment": "Nina attacks"
+  },
+  {
+    "text": "Customers' ex-girlfriends bike to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "Customers' ex-girlfriends bike to"
+  },
+  {
+    "text": "Most guests aren't biking to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "Most guests aren't biking to"
+  },
+  {
+    "text": "Those fathers of Carla bike to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "Those fathers of Carla bike to"
+  },
+  {
+    "text": "Vincent's electrician biked to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "Vincent's electrician biked to"
+  },
+  {
+    "text": "Angela hadn't biked to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "Angela hadn't biked to"
+  },
+  {
+    "text": "Sally was biking to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "Sally was biking to"
+  },
+  {
+    "text": "All dancers did bike to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "All dancers did bike to"
+  },
+  {
+    "text": "These grandsons of Michelle biked to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "These grandsons of Michelle biked to"
+  },
+  {
+    "text": "All brothers of Melanie bike to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "All brothers of Melanie bike to"
+  },
+  {
+    "text": "Kendra bikes to",
+    "dependent_lemma": "bike",
+    "verb_fragment": "Kendra bikes to"
+  },
+  {
+    "text": "These banks boasted about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "These banks boasted about"
+  },
+  {
+    "text": "Gary boasted about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "Gary boasted about"
+  },
+  {
+    "text": "Michael boasted about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "Michael boasted about"
+  },
+  {
+    "text": "Omar hasn't boasted about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "Omar hasn't boasted about"
+  },
+  {
+    "text": "These sisters of Susan boast about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "These sisters of Susan boast about"
+  },
+  {
+    "text": "Sharon's oncologists have boasted about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "Sharon's oncologists have boasted about"
+  },
+  {
+    "text": "Lissa does boast about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "Lissa does boast about"
+  },
+  {
+    "text": "Matt boasted about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "Matt boasted about"
+  },
+  {
+    "text": "Larry boasts about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "Larry boasts about"
+  },
+  {
+    "text": "Steve is boasting about",
+    "dependent_lemma": "boast",
+    "verb_fragment": "Steve is boasting about"
+  },
+  {
+    "text": "Patricia's brothers are bothering",
+    "dependent_lemma": "bother",
+    "verb_fragment": "Patricia's brothers are bothering"
+  },
+  {
+    "text": "That school had bothered",
+    "dependent_lemma": "bother",
+    "verb_fragment": "That school had bothered"
+  },
+  {
+    "text": "Deborah bothered",
+    "dependent_lemma": "bother",
+    "verb_fragment": "Deborah bothered"
+  },
+  {
+    "text": "Most ladies bothered",
+    "dependent_lemma": "bother",
+    "verb_fragment": "Most ladies bothered"
+  },
+  {
+    "text": "Susan's fathers bothered",
+    "dependent_lemma": "bother",
+    "verb_fragment": "Susan's fathers bothered"
+  },
+  {
+    "text": "Most sketches bother",
+    "dependent_lemma": "bother",
+    "verb_fragment": "Most sketches bother"
+  },
+  {
+    "text": "Tiffany shouldn't bother",
+    "dependent_lemma": "bother",
+    "verb_fragment": "Tiffany shouldn't bother"
+  },
+  {
+    "text": "Those horses have bothered",
+    "dependent_lemma": "bother",
+    "verb_fragment": "Those horses have bothered"
+  },
+  {
+    "text": "Some car hasn't bothered",
+    "dependent_lemma": "bother",
+    "verb_fragment": "Some car hasn't bothered"
+  },
+  {
+    "text": "Cindy's husband had bothered",
+    "dependent_lemma": "bother",
+    "verb_fragment": "Cindy's husband had bothered"
+  },
+  {
+    "text": "The government can't bother",
+    "dependent_lemma": "bother",
+    "verb_fragment": "The government can't bother"
+  },
+  {
+    "text": "Naomi has boycotted",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Naomi has boycotted"
+  },
+  {
+    "text": "Kevin isn't boycotting",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Kevin isn't boycotting"
+  },
+  {
+    "text": "Larry shouldn't boycott",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Larry shouldn't boycott"
+  },
+  {
+    "text": "Tiffany boycotts",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Tiffany boycotts"
+  },
+  {
+    "text": "The grandmothers of Beverly boycott",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "The grandmothers of Beverly boycott"
+  },
+  {
+    "text": "The students boycott",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "The students boycott"
+  },
+  {
+    "text": "Linda wouldn't boycott",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Linda wouldn't boycott"
+  },
+  {
+    "text": "Eva might boycott",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Eva might boycott"
+  },
+  {
+    "text": "Matt's dermatologists boycott",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Matt's dermatologists boycott"
+  },
+  {
+    "text": "Sonia's mothers weren't boycotting",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Sonia's mothers weren't boycotting"
+  },
+  {
+    "text": "Naomi boycotted",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Naomi boycotted"
+  },
+  {
+    "text": "Every girl boycotted",
+    "dependent_lemma": "boycott",
+    "verb_fragment": "Every girl boycotted"
+  },
+  {
+    "text": "Every woman's classmate broke",
+    "dependent_lemma": "break",
+    "verb_fragment": "Every woman's classmate broke"
+  },
+  {
+    "text": "April can't break",
+    "dependent_lemma": "break",
+    "verb_fragment": "April can't break"
+  },
+  {
+    "text": "Katherine's doctors can't break",
+    "dependent_lemma": "break",
+    "verb_fragment": "Katherine's doctors can't break"
+  },
+  {
+    "text": "Raymond's guests break",
+    "dependent_lemma": "break",
+    "verb_fragment": "Raymond's guests break"
+  },
+  {
+    "text": "Monet's student broke",
+    "dependent_lemma": "break",
+    "verb_fragment": "Monet's student broke"
+  },
+  {
+    "text": "Some hamster breaks",
+    "dependent_lemma": "break",
+    "verb_fragment": "Some hamster breaks"
+  },
+  {
+    "text": "Laurie breaks",
+    "dependent_lemma": "break",
+    "verb_fragment": "Laurie breaks"
+  },
+  {
+    "text": "Tina has broken",
+    "dependent_lemma": "break",
+    "verb_fragment": "Tina has broken"
+  },
+  {
+    "text": "Stephanie's students break",
+    "dependent_lemma": "break",
+    "verb_fragment": "Stephanie's students break"
+  },
+  {
+    "text": "Jeffrey isn't breaking",
+    "dependent_lemma": "break",
+    "verb_fragment": "Jeffrey isn't breaking"
+  },
+  {
+    "text": "Lori isn't breaking",
+    "dependent_lemma": "break",
+    "verb_fragment": "Lori isn't breaking"
+  },
+  {
+    "text": "Valerie hadn't broken",
+    "dependent_lemma": "break",
+    "verb_fragment": "Valerie hadn't broken"
+  },
+  {
+    "text": "This cousin of Theodore buys",
+    "dependent_lemma": "buy",
+    "verb_fragment": "This cousin of Theodore buys"
+  },
+  {
+    "text": "Some teacher's nieces buy",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Some teacher's nieces buy"
+  },
+  {
+    "text": "The son of Diana wouldn't buy",
+    "dependent_lemma": "buy",
+    "verb_fragment": "The son of Diana wouldn't buy"
+  },
+  {
+    "text": "Allison might buy",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Allison might buy"
+  },
+  {
+    "text": "Some people buy",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Some people buy"
+  },
+  {
+    "text": "Anne buys",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Anne buys"
+  },
+  {
+    "text": "All guys buy",
+    "dependent_lemma": "buy",
+    "verb_fragment": "All guys buy"
+  },
+  {
+    "text": "Melissa couldn't buy",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Melissa couldn't buy"
+  },
+  {
+    "text": "Ella could buy",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Ella could buy"
+  },
+  {
+    "text": "Noah buys",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Noah buys"
+  },
+  {
+    "text": "That customer's doctors are buying",
+    "dependent_lemma": "buy",
+    "verb_fragment": "That customer's doctors are buying"
+  },
+  {
+    "text": "Many people had bought",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Many people had bought"
+  },
+  {
+    "text": "Marla buys",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Marla buys"
+  },
+  {
+    "text": "Regina bought",
+    "dependent_lemma": "buy",
+    "verb_fragment": "Regina bought"
+  },
+  {
+    "text": "Carmen's father isn't cleaning",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Carmen's father isn't cleaning"
+  },
+  {
+    "text": "Carmen's podiatrists have cleaned",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Carmen's podiatrists have cleaned"
+  },
+  {
+    "text": "A waiter couldn't clean",
+    "dependent_lemma": "clean",
+    "verb_fragment": "A waiter couldn't clean"
+  },
+  {
+    "text": "Cindy's podiatrists cleaned",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Cindy's podiatrists cleaned"
+  },
+  {
+    "text": "Homer cleans",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Homer cleans"
+  },
+  {
+    "text": "Travis's ex-wife cleaned",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Travis's ex-wife cleaned"
+  },
+  {
+    "text": "Amelia wasn't cleaning",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Amelia wasn't cleaning"
+  },
+  {
+    "text": "Cindy wouldn't clean",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Cindy wouldn't clean"
+  },
+  {
+    "text": "Sheila could clean",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Sheila could clean"
+  },
+  {
+    "text": "The senators clean",
+    "dependent_lemma": "clean",
+    "verb_fragment": "The senators clean"
+  },
+  {
+    "text": "Brett did clean",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Brett did clean"
+  },
+  {
+    "text": "The student's contractor was cleaning",
+    "dependent_lemma": "clean",
+    "verb_fragment": "The student's contractor was cleaning"
+  },
+  {
+    "text": "Erin hadn't cleaned",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Erin hadn't cleaned"
+  },
+  {
+    "text": "Tanya's bosses clean",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Tanya's bosses clean"
+  },
+  {
+    "text": "Chad's niece isn't cleaning",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Chad's niece isn't cleaning"
+  },
+  {
+    "text": "Gregory cleaned",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Gregory cleaned"
+  },
+  {
+    "text": "Ellen cleaned",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Ellen cleaned"
+  },
+  {
+    "text": "Vanessa's granddaughters did clean",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Vanessa's granddaughters did clean"
+  },
+  {
+    "text": "Vincent's plumbers clean",
+    "dependent_lemma": "clean",
+    "verb_fragment": "Vincent's plumbers clean"
+  },
+  {
+    "text": "William didn't clean",
+    "dependent_lemma": "clean",
+    "verb_fragment": "William didn't clean"
+  },
+  {
+    "text": "Most pedestrians' father might climb up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Most pedestrians' father might climb up"
+  },
+  {
+    "text": "Rodney's friend might climb up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Rodney's friend might climb up"
+  },
+  {
+    "text": "Patrick did climb up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Patrick did climb up"
+  },
+  {
+    "text": "Teresa is climbing down",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Teresa is climbing down"
+  },
+  {
+    "text": "Some fish climbed up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Some fish climbed up"
+  },
+  {
+    "text": "The senator is climbing up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "The senator is climbing up"
+  },
+  {
+    "text": "Monica climbs up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Monica climbs up"
+  },
+  {
+    "text": "Alicia wasn't climbing down",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Alicia wasn't climbing down"
+  },
+  {
+    "text": "Brenda's teacher hadn't climbed up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Brenda's teacher hadn't climbed up"
+  },
+  {
+    "text": "George climbed down",
+    "dependent_lemma": "climb",
+    "verb_fragment": "George climbed down"
+  },
+  {
+    "text": "Curtis wasn't climbing up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Curtis wasn't climbing up"
+  },
+  {
+    "text": "Irene's ex-husbands climb down",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Irene's ex-husbands climb down"
+  },
+  {
+    "text": "Stacey's piano teachers shouldn't climb up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "Stacey's piano teachers shouldn't climb up"
+  },
+  {
+    "text": "A lot of teachers' mothers climb down",
+    "dependent_lemma": "climb",
+    "verb_fragment": "A lot of teachers' mothers climb down"
+  },
+  {
+    "text": "A lot of students' ex-wife hadn't climbed up",
+    "dependent_lemma": "climb",
+    "verb_fragment": "A lot of students' ex-wife hadn't climbed up"
+  },
+  {
+    "text": "The person won't conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "The person won't conceal"
+  },
+  {
+    "text": "Irene's French teachers conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Irene's French teachers conceal"
+  },
+  {
+    "text": "Amelia's guest couldn't conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Amelia's guest couldn't conceal"
+  },
+  {
+    "text": "Some patient's colleagues have concealed",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Some patient's colleagues have concealed"
+  },
+  {
+    "text": "Deanna wasn't concealing",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Deanna wasn't concealing"
+  },
+  {
+    "text": "Every student's oncologist had concealed",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Every student's oncologist had concealed"
+  },
+  {
+    "text": "Carrie hasn't concealed",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Carrie hasn't concealed"
+  },
+  {
+    "text": "The Impressionists conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "The Impressionists conceal"
+  },
+  {
+    "text": "Every bank concealed",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Every bank concealed"
+  },
+  {
+    "text": "Alicia's piano teachers could conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Alicia's piano teachers could conceal"
+  },
+  {
+    "text": "Some boy was concealing",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Some boy was concealing"
+  },
+  {
+    "text": "Colleen's associate was concealing",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Colleen's associate was concealing"
+  },
+  {
+    "text": "Naomi didn't conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Naomi didn't conceal"
+  },
+  {
+    "text": "Some government couldn't conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Some government couldn't conceal"
+  },
+  {
+    "text": "All nieces of Beverly conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "All nieces of Beverly conceal"
+  },
+  {
+    "text": "Florence conceals",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Florence conceals"
+  },
+  {
+    "text": "Christina's podiatrist was concealing",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Christina's podiatrist was concealing"
+  },
+  {
+    "text": "Paul shouldn't conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Paul shouldn't conceal"
+  },
+  {
+    "text": "Sally hadn't concealed",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Sally hadn't concealed"
+  },
+  {
+    "text": "Those governments conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Those governments conceal"
+  },
+  {
+    "text": "The grandmother of Todd wasn't concealing",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "The grandmother of Todd wasn't concealing"
+  },
+  {
+    "text": "Every person conceals",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Every person conceals"
+  },
+  {
+    "text": "Melanie had concealed",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Melanie had concealed"
+  },
+  {
+    "text": "All drivers conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "All drivers conceal"
+  },
+  {
+    "text": "Some grandmothers of Tammy could conceal",
+    "dependent_lemma": "conceal",
+    "verb_fragment": "Some grandmothers of Tammy could conceal"
+  },
+  {
+    "text": "Elaine criticized",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "Elaine criticized"
+  },
+  {
+    "text": "Sabrina was criticizing",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "Sabrina was criticizing"
+  },
+  {
+    "text": "Cheryl's hairdressers criticize",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "Cheryl's hairdressers criticize"
+  },
+  {
+    "text": "Katherine criticizes",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "Katherine criticizes"
+  },
+  {
+    "text": "Pedestrians criticize",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "Pedestrians criticize"
+  },
+  {
+    "text": "That granddaughter of Becky criticizes",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "That granddaughter of Becky criticizes"
+  },
+  {
+    "text": "Brian criticized",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "Brian criticized"
+  },
+  {
+    "text": "Heather can criticize",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "Heather can criticize"
+  },
+  {
+    "text": "Sara has criticized",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "Sara has criticized"
+  },
+  {
+    "text": "A guy has criticized",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "A guy has criticized"
+  },
+  {
+    "text": "Becca had criticized",
+    "dependent_lemma": "criticize",
+    "verb_fragment": "Becca had criticized"
+  },
+  {
+    "text": "The Borgias disagreed with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "The Borgias disagreed with"
+  },
+  {
+    "text": "Many documentaries about Winston Churchill had disagreed with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "Many documentaries about Winston Churchill had disagreed with"
+  },
+  {
+    "text": "Tonya disagrees with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "Tonya disagrees with"
+  },
+  {
+    "text": "Most children's nieces were disagreeing with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "Most children's nieces were disagreeing with"
+  },
+  {
+    "text": "Gina's tutor hasn't disagreed with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "Gina's tutor hasn't disagreed with"
+  },
+  {
+    "text": "Beverly disagrees with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "Beverly disagrees with"
+  },
+  {
+    "text": "Some essays about politics disagreed with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "Some essays about politics disagreed with"
+  },
+  {
+    "text": "Nicole's guest wouldn't disagree with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "Nicole's guest wouldn't disagree with"
+  },
+  {
+    "text": "Liam's mentor wasn't disagreeing with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "Liam's mentor wasn't disagreeing with"
+  },
+  {
+    "text": "These commentaries disagree with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "These commentaries disagree with"
+  },
+  {
+    "text": "An adult's ex-husbands had disagreed with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "An adult's ex-husbands had disagreed with"
+  },
+  {
+    "text": "Some pedestrians disagree with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "Some pedestrians disagree with"
+  },
+  {
+    "text": "The story hadn't disagreed with",
+    "dependent_lemma": "disagree",
+    "verb_fragment": "The story hadn't disagreed with"
+  },
+  {
+    "text": "Carrie did discover",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Carrie did discover"
+  },
+  {
+    "text": "Erin's employees were discovering",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Erin's employees were discovering"
+  },
+  {
+    "text": "Russell's sisters discover",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Russell's sisters discover"
+  },
+  {
+    "text": "Every driver can discover",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Every driver can discover"
+  },
+  {
+    "text": "Colleen discovers",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Colleen discovers"
+  },
+  {
+    "text": "Stacy discovered",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Stacy discovered"
+  },
+  {
+    "text": "The daughter of Rachelle discovered",
+    "dependent_lemma": "discover",
+    "verb_fragment": "The daughter of Rachelle discovered"
+  },
+  {
+    "text": "Sharon won't discover",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Sharon won't discover"
+  },
+  {
+    "text": "Donald's plumbers discover",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Donald's plumbers discover"
+  },
+  {
+    "text": "Laura discovers",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Laura discovers"
+  },
+  {
+    "text": "Martin discovered",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Martin discovered"
+  },
+  {
+    "text": "Julie is discovering",
+    "dependent_lemma": "discover",
+    "verb_fragment": "Julie is discovering"
+  },
+  {
+    "text": "Doctors' lawyer discussed",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "Doctors' lawyer discussed"
+  },
+  {
+    "text": "Allison is discussing",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "Allison is discussing"
+  },
+  {
+    "text": "These children discuss",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "These children discuss"
+  },
+  {
+    "text": "Some woman's oncologist will discuss",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "Some woman's oncologist will discuss"
+  },
+  {
+    "text": "Stacy's ex-girlfriends discussed",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "Stacy's ex-girlfriends discussed"
+  },
+  {
+    "text": "Andrew discussed",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "Andrew discussed"
+  },
+  {
+    "text": "The student's best friends had discussed",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "The student's best friends had discussed"
+  },
+  {
+    "text": "Ann's senators discuss",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "Ann's senators discuss"
+  },
+  {
+    "text": "Stephanie's dentists discussed",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "Stephanie's dentists discussed"
+  },
+  {
+    "text": "Vincent was discussing",
+    "dependent_lemma": "discuss",
+    "verb_fragment": "Vincent was discussing"
+  },
+  {
+    "text": "Erin wouldn't disgust",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "Erin wouldn't disgust"
+  },
+  {
+    "text": "Adam would disgust",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "Adam would disgust"
+  },
+  {
+    "text": "Catherine's handymen would disgust",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "Catherine's handymen would disgust"
+  },
+  {
+    "text": "These mushrooms don't disgust",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "These mushrooms don't disgust"
+  },
+  {
+    "text": "That apple hasn't disgusted",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "That apple hasn't disgusted"
+  },
+  {
+    "text": "Apples disgust",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "Apples disgust"
+  },
+  {
+    "text": "The nose hadn't disgusted",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "The nose hadn't disgusted"
+  },
+  {
+    "text": "Sandra was disgusting",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "Sandra was disgusting"
+  },
+  {
+    "text": "Many documentaries would disgust",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "Many documentaries would disgust"
+  },
+  {
+    "text": "Wendy couldn't disgust",
+    "dependent_lemma": "disgust",
+    "verb_fragment": "Wendy couldn't disgust"
+  },
+  {
+    "text": "All bananas disturb",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "All bananas disturb"
+  },
+  {
+    "text": "Many sketches of Russell disturb",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "Many sketches of Russell disturb"
+  },
+  {
+    "text": "Rose wasn't disturbing",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "Rose wasn't disturbing"
+  },
+  {
+    "text": "Regina disturbs",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "Regina disturbs"
+  },
+  {
+    "text": "Tamara will disturb",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "Tamara will disturb"
+  },
+  {
+    "text": "The high schools are disturbing",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "The high schools are disturbing"
+  },
+  {
+    "text": "This sister of Derek was disturbing",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "This sister of Derek was disturbing"
+  },
+  {
+    "text": "This teacher disturbs",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "This teacher disturbs"
+  },
+  {
+    "text": "Every skateboard hasn't disturbed",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "Every skateboard hasn't disturbed"
+  },
+  {
+    "text": "Dan had disturbed",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "Dan had disturbed"
+  },
+  {
+    "text": "Every slope disturbs",
+    "dependent_lemma": "disturb",
+    "verb_fragment": "Every slope disturbs"
+  },
+  {
+    "text": "Chad's daughters embarrasses",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "Chad's daughters embarrasses"
+  },
+  {
+    "text": "Beth will embarrass",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "Beth will embarrass"
+  },
+  {
+    "text": "A print of many windows embarrasses",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "A print of many windows embarrasses"
+  },
+  {
+    "text": "Granddaughters of Aaron embarrass",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "Granddaughters of Aaron embarrass"
+  },
+  {
+    "text": "Computers were embarrassing",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "Computers were embarrassing"
+  },
+  {
+    "text": "A lot of shawls embarrass",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "A lot of shawls embarrass"
+  },
+  {
+    "text": "Grace's partners embarrasses",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "Grace's partners embarrasses"
+  },
+  {
+    "text": "The boys embarrasses",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "The boys embarrasses"
+  },
+  {
+    "text": "Some hamsters embarrass",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "Some hamsters embarrass"
+  },
+  {
+    "text": "Wayne will embarrass",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "Wayne will embarrass"
+  },
+  {
+    "text": "Many doctors hadn't embarrassed",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "Many doctors hadn't embarrassed"
+  },
+  {
+    "text": "A lot of lakes will embarrass",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "A lot of lakes will embarrass"
+  },
+  {
+    "text": "Rhonda's guests embarrassed",
+    "dependent_lemma": "embarrass",
+    "verb_fragment": "Rhonda's guests embarrassed"
+  },
+  {
+    "text": "Denise has escaped from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Denise has escaped from"
+  },
+  {
+    "text": "Robert hasn't escaped from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Robert hasn't escaped from"
+  },
+  {
+    "text": "Many actresses escape from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Many actresses escape from"
+  },
+  {
+    "text": "Jerry wasn't escaping from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Jerry wasn't escaping from"
+  },
+  {
+    "text": "Mary escapes from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Mary escapes from"
+  },
+  {
+    "text": "Alan's mentees aren't escaping from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Alan's mentees aren't escaping from"
+  },
+  {
+    "text": "Alan's dermatologist hasn't escaped from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Alan's dermatologist hasn't escaped from"
+  },
+  {
+    "text": "Samuel would escape from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Samuel would escape from"
+  },
+  {
+    "text": "David's senators don't escape from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "David's senators don't escape from"
+  },
+  {
+    "text": "Amy was escaping from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Amy was escaping from"
+  },
+  {
+    "text": "Christopher was escaping from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Christopher was escaping from"
+  },
+  {
+    "text": "Karen's hairdressers were escaping from",
+    "dependent_lemma": "escape",
+    "verb_fragment": "Karen's hairdressers were escaping from"
+  },
+  {
+    "text": "Sonia's teachers exit",
+    "dependent_lemma": "exit",
+    "verb_fragment": "Sonia's teachers exit"
+  },
+  {
+    "text": "All men had exited",
+    "dependent_lemma": "exit",
+    "verb_fragment": "All men had exited"
+  },
+  {
+    "text": "Some person's ex-wives exited",
+    "dependent_lemma": "exit",
+    "verb_fragment": "Some person's ex-wives exited"
+  },
+  {
+    "text": "This lady exited",
+    "dependent_lemma": "exit",
+    "verb_fragment": "This lady exited"
+  },
+  {
+    "text": "That granddaughter of Rachel couldn't exit",
+    "dependent_lemma": "exit",
+    "verb_fragment": "That granddaughter of Rachel couldn't exit"
+  },
+  {
+    "text": "Regina's nephew had exited",
+    "dependent_lemma": "exit",
+    "verb_fragment": "Regina's nephew had exited"
+  },
+  {
+    "text": "Connie won't exit",
+    "dependent_lemma": "exit",
+    "verb_fragment": "Connie won't exit"
+  },
+  {
+    "text": "Carolyn exits",
+    "dependent_lemma": "exit",
+    "verb_fragment": "Carolyn exits"
+  },
+  {
+    "text": "The customers' sons exit",
+    "dependent_lemma": "exit",
+    "verb_fragment": "The customers' sons exit"
+  },
+  {
+    "text": "Martin's employee won't exit",
+    "dependent_lemma": "exit",
+    "verb_fragment": "Martin's employee won't exit"
+  },
+  {
+    "text": "Kevin hadn't exited",
+    "dependent_lemma": "exit",
+    "verb_fragment": "Kevin hadn't exited"
+  },
+  {
+    "text": "Derek exits",
+    "dependent_lemma": "exit",
+    "verb_fragment": "Derek exits"
+  },
+  {
+    "text": "Bill explores",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Bill explores"
+  },
+  {
+    "text": "Melinda explores",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Melinda explores"
+  },
+  {
+    "text": "Lori was exploring",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Lori was exploring"
+  },
+  {
+    "text": "Every waiter's brother explores",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Every waiter's brother explores"
+  },
+  {
+    "text": "Dana explores",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Dana explores"
+  },
+  {
+    "text": "A nephew of Melanie hadn't explored",
+    "dependent_lemma": "explore",
+    "verb_fragment": "A nephew of Melanie hadn't explored"
+  },
+  {
+    "text": "Irene explores",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Irene explores"
+  },
+  {
+    "text": "These actors were exploring",
+    "dependent_lemma": "explore",
+    "verb_fragment": "These actors were exploring"
+  },
+  {
+    "text": "Most brothers of Michelle explore",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Most brothers of Michelle explore"
+  },
+  {
+    "text": "Naomi's brothers explored",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Naomi's brothers explored"
+  },
+  {
+    "text": "Liam is exploring",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Liam is exploring"
+  },
+  {
+    "text": "Christopher won't explore",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Christopher won't explore"
+  },
+  {
+    "text": "Dan will explore",
+    "dependent_lemma": "explore",
+    "verb_fragment": "Dan will explore"
+  },
+  {
+    "text": "Kevin had found",
+    "dependent_lemma": "find",
+    "verb_fragment": "Kevin had found"
+  },
+  {
+    "text": "Timothy found",
+    "dependent_lemma": "find",
+    "verb_fragment": "Timothy found"
+  },
+  {
+    "text": "Some adult finds",
+    "dependent_lemma": "find",
+    "verb_fragment": "Some adult finds"
+  },
+  {
+    "text": "Some dancer wasn't finding",
+    "dependent_lemma": "find",
+    "verb_fragment": "Some dancer wasn't finding"
+  },
+  {
+    "text": "Angela's grandfather found",
+    "dependent_lemma": "find",
+    "verb_fragment": "Angela's grandfather found"
+  },
+  {
+    "text": "Michael is finding",
+    "dependent_lemma": "find",
+    "verb_fragment": "Michael is finding"
+  },
+  {
+    "text": "Liam was finding",
+    "dependent_lemma": "find",
+    "verb_fragment": "Liam was finding"
+  },
+  {
+    "text": "Cheryl's fathers find",
+    "dependent_lemma": "find",
+    "verb_fragment": "Cheryl's fathers find"
+  },
+  {
+    "text": "Carmen shouldn't find",
+    "dependent_lemma": "find",
+    "verb_fragment": "Carmen shouldn't find"
+  },
+  {
+    "text": "Carmen won't find",
+    "dependent_lemma": "find",
+    "verb_fragment": "Carmen won't find"
+  },
+  {
+    "text": "Stephen finds",
+    "dependent_lemma": "find",
+    "verb_fragment": "Stephen finds"
+  },
+  {
+    "text": "Ella's tutor can't fire",
+    "dependent_lemma": "fire",
+    "verb_fragment": "Ella's tutor can't fire"
+  },
+  {
+    "text": "Jerry doesn't fire",
+    "dependent_lemma": "fire",
+    "verb_fragment": "Jerry doesn't fire"
+  },
+  {
+    "text": "These dancers' ex-wives fire",
+    "dependent_lemma": "fire",
+    "verb_fragment": "These dancers' ex-wives fire"
+  },
+  {
+    "text": "Ella fired",
+    "dependent_lemma": "fire",
+    "verb_fragment": "Ella fired"
+  },
+  {
+    "text": "Renee's lawyer fires",
+    "dependent_lemma": "fire",
+    "verb_fragment": "Renee's lawyer fires"
+  },
+  {
+    "text": "Kevin fired",
+    "dependent_lemma": "fire",
+    "verb_fragment": "Kevin fired"
+  },
+  {
+    "text": "Heidi fires",
+    "dependent_lemma": "fire",
+    "verb_fragment": "Heidi fires"
+  },
+  {
+    "text": "Rebecca fires",
+    "dependent_lemma": "fire",
+    "verb_fragment": "Rebecca fires"
+  },
+  {
+    "text": "Some fathers of this waitress have fired",
+    "dependent_lemma": "fire",
+    "verb_fragment": "Some fathers of this waitress have fired"
+  },
+  {
+    "text": "All drivers fired",
+    "dependent_lemma": "fire",
+    "verb_fragment": "All drivers fired"
+  },
+  {
+    "text": "Vanessa does fix",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Vanessa does fix"
+  },
+  {
+    "text": "George hadn't fixed",
+    "dependent_lemma": "fix",
+    "verb_fragment": "George hadn't fixed"
+  },
+  {
+    "text": "Theresa fixes",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Theresa fixes"
+  },
+  {
+    "text": "These men fix",
+    "dependent_lemma": "fix",
+    "verb_fragment": "These men fix"
+  },
+  {
+    "text": "All women's plumbers aren't fixing",
+    "dependent_lemma": "fix",
+    "verb_fragment": "All women's plumbers aren't fixing"
+  },
+  {
+    "text": "Some actors fix",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Some actors fix"
+  },
+  {
+    "text": "A lot of customers fix",
+    "dependent_lemma": "fix",
+    "verb_fragment": "A lot of customers fix"
+  },
+  {
+    "text": "Stacy fixed",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Stacy fixed"
+  },
+  {
+    "text": "Scott fixed",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Scott fixed"
+  },
+  {
+    "text": "Michelle fixes",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Michelle fixes"
+  },
+  {
+    "text": "Wendy can fix",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Wendy can fix"
+  },
+  {
+    "text": "Donald's sisters didn't fix",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Donald's sisters didn't fix"
+  },
+  {
+    "text": "Bradley's nieces fix",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Bradley's nieces fix"
+  },
+  {
+    "text": "Lucille is fixing",
+    "dependent_lemma": "fix",
+    "verb_fragment": "Lucille is fixing"
+  },
+  {
+    "text": "Laurie was fleeing from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "Laurie was fleeing from"
+  },
+  {
+    "text": "Many teenagers had fled from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "Many teenagers had fled from"
+  },
+  {
+    "text": "Gerald would flee from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "Gerald would flee from"
+  },
+  {
+    "text": "These waiters flee from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "These waiters flee from"
+  },
+  {
+    "text": "Amanda hadn't fled from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "Amanda hadn't fled from"
+  },
+  {
+    "text": "Joel's grandfathers flee from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "Joel's grandfathers flee from"
+  },
+  {
+    "text": "Those pedestrians flee from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "Those pedestrians flee from"
+  },
+  {
+    "text": "Kristen is fleeing from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "Kristen is fleeing from"
+  },
+  {
+    "text": "Amanda could flee from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "Amanda could flee from"
+  },
+  {
+    "text": "Stacey wasn't fleeing from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "Stacey wasn't fleeing from"
+  },
+  {
+    "text": "That guy isn't fleeing from",
+    "dependent_lemma": "flee",
+    "verb_fragment": "That guy isn't fleeing from"
+  },
+  {
+    "text": "The Clintons heal",
+    "dependent_lemma": "heal",
+    "verb_fragment": "The Clintons heal"
+  },
+  {
+    "text": "Some student wasn't healing",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Some student wasn't healing"
+  },
+  {
+    "text": "Donald did heal",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Donald did heal"
+  },
+  {
+    "text": "Adam heals",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Adam heals"
+  },
+  {
+    "text": "Teresa's partners heal",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Teresa's partners heal"
+  },
+  {
+    "text": "Melanie had healed",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Melanie had healed"
+  },
+  {
+    "text": "Nicole heals",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Nicole heals"
+  },
+  {
+    "text": "Kendra heals",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Kendra heals"
+  },
+  {
+    "text": "Colleen's sisters are healing",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Colleen's sisters are healing"
+  },
+  {
+    "text": "Tammy isn't healing",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Tammy isn't healing"
+  },
+  {
+    "text": "Laura's teachers had healed",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Laura's teachers had healed"
+  },
+  {
+    "text": "Melinda does heal",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Melinda does heal"
+  },
+  {
+    "text": "Alicia heals",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Alicia heals"
+  },
+  {
+    "text": "Lucille had healed",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Lucille had healed"
+  },
+  {
+    "text": "Rachel healed",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Rachel healed"
+  },
+  {
+    "text": "Those doctors heal",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Those doctors heal"
+  },
+  {
+    "text": "Paul's sisters heal",
+    "dependent_lemma": "heal",
+    "verb_fragment": "Paul's sisters heal"
+  },
+  {
+    "text": "Tina's ex-wife hid",
+    "dependent_lemma": "hide",
+    "verb_fragment": "Tina's ex-wife hid"
+  },
+  {
+    "text": "Rachelle's supervisor wasn't hiding",
+    "dependent_lemma": "hide",
+    "verb_fragment": "Rachelle's supervisor wasn't hiding"
+  },
+  {
+    "text": "Christine's doctors were hiding",
+    "dependent_lemma": "hide",
+    "verb_fragment": "Christine's doctors were hiding"
+  },
+  {
+    "text": "The grandson of Valerie wasn't hiding",
+    "dependent_lemma": "hide",
+    "verb_fragment": "The grandson of Valerie wasn't hiding"
+  },
+  {
+    "text": "A student hid",
+    "dependent_lemma": "hide",
+    "verb_fragment": "A student hid"
+  },
+  {
+    "text": "Victoria hid",
+    "dependent_lemma": "hide",
+    "verb_fragment": "Victoria hid"
+  },
+  {
+    "text": "Erin had hidden",
+    "dependent_lemma": "hide",
+    "verb_fragment": "Erin had hidden"
+  },
+  {
+    "text": "Some driver hides",
+    "dependent_lemma": "hide",
+    "verb_fragment": "Some driver hides"
+  },
+  {
+    "text": "Nancy isn't hiding",
+    "dependent_lemma": "hide",
+    "verb_fragment": "Nancy isn't hiding"
+  },
+  {
+    "text": "Some teachers' colleagues hide",
+    "dependent_lemma": "hide",
+    "verb_fragment": "Some teachers' colleagues hide"
+  },
+  {
+    "text": "Jessica's guests hide",
+    "dependent_lemma": "hide",
+    "verb_fragment": "Jessica's guests hide"
+  },
+  {
+    "text": "Most schools hurt",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "Most schools hurt"
+  },
+  {
+    "text": "A lamp hurts",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "A lamp hurts"
+  },
+  {
+    "text": "Some waiter's mentee hurt",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "Some waiter's mentee hurt"
+  },
+  {
+    "text": "Every vase hurts",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "Every vase hurts"
+  },
+  {
+    "text": "Some waitress hurt",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "Some waitress hurt"
+  },
+  {
+    "text": "Some broccoli hurts",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "Some broccoli hurts"
+  },
+  {
+    "text": "Melissa hadn't hurt",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "Melissa hadn't hurt"
+  },
+  {
+    "text": "Melanie shouldn't hurt",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "Melanie shouldn't hurt"
+  },
+  {
+    "text": "Vanessa's lawyers hurt",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "Vanessa's lawyers hurt"
+  },
+  {
+    "text": "Pamela hurt",
+    "dependent_lemma": "hurt",
+    "verb_fragment": "Pamela hurt"
+  },
+  {
+    "text": "Grace is investigating",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "Grace is investigating"
+  },
+  {
+    "text": "Margaret is investigating",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "Margaret is investigating"
+  },
+  {
+    "text": "Liam investigates",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "Liam investigates"
+  },
+  {
+    "text": "Those men are investigating",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "Those men are investigating"
+  },
+  {
+    "text": "Most nieces of Beverly have investigated",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "Most nieces of Beverly have investigated"
+  },
+  {
+    "text": "Richard hadn't investigated",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "Richard hadn't investigated"
+  },
+  {
+    "text": "All fathers of Dawn investigate",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "All fathers of Dawn investigate"
+  },
+  {
+    "text": "Renee's friend investigated",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "Renee's friend investigated"
+  },
+  {
+    "text": "Naomi's doctors investigate",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "Naomi's doctors investigate"
+  },
+  {
+    "text": "Galileo didn't investigate",
+    "dependent_lemma": "investigate",
+    "verb_fragment": "Galileo didn't investigate"
+  },
+  {
+    "text": "April's mentees weren't kissing",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "April's mentees weren't kissing"
+  },
+  {
+    "text": "Ruth kisses",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "Ruth kisses"
+  },
+  {
+    "text": "Erin kisses",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "Erin kisses"
+  },
+  {
+    "text": "Tina wasn't kissing",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "Tina wasn't kissing"
+  },
+  {
+    "text": "Paula has kissed",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "Paula has kissed"
+  },
+  {
+    "text": "Steven's ex-wife does kiss",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "Steven's ex-wife does kiss"
+  },
+  {
+    "text": "James's mentees kiss",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "James's mentees kiss"
+  },
+  {
+    "text": "Connie's dermatologist kissed",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "Connie's dermatologist kissed"
+  },
+  {
+    "text": "Every cashier had kissed",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "Every cashier had kissed"
+  },
+  {
+    "text": "The pedestrians' boss kisses",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "The pedestrians' boss kisses"
+  },
+  {
+    "text": "The drivers were kissing",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "The drivers were kissing"
+  },
+  {
+    "text": "All teachers' teacher hadn't kissed",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "All teachers' teacher hadn't kissed"
+  },
+  {
+    "text": "The Lutherans kiss",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "The Lutherans kiss"
+  },
+  {
+    "text": "Galileo kissed",
+    "dependent_lemma": "kiss",
+    "verb_fragment": "Galileo kissed"
+  },
+  {
+    "text": "Phillip knows",
+    "dependent_lemma": "know",
+    "verb_fragment": "Phillip knows"
+  },
+  {
+    "text": "Chad knows",
+    "dependent_lemma": "know",
+    "verb_fragment": "Chad knows"
+  },
+  {
+    "text": "Carl had known",
+    "dependent_lemma": "know",
+    "verb_fragment": "Carl had known"
+  },
+  {
+    "text": "Vanessa knows",
+    "dependent_lemma": "know",
+    "verb_fragment": "Vanessa knows"
+  },
+  {
+    "text": "George's oncologist has known",
+    "dependent_lemma": "know",
+    "verb_fragment": "George's oncologist has known"
+  },
+  {
+    "text": "Amy had known",
+    "dependent_lemma": "know",
+    "verb_fragment": "Amy had known"
+  },
+  {
+    "text": "Laurie had known",
+    "dependent_lemma": "know",
+    "verb_fragment": "Laurie had known"
+  },
+  {
+    "text": "Laura's brothers know",
+    "dependent_lemma": "know",
+    "verb_fragment": "Laura's brothers know"
+  },
+  {
+    "text": "Jacqueline did know",
+    "dependent_lemma": "know",
+    "verb_fragment": "Jacqueline did know"
+  },
+  {
+    "text": "Chad's son knows",
+    "dependent_lemma": "know",
+    "verb_fragment": "Chad's son knows"
+  },
+  {
+    "text": "Joseph knew",
+    "dependent_lemma": "know",
+    "verb_fragment": "Joseph knew"
+  },
+  {
+    "text": "Many drivers knew",
+    "dependent_lemma": "know",
+    "verb_fragment": "Many drivers knew"
+  },
+  {
+    "text": "Gina's students know",
+    "dependent_lemma": "know",
+    "verb_fragment": "Gina's students know"
+  },
+  {
+    "text": "Some cashier knew",
+    "dependent_lemma": "know",
+    "verb_fragment": "Some cashier knew"
+  },
+  {
+    "text": "Patricia did lift",
+    "dependent_lemma": "lift",
+    "verb_fragment": "Patricia did lift"
+  },
+  {
+    "text": "Many fathers of Florence lifted",
+    "dependent_lemma": "lift",
+    "verb_fragment": "Many fathers of Florence lifted"
+  },
+  {
+    "text": "Peter isn't lifting",
+    "dependent_lemma": "lift",
+    "verb_fragment": "Peter isn't lifting"
+  },
+  {
+    "text": "Heather lifted",
+    "dependent_lemma": "lift",
+    "verb_fragment": "Heather lifted"
+  },
+  {
+    "text": "Most girls lifted",
+    "dependent_lemma": "lift",
+    "verb_fragment": "Most girls lifted"
+  },
+  {
+    "text": "Angela wasn't lifting",
+    "dependent_lemma": "lift",
+    "verb_fragment": "Angela wasn't lifting"
+  },
+  {
+    "text": "The Impressionists lift",
+    "dependent_lemma": "lift",
+    "verb_fragment": "The Impressionists lift"
+  },
+  {
+    "text": "Diane couldn't lift",
+    "dependent_lemma": "lift",
+    "verb_fragment": "Diane couldn't lift"
+  },
+  {
+    "text": "Kristin does lift",
+    "dependent_lemma": "lift",
+    "verb_fragment": "Kristin does lift"
+  },
+  {
+    "text": "Becky's grandfather could lift",
+    "dependent_lemma": "lift",
+    "verb_fragment": "Becky's grandfather could lift"
+  },
+  {
+    "text": "That picture of that newspaper article looked like",
+    "dependent_lemma": "look",
+    "verb_fragment": "That picture of that newspaper article looked like"
+  },
+  {
+    "text": "A lot of bikes are looking like",
+    "dependent_lemma": "look",
+    "verb_fragment": "A lot of bikes are looking like"
+  },
+  {
+    "text": "A picture of Keith looks like",
+    "dependent_lemma": "look",
+    "verb_fragment": "A picture of Keith looks like"
+  },
+  {
+    "text": "Most drawings of Amelia look like",
+    "dependent_lemma": "look",
+    "verb_fragment": "Most drawings of Amelia look like"
+  },
+  {
+    "text": "Elaine can't look like",
+    "dependent_lemma": "look",
+    "verb_fragment": "Elaine can't look like"
+  },
+  {
+    "text": "All prints look like",
+    "dependent_lemma": "look",
+    "verb_fragment": "All prints look like"
+  },
+  {
+    "text": "The picture of this candle looks like",
+    "dependent_lemma": "look",
+    "verb_fragment": "The picture of this candle looks like"
+  },
+  {
+    "text": "Sandra looked like",
+    "dependent_lemma": "look",
+    "verb_fragment": "Sandra looked like"
+  },
+  {
+    "text": "A picture looks like",
+    "dependent_lemma": "look",
+    "verb_fragment": "A picture looks like"
+  },
+  {
+    "text": "Sherry could look like",
+    "dependent_lemma": "look",
+    "verb_fragment": "Sherry could look like"
+  },
+  {
+    "text": "Those dancers haven't looked like",
+    "dependent_lemma": "look",
+    "verb_fragment": "Those dancers haven't looked like"
+  },
+  {
+    "text": "A lot of pictures looked like",
+    "dependent_lemma": "look",
+    "verb_fragment": "A lot of pictures looked like"
+  },
+  {
+    "text": "Those newspaper articles about science look like",
+    "dependent_lemma": "look",
+    "verb_fragment": "Those newspaper articles about science look like"
+  },
+  {
+    "text": "Every photograph looked like",
+    "dependent_lemma": "look",
+    "verb_fragment": "Every photograph looked like"
+  },
+  {
+    "text": "Paintings look like",
+    "dependent_lemma": "look",
+    "verb_fragment": "Paintings look like"
+  },
+  {
+    "text": "The print of every student is looking like",
+    "dependent_lemma": "look",
+    "verb_fragment": "The print of every student is looking like"
+  },
+  {
+    "text": "Some drawing of these dishes can look like",
+    "dependent_lemma": "look",
+    "verb_fragment": "Some drawing of these dishes can look like"
+  },
+  {
+    "text": "The actress can notice",
+    "dependent_lemma": "notice",
+    "verb_fragment": "The actress can notice"
+  },
+  {
+    "text": "Leslie wasn't noticing",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Leslie wasn't noticing"
+  },
+  {
+    "text": "Many boys noticed",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Many boys noticed"
+  },
+  {
+    "text": "A lot of children had noticed",
+    "dependent_lemma": "notice",
+    "verb_fragment": "A lot of children had noticed"
+  },
+  {
+    "text": "Christopher's dermatologist will notice",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Christopher's dermatologist will notice"
+  },
+  {
+    "text": "Scott notices",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Scott notices"
+  },
+  {
+    "text": "Elaine hasn't noticed",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Elaine hasn't noticed"
+  },
+  {
+    "text": "The granddaughter of Kevin noticed",
+    "dependent_lemma": "notice",
+    "verb_fragment": "The granddaughter of Kevin noticed"
+  },
+  {
+    "text": "Nicole's French teachers notice",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Nicole's French teachers notice"
+  },
+  {
+    "text": "Noah notices",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Noah notices"
+  },
+  {
+    "text": "Karen might notice",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Karen might notice"
+  },
+  {
+    "text": "Linda notices",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Linda notices"
+  },
+  {
+    "text": "Danielle's employee shouldn't notice",
+    "dependent_lemma": "notice",
+    "verb_fragment": "Danielle's employee shouldn't notice"
+  },
+  {
+    "text": "These guests notice",
+    "dependent_lemma": "notice",
+    "verb_fragment": "These guests notice"
+  },
+  {
+    "text": "Michelle praises",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Michelle praises"
+  },
+  {
+    "text": "This waitress had praised",
+    "dependent_lemma": "praise",
+    "verb_fragment": "This waitress had praised"
+  },
+  {
+    "text": "Tamara's hairdresser wasn't praising",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Tamara's hairdresser wasn't praising"
+  },
+  {
+    "text": "Carla isn't praising",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Carla isn't praising"
+  },
+  {
+    "text": "Travis's tutors praise",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Travis's tutors praise"
+  },
+  {
+    "text": "Kenneth won't praise",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Kenneth won't praise"
+  },
+  {
+    "text": "Bruce wasn't praising",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Bruce wasn't praising"
+  },
+  {
+    "text": "Many nieces of Alicia praise",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Many nieces of Alicia praise"
+  },
+  {
+    "text": "Danielle's associate praises",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Danielle's associate praises"
+  },
+  {
+    "text": "Eric praises",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Eric praises"
+  },
+  {
+    "text": "Joseph can't praise",
+    "dependent_lemma": "praise",
+    "verb_fragment": "Joseph can't praise"
+  },
+  {
+    "text": "The pedestrians question",
+    "dependent_lemma": "question",
+    "verb_fragment": "The pedestrians question"
+  },
+  {
+    "text": "These drivers questioned",
+    "dependent_lemma": "question",
+    "verb_fragment": "These drivers questioned"
+  },
+  {
+    "text": "Some actors' tutor hadn't questioned",
+    "dependent_lemma": "question",
+    "verb_fragment": "Some actors' tutor hadn't questioned"
+  },
+  {
+    "text": "Melissa had questioned",
+    "dependent_lemma": "question",
+    "verb_fragment": "Melissa had questioned"
+  },
+  {
+    "text": "That actor's partner questions",
+    "dependent_lemma": "question",
+    "verb_fragment": "That actor's partner questions"
+  },
+  {
+    "text": "Donna hasn't questioned",
+    "dependent_lemma": "question",
+    "verb_fragment": "Donna hasn't questioned"
+  },
+  {
+    "text": "Diane has questioned",
+    "dependent_lemma": "question",
+    "verb_fragment": "Diane has questioned"
+  },
+  {
+    "text": "Every son of Sheila is questioning",
+    "dependent_lemma": "question",
+    "verb_fragment": "Every son of Sheila is questioning"
+  },
+  {
+    "text": "Timothy's ex-wives questioned",
+    "dependent_lemma": "question",
+    "verb_fragment": "Timothy's ex-wives questioned"
+  },
+  {
+    "text": "Monet questioned",
+    "dependent_lemma": "question",
+    "verb_fragment": "Monet questioned"
+  },
+  {
+    "text": "Paula hadn't questioned",
+    "dependent_lemma": "question",
+    "verb_fragment": "Paula hadn't questioned"
+  },
+  {
+    "text": "Denise's ex-boyfriends question",
+    "dependent_lemma": "question",
+    "verb_fragment": "Denise's ex-boyfriends question"
+  },
+  {
+    "text": "These grandmothers of Rebecca remembered",
+    "dependent_lemma": "remember",
+    "verb_fragment": "These grandmothers of Rebecca remembered"
+  },
+  {
+    "text": "Bruce shouldn't remember",
+    "dependent_lemma": "remember",
+    "verb_fragment": "Bruce shouldn't remember"
+  },
+  {
+    "text": "Stephen's best friend hadn't remembered",
+    "dependent_lemma": "remember",
+    "verb_fragment": "Stephen's best friend hadn't remembered"
+  },
+  {
+    "text": "Every patient remembers",
+    "dependent_lemma": "remember",
+    "verb_fragment": "Every patient remembers"
+  },
+  {
+    "text": "Every brother of Andrea remembers",
+    "dependent_lemma": "remember",
+    "verb_fragment": "Every brother of Andrea remembers"
+  },
+  {
+    "text": "Joseph's sons remember",
+    "dependent_lemma": "remember",
+    "verb_fragment": "Joseph's sons remember"
+  },
+  {
+    "text": "Donald has remembered",
+    "dependent_lemma": "remember",
+    "verb_fragment": "Donald has remembered"
+  },
+  {
+    "text": "Tina won't remember",
+    "dependent_lemma": "remember",
+    "verb_fragment": "Tina won't remember"
+  },
+  {
+    "text": "A waiter remembers",
+    "dependent_lemma": "remember",
+    "verb_fragment": "A waiter remembers"
+  },
+  {
+    "text": "Regina hadn't remembered",
+    "dependent_lemma": "remember",
+    "verb_fragment": "Regina hadn't remembered"
+  },
+  {
+    "text": "All brothers of Regina remember",
+    "dependent_lemma": "remember",
+    "verb_fragment": "All brothers of Regina remember"
+  },
+  {
+    "text": "Theodore remembers",
+    "dependent_lemma": "remember",
+    "verb_fragment": "Theodore remembers"
+  },
+  {
+    "text": "Christopher researched",
+    "dependent_lemma": "research",
+    "verb_fragment": "Christopher researched"
+  },
+  {
+    "text": "Jane researched",
+    "dependent_lemma": "research",
+    "verb_fragment": "Jane researched"
+  },
+  {
+    "text": "Those women do research",
+    "dependent_lemma": "research",
+    "verb_fragment": "Those women do research"
+  },
+  {
+    "text": "Randolf didn't research",
+    "dependent_lemma": "research",
+    "verb_fragment": "Randolf didn't research"
+  },
+  {
+    "text": "Every customer researches",
+    "dependent_lemma": "research",
+    "verb_fragment": "Every customer researches"
+  },
+  {
+    "text": "Most pedestrians shouldn't research",
+    "dependent_lemma": "research",
+    "verb_fragment": "Most pedestrians shouldn't research"
+  },
+  {
+    "text": "Brett won't research",
+    "dependent_lemma": "research",
+    "verb_fragment": "Brett won't research"
+  },
+  {
+    "text": "Dawn should research",
+    "dependent_lemma": "research",
+    "verb_fragment": "Dawn should research"
+  },
+  {
+    "text": "This child researched",
+    "dependent_lemma": "research",
+    "verb_fragment": "This child researched"
+  },
+  {
+    "text": "Most children are researching",
+    "dependent_lemma": "research",
+    "verb_fragment": "Most children are researching"
+  },
+  {
+    "text": "Daniel's ex-husband resembles",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "Daniel's ex-husband resembles"
+  },
+  {
+    "text": "Irene resembled",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "Irene resembled"
+  },
+  {
+    "text": "Some shawl might resemble",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "Some shawl might resemble"
+  },
+  {
+    "text": "This unicycle resembles",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "This unicycle resembles"
+  },
+  {
+    "text": "The painting of some truck wouldn't resemble",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "The painting of some truck wouldn't resemble"
+  },
+  {
+    "text": "Most cashiers resemble",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "Most cashiers resemble"
+  },
+  {
+    "text": "That ice cream has resembled",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "That ice cream has resembled"
+  },
+  {
+    "text": "These adults' electricians resemble",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "These adults' electricians resemble"
+  },
+  {
+    "text": "Some box resembles",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "Some box resembles"
+  },
+  {
+    "text": "A skateboard resembled",
+    "dependent_lemma": "resemble",
+    "verb_fragment": "A skateboard resembled"
+  },
+  {
+    "text": "Russell is returning to",
+    "dependent_lemma": "return",
+    "verb_fragment": "Russell is returning to"
+  },
+  {
+    "text": "Every lady's grandfathers hadn't returned to",
+    "dependent_lemma": "return",
+    "verb_fragment": "Every lady's grandfathers hadn't returned to"
+  },
+  {
+    "text": "Galileo's associates return to",
+    "dependent_lemma": "return",
+    "verb_fragment": "Galileo's associates return to"
+  },
+  {
+    "text": "Alan had returned to",
+    "dependent_lemma": "return",
+    "verb_fragment": "Alan had returned to"
+  },
+  {
+    "text": "Ruth returned to",
+    "dependent_lemma": "return",
+    "verb_fragment": "Ruth returned to"
+  },
+  {
+    "text": "That grandmother of Wayne can't return to",
+    "dependent_lemma": "return",
+    "verb_fragment": "That grandmother of Wayne can't return to"
+  },
+  {
+    "text": "Tiffany has returned to",
+    "dependent_lemma": "return",
+    "verb_fragment": "Tiffany has returned to"
+  },
+  {
+    "text": "Lisa wasn't returning to",
+    "dependent_lemma": "return",
+    "verb_fragment": "Lisa wasn't returning to"
+  },
+  {
+    "text": "Homer can return to",
+    "dependent_lemma": "return",
+    "verb_fragment": "Homer can return to"
+  },
+  {
+    "text": "This grandson of Brenda isn't returning to",
+    "dependent_lemma": "return",
+    "verb_fragment": "This grandson of Brenda isn't returning to"
+  },
+  {
+    "text": "That brother of Michael revealed",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "That brother of Michael revealed"
+  },
+  {
+    "text": "Rodney has revealed",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "Rodney has revealed"
+  },
+  {
+    "text": "Anne's wife revealed",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "Anne's wife revealed"
+  },
+  {
+    "text": "Every teacher doesn't reveal",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "Every teacher doesn't reveal"
+  },
+  {
+    "text": "Thomas reveals",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "Thomas reveals"
+  },
+  {
+    "text": "A lot of granddaughters of Lucille reveal",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "A lot of granddaughters of Lucille reveal"
+  },
+  {
+    "text": "Theodore hadn't revealed",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "Theodore hadn't revealed"
+  },
+  {
+    "text": "Some ladies reveal",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "Some ladies reveal"
+  },
+  {
+    "text": "Renee hasn't revealed",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "Renee hasn't revealed"
+  },
+  {
+    "text": "Ronald wasn't revealing",
+    "dependent_lemma": "reveal",
+    "verb_fragment": "Ronald wasn't revealing"
+  },
+  {
+    "text": "Marcus wasn't running around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Marcus wasn't running around"
+  },
+  {
+    "text": "Cousins of Stephanie run around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Cousins of Stephanie run around"
+  },
+  {
+    "text": "All grandmothers of Debra run around",
+    "dependent_lemma": "run",
+    "verb_fragment": "All grandmothers of Debra run around"
+  },
+  {
+    "text": "Carolyn's grandfathers ran around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Carolyn's grandfathers ran around"
+  },
+  {
+    "text": "Kristin ran around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Kristin ran around"
+  },
+  {
+    "text": "Russell runs around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Russell runs around"
+  },
+  {
+    "text": "Christine runs around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Christine runs around"
+  },
+  {
+    "text": "Alice is running around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Alice is running around"
+  },
+  {
+    "text": "Those actors run around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Those actors run around"
+  },
+  {
+    "text": "Veronica's associates hadn't run around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Veronica's associates hadn't run around"
+  },
+  {
+    "text": "Irene's wife has run around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Irene's wife has run around"
+  },
+  {
+    "text": "Adam runs around",
+    "dependent_lemma": "run",
+    "verb_fragment": "Adam runs around"
+  },
+  {
+    "text": "Every hospital shocked",
+    "dependent_lemma": "shock",
+    "verb_fragment": "Every hospital shocked"
+  },
+  {
+    "text": "Some rabbits hadn't shocked",
+    "dependent_lemma": "shock",
+    "verb_fragment": "Some rabbits hadn't shocked"
+  },
+  {
+    "text": "A mountain shocks",
+    "dependent_lemma": "shock",
+    "verb_fragment": "A mountain shocks"
+  },
+  {
+    "text": "Liam should shock",
+    "dependent_lemma": "shock",
+    "verb_fragment": "Liam should shock"
+  },
+  {
+    "text": "Beef shocks",
+    "dependent_lemma": "shock",
+    "verb_fragment": "Beef shocks"
+  },
+  {
+    "text": "That gate shocks",
+    "dependent_lemma": "shock",
+    "verb_fragment": "That gate shocks"
+  },
+  {
+    "text": "The face wasn't shocking",
+    "dependent_lemma": "shock",
+    "verb_fragment": "The face wasn't shocking"
+  },
+  {
+    "text": "A high school shocked",
+    "dependent_lemma": "shock",
+    "verb_fragment": "A high school shocked"
+  },
+  {
+    "text": "Some art gallery shocks",
+    "dependent_lemma": "shock",
+    "verb_fragment": "Some art gallery shocks"
+  },
+  {
+    "text": "Eva has shocked",
+    "dependent_lemma": "shock",
+    "verb_fragment": "Eva has shocked"
+  },
+  {
+    "text": "These schools were shocking",
+    "dependent_lemma": "shock",
+    "verb_fragment": "These schools were shocking"
+  },
+  {
+    "text": "Beth's ex-boyfriend shocked",
+    "dependent_lemma": "shock",
+    "verb_fragment": "Beth's ex-boyfriend shocked"
+  },
+  {
+    "text": "The documentary about the Borgias shocks",
+    "dependent_lemma": "shock",
+    "verb_fragment": "The documentary about the Borgias shocks"
+  },
+  {
+    "text": "The Borgias hadn't shocked",
+    "dependent_lemma": "shock",
+    "verb_fragment": "The Borgias hadn't shocked"
+  },
+  {
+    "text": "All shawls shock",
+    "dependent_lemma": "shock",
+    "verb_fragment": "All shawls shock"
+  },
+  {
+    "text": "Candice shocked",
+    "dependent_lemma": "shock",
+    "verb_fragment": "Candice shocked"
+  },
+  {
+    "text": "Dan sounded like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "Dan sounded like"
+  },
+  {
+    "text": "Martha's plumbers sounded like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "Martha's plumbers sounded like"
+  },
+  {
+    "text": "Dancers sound like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "Dancers sound like"
+  },
+  {
+    "text": "Brenda sounds like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "Brenda sounds like"
+  },
+  {
+    "text": "That driver's ex-girlfriend sounds like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "That driver's ex-girlfriend sounds like"
+  },
+  {
+    "text": "Emily won't sound like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "Emily won't sound like"
+  },
+  {
+    "text": "Kevin sounds like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "Kevin sounds like"
+  },
+  {
+    "text": "Lawrence sounds like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "Lawrence sounds like"
+  },
+  {
+    "text": "The Borgias sound like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "The Borgias sound like"
+  },
+  {
+    "text": "The children hadn't sounded like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "The children hadn't sounded like"
+  },
+  {
+    "text": "These children's mentees sound like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "These children's mentees sound like"
+  },
+  {
+    "text": "Some book has sounded like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "Some book has sounded like"
+  },
+  {
+    "text": "Elizabeth sounds like",
+    "dependent_lemma": "sound",
+    "verb_fragment": "Elizabeth sounds like"
+  },
+  {
+    "text": "Donna talked about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Donna talked about"
+  },
+  {
+    "text": "Naomi talked to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Naomi talked to"
+  },
+  {
+    "text": "Guy's daughters talk to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Guy's daughters talk to"
+  },
+  {
+    "text": "Laura talks to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Laura talks to"
+  },
+  {
+    "text": "Some children are talking about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Some children are talking about"
+  },
+  {
+    "text": "Marcus's French teacher talks to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Marcus's French teacher talks to"
+  },
+  {
+    "text": "Michael isn't talking about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Michael isn't talking about"
+  },
+  {
+    "text": "Sharon's grandmothers haven't talked about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Sharon's grandmothers haven't talked about"
+  },
+  {
+    "text": "The dancer wouldn't talk about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "The dancer wouldn't talk about"
+  },
+  {
+    "text": "Donna talked about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Donna talked about"
+  },
+  {
+    "text": "Melanie should talk to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Melanie should talk to"
+  },
+  {
+    "text": "Kendra won't talk to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Kendra won't talk to"
+  },
+  {
+    "text": "Steve hasn't talked about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Steve hasn't talked about"
+  },
+  {
+    "text": "Kristen talks to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Kristen talks to"
+  },
+  {
+    "text": "Tina's teacher talks about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Tina's teacher talks about"
+  },
+  {
+    "text": "Kevin had talked about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Kevin had talked about"
+  },
+  {
+    "text": "Nina talks to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Nina talks to"
+  },
+  {
+    "text": "A hospital talked about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "A hospital talked about"
+  },
+  {
+    "text": "These pedestrians talked to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "These pedestrians talked to"
+  },
+  {
+    "text": "Thomas didn't talk to",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Thomas didn't talk to"
+  },
+  {
+    "text": "Randolf talked about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Randolf talked about"
+  },
+  {
+    "text": "Cynthia talked about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "Cynthia talked about"
+  },
+  {
+    "text": "This doctor could talk about",
+    "dependent_lemma": "talk",
+    "verb_fragment": "This doctor could talk about"
+  },
+  {
+    "text": "Diane watched",
+    "dependent_lemma": "watch",
+    "verb_fragment": "Diane watched"
+  },
+  {
+    "text": "Tiffany's contractors watch",
+    "dependent_lemma": "watch",
+    "verb_fragment": "Tiffany's contractors watch"
+  },
+  {
+    "text": "Every grandmother of Christopher hasn't watched",
+    "dependent_lemma": "watch",
+    "verb_fragment": "Every grandmother of Christopher hasn't watched"
+  },
+  {
+    "text": "Brian watched",
+    "dependent_lemma": "watch",
+    "verb_fragment": "Brian watched"
+  },
+  {
+    "text": "Sharon had watched",
+    "dependent_lemma": "watch",
+    "verb_fragment": "Sharon had watched"
+  },
+  {
+    "text": "Angela isn't watching",
+    "dependent_lemma": "watch",
+    "verb_fragment": "Angela isn't watching"
+  },
+  {
+    "text": "Phillip's nieces watch",
+    "dependent_lemma": "watch",
+    "verb_fragment": "Phillip's nieces watch"
+  },
+  {
+    "text": "This boy watched",
+    "dependent_lemma": "watch",
+    "verb_fragment": "This boy watched"
+  },
+  {
+    "text": "Veronica's father wasn't watching",
+    "dependent_lemma": "watch",
+    "verb_fragment": "Veronica's father wasn't watching"
+  },
+  {
+    "text": "Connie's partner won't watch",
+    "dependent_lemma": "watch",
+    "verb_fragment": "Connie's partner won't watch"
+  }
+]

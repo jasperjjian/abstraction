@@ -132,6 +132,7 @@ def loop_checkpoints_and_save(
     token_ids: Optional[List[int]] = None,
     tokens: Optional[List[str]] = None,
     top_k: float = 0.9,
+    output_dir: str = ".",
 ) -> None:
     """Iterate over model checkpoints, run inference, and save results.
 
@@ -172,9 +173,10 @@ def loop_checkpoints_and_save(
     model_name_short = model_name.split("/")[-1]
 
     for checkpoint in tqdm(branches):
-        output_path = (
-            f"/nlp/scr/jjian/data/wikitext/{split}/predictions/"
-            f"{rep}/prototype_nouns/{model_name_short}.{checkpoint}.predictions.json"
+        output_path = os.path.join(
+            output_dir, split, "predictions",
+            rep, "prototype_nouns",
+            f"{model_name_short}.{checkpoint}.predictions.json"
         )
 
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -213,7 +215,8 @@ if __name__ == "__main__":
     split = sys.argv[4]
 
     model_name = "stanford-crfm/darkmatter-gpt2-small-x343"
-    cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
+    cache_dir = os.environ.get("CACHE_DIR", "./cache")
+    output_dir = os.environ.get("OUTPUT_DIR", ".")
 
     ditrans_json = json.load(open(ditrans_sampled, "r"))
 
@@ -223,4 +226,5 @@ if __name__ == "__main__":
         model_name, split, ditrans_json,
         cache_dir=cache_dir, rep=rep, batch_size=16, branch=branch,
         token_ids=PROTOTYPE_TOKEN_IDS, tokens=PROTOTYPE_TOKENS,
+        output_dir=output_dir,
     )

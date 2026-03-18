@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# loop through all files in the directory
-mkdir -p /nlp/scr/jjian/datasets/openwebtext_filtered/parsed
+REPO_DIR=$(dirname "$(dirname "$(realpath "$0")")")
+INPUT_DIR="${1:?Usage: split_parsing.sh <input_dir> [output_dir]}"
+OUTPUT_DIR="${2:-./output/parsed}"
 
-for file in /nlp/scr/jjian/datasets/openwebtext_filtered/temp/ditransitive.*.txt; do
-    # get the filename without the extension
+mkdir -p "$OUTPUT_DIR"
+
+for file in "$INPUT_DIR"/ditransitive.*.txt; do
     filename=$(basename -- "$file")
     file_prefix="${filename%.*}"
-    # split the file into 1000 line chunks
-    INPUT=$file
-    OUTPUT="/nlp/scr/jjian/datasets/openwebtext_filtered/parsed/${file_prefix}.parsed.conllu"
-    nlprun -r 48G "python3 /afs/cs.stanford.edu/u/jjian/projects/abstraction/abstraction/filtering/parse.py $INPUT $OUTPUT"
+    OUTPUT="$OUTPUT_DIR/${file_prefix}.parsed.conllu"
+    nlprun -r 48G "python3 $REPO_DIR/abstraction/filtering/parse.py $file $OUTPUT"
 done

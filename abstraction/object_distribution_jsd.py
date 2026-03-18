@@ -41,7 +41,6 @@ def get_next_token_distribution_batch(input_prefixes, model, tokenizer, model_na
 
     # Apply softmax to get the probability distributions
     probabilities = torch.nn.functional.softmax(next_token_logits, dim=-1)
-    #print(probabilities.shape)
 
     return probabilities
 
@@ -58,7 +57,7 @@ def get_rows_to_sum(combined_splits):
     return rows_to_sum
 
 
-def loop_checkpoints_and_save(model_name, split, instances_class_one, instances_class_two, cache_dir=None, rep="verb_fragment", batch_size=32, branch=None, comparison_setting="verbwise", source="wikitext", rep_two=None):
+def loop_checkpoints_and_save(model_name, split, instances_class_one, instances_class_two, cache_dir=None, rep="verb_fragment", batch_size=32, branch=None, comparison_setting="verbwise", source="wikitext", rep_two=None, output_dir=None):
     out = list_repo_refs(model_name)
     branches = [b.name for b in out.tags]
     if branch == 10:
@@ -78,9 +77,9 @@ def loop_checkpoints_and_save(model_name, split, instances_class_one, instances_
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model_name_preprocessed = model_name.split("/")[-1]
     if rep_two is not None and comparison_setting == "pairwise":
-        output_path = f'/nlp/scr/jjian/data/{source}/final/{split}/predictions/{model_name_preprocessed}.full_jsd.{rep}.{rep_two}.{comparison_setting}.hdf5'
+        output_path = os.path.join(output_dir, f'{source}/final/{split}/predictions/{model_name_preprocessed}.full_jsd.{rep}.{rep_two}.{comparison_setting}.hdf5')
     else:
-        output_path = f'/nlp/scr/jjian/data/{source}/final/{split}/predictions/{model_name_preprocessed}.full_jsd.{rep}.{rep}.{comparison_setting}.hdf5'
+        output_path = os.path.join(output_dir, f'{source}/final/{split}/predictions/{model_name_preprocessed}.full_jsd.{rep}.{rep}.{comparison_setting}.hdf5')
     if not os.path.exists(os.path.dirname(output_path)):
         os.makedirs(os.path.dirname(output_path))
     output_file = h5py.File(output_path, "w")
@@ -97,7 +96,6 @@ def loop_checkpoints_and_save(model_name, split, instances_class_one, instances_
         # Process instances_class_one in batches
         results_class_one = []
         results_class_two = []
-        # add tqdm to the loop
 
         for i in range(0, len(instances_class_one), batch_size):
             batch = instances_class_one[i:i + batch_size]
@@ -171,13 +169,14 @@ def main():
     parser.add_argument("--class_two_file", type=str, required=True, help="Class two file")
     parser.add_argument("--source", type=str, required=True, help="Source")
     parser.add_argument("--model_name", type=str, required=False, help="Model name")
+    parser.add_argument("--output_dir", type=str, required=True, help="Root directory for output HDF5 files")
+    parser.add_argument("--cache_dir", type=str, required=False, default=None, help="Cache directory for model weights")
     args = parser.parse_args()
 
     if args.model_name is not None:
         model_name = f"stanford-crfm/{args.model_name}"
     else:
         model_name = "stanford-crfm/battlestar-gpt2-small-x49"
-    cache_dir = "/nlp/scr/jjian/mistral-checkpoints/"
 
     class_one_json = json.load(open(args.class_one_file, "r"))
     class_two_json = json.load(open(args.class_two_file, "r"))
@@ -191,13 +190,14 @@ def main():
         args.split,
         class_one_json,
         class_two_json,
-        cache_dir=cache_dir,
+        cache_dir=args.cache_dir,
         rep=args.rep,
         batch_size=16,
         branch=args.branch,
         source=args.source,
         comparison_setting=args.comparison_setting,
         rep_two=args.rep_two,
+        output_dir=args.output_dir,
     )
 
 if __name__ == "__main__":

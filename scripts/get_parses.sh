@@ -1,6 +1,7 @@
 #!/bin/bash
-
-INPUT="/afs/cs.stanford.edu/u/jjian/projects/abstraction/scraped_data/wikitext/with.substance.raw.filtered.txt"
-OUTPUT="/nlp/scr/jjian/datasets/wikitext_parsed/with.substance.raw.filtered.parsed.conllu"
-
-python3 /sailhome/jjian/projects/abstraction/abstraction/filtering/substance_adjunct.py $INPUT $OUTPUT
+ 
+REPO_DIR=$(dirname "$(dirname "$(realpath "$0")")")
+INPUT="${1:-$REPO_DIR/scraped_data/wikitext/with.substance.raw.filtered.txt}"
+OUTPUT="${2:-./output/with.substance.raw.filtered.parsed.conllu}"
+ 
+python3 "$REPO_DIR/abstraction/filtering/substance_adjunct.py" "$INPUT" "$OUTPUT"
